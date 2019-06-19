@@ -9,16 +9,16 @@ class Login extends Component{
             
             <form>
             <div className="form-group">
-              <label  for="exampleInputEmail1" >Email</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+              <label  for="exampleInputEmail1" >Correo</label>
+              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com"/>
               <small id="emailHelp" className="form-text text-muted">Nunca compartiremos tu correo electrónico con alguien más.</small>
             </div>
             <div className="form-group" >
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+              <label for="exampleInputPassword1">Contraseña</label>
+              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Contraseña"/>
             </div>
             
-            <button type="submit" className="btn btn-primary">Login</button>
+            <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
           </form>
 
                     </div>

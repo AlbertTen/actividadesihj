@@ -35,7 +35,7 @@ class Header extends Component{
                         <a href="/" className="navbar-brand">
                             <div className="logosecretaria"></div>
                             <div className="nombresecretaria">
-                                <strong>Actividades Instituto Hidalguense de la Juventud</strong>
+                                <strong>Actividades IHJ</strong>
                             </div>
                         </a>
                         <button className="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown2" aria-controls="navbarNavDropdown2" aria-expanded="false" aria-label="Toggle navigation">

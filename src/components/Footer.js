@@ -18,9 +18,9 @@ class Footer extends Component{
                         <div className="col-12 col-md-4 redes text-center">
                             <p>
                                 <strong style={{fontSize: "20px"}}>Contacto</strong>
-                                <br></br>Calle General Ignacio Mejía, Colonia Morelos
+                                <br></br>Esq. Blvd Everardo Márquez esquina con Av. Revolución, Col. Periodistas, C.P. 42060
                                 <br></br>Pachuca de Soto, Hidalgo, México
-                                <br></br>+52 (771) 107 0707
+                                <br></br>+52 (771) 14 73 22 68
                             </p>
                             <div>
                                 <center>
