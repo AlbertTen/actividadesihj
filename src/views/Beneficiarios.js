@@ -1,40 +1,57 @@
 import React, {Component} from 'react';
 
-//View 
+//View para Beneficiarios
 
 class Beneficiarios extends Component{
     render(){
         return(
+        
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-10 col-lg-10">
+                    <h3 align="center"> <strong>Beneficiarios</strong> </h3> <br></br>
+            
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Edad</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Curp</th>
+                                <th scope="col">Fecha de Nacimiento</th>
+                                <th scope="col">Dirección</th>
+                        
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                    <button type="button" class="btn btn-warning">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            <div className="card" style={{width: '18em;'}}>
-            <h1>Panel de Administrador</h1>
-            <h4>Beneficiarios</h4>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">Beneficiario 1
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-primary">Editar</button>
-                        <button type="button" className="btn btn-primary">Eliminar</button>
+                    <div class style={{textAlign:"right"}}>
+                                <button type="button" class="btn btn-success">Agregar</button>
                     </div>
-                </li>
 
-                <li class="list-group-item">Beneficiairio 2
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-primary">Editar</button>
-                        <button type="button" className="btn btn-primary">Eliminar</button>
-                    </div>
-                </li>
-
-                <li class="list-group-item">Beneficiario 3
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-primary">Editar</button>
-                        <button type="button" className="btn btn-primary">Eliminar</button>
-                    </div>
-                </li>
-
-                
-            </ul>
+                    
+                </div>
+            </div>
         </div>
-
         );
     }
 }

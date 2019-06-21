@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import './App.css';
+ 
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Router from './Router';
+//import Principal from './views/Principal';
+//import Beneficiarios from './views/Beneficiarios';
 
 
 // import Actividades from './views/Actividades';
@@ -14,7 +16,9 @@ class App extends Component {
       <div>
         <Header/>
         <Router/>
+        
         <Footer/> 
+        
       </div>
     );
   }
