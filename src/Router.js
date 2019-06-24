@@ -6,8 +6,10 @@ import Registro from './views/Registro';
 import Beneficiarios from './views/Beneficiarios';
 import BeneficiariosRegistro from './views/BeneficiariosRegistro';
 import Area from './views/Area';
+import AreaRegistro from './views/AreaRegistro';
 import Tactividad from './views/Tactividad';
-
+import ActividadRegistro from './views/ActividadRegistro';
+import Tusuarios from './views/Tusuarios';
 
 class Router extends Component {
     render(){
@@ -22,10 +24,12 @@ class Router extends Component {
                 <Route path="/beneficiariosRegistro" component={BeneficiariosRegistro}/>
 
                 <Route path="/area" component={Area}/>
+                <Route path="/areaRegistro" component={AreaRegistro}/>
 
                 <Route path="/tactividad" component={Tactividad}/>
+                <Route path="/actividadRegistro" component={ActividadRegistro}/>
 
-                
+                <Route path="/tusuarios" component={Tusuarios}/>
                 
             </Switch>
         );

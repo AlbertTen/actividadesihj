@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {municipios, hidalgo} from '../components/data/data';
 
 class AreaRegistro extends Component {
 
@@ -81,7 +82,7 @@ class AreaRegistro extends Component {
                             <span className="login100-form-title-1">Registra Área</span>
                         </div>
 
-                        <div className="text-center" style={{paddingTop:"15px"}}>
+                        <div className="text-center w-100" style={{paddingTop:"15px"}}>
                             <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                         </div>
 
@@ -101,7 +102,7 @@ class AreaRegistro extends Component {
                             </div>
 
                             <div className="col-12 col-lg-6 mb-3">
-                                <label htmlFor="app">Responsable: </label>
+                                <label htmlFor="responsable">Responsable: </label>
                                 <input 
                                     type="text" className="form-control" 
                                     id="responsable" name="responsable" required

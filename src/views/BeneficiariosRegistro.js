@@ -180,7 +180,7 @@ class BeneficiariosRegistro extends Component{
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="telefono">Email: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="email" className="form-control" 
                                         id="email" name="email" required
                                         placeholder="Tu email aqui ..."
                                         onChange={this.handleInputChange}

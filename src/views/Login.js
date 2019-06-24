@@ -30,7 +30,7 @@ class Login extends Component{
                     <div className="col-12 col-lg-6 mb-3">
                       <label htmlFor="email">Email: </label>
                         <input 
-                          type="text" className="form-control" 
+                          type="email" className="form-control" 
                           id="email" name="email" required
                           placeholder="Por favor ingresa tu correo"
                           onChange={this.handleInputChange}
@@ -43,7 +43,7 @@ class Login extends Component{
                     <div className="col-12 col-lg-6 mb-3">
                       <label htmlFor="password">Contraseña: </label>
                         <input 
-                          type="text" className="form-control" 
+                          type="password" className="form-control" 
                           id="password" name="password" required
                           placeholder="Tu contraseña aqui"
                           onChange={this.handleInputChange}
