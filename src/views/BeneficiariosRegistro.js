@@ -194,12 +194,25 @@ class BeneficiariosRegistro extends Component{
                                     <label htmlFor="curp">Curp: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="curp" name="CURP" required
+                                        id="curp" name="curp" required
                                         placeholder="Tu CURP aqui ..."
                                         onChange={this.handleInputChange}
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu CURP
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="Fecha de Nacimiento">Fecha de Nacimiento: </label>
+                                    <input 
+                                        type="date" className="form-control" 
+                                        id="fechaNac" name="fechaNac" required
+                                        placeholder="Tu fecha de nacimiento aqui ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa tu fecha de nacimiento
                                     </div>
                                 </div>
 

@@ -106,7 +106,7 @@ class ActividadRegistro extends Component {
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="dia">Día: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="date" className="form-control" 
                                         id="dia" name="dia" required
                                         placeholder="El día aqui ..."
                                         onChange={this.handleInputChange}
@@ -119,7 +119,7 @@ class ActividadRegistro extends Component {
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="hora">Hora: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="time" className="form-control" 
                                         id="hora" name="hora" required
                                         placeholder="La hora aqui ..."
                                         onChange={this.handleInputChange}

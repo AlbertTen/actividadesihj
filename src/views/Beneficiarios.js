@@ -14,24 +14,16 @@ class Beneficiarios extends Component{
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Edad</th>
-                                <th scope="col">Sexo</th>
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Curp</th>
-                                <th scope="col">Fecha de Nacimiento</th>
-                                <th scope="col">Dirección</th>
+                                <th scope="col">Municipio</th>
                         
-                                <th scope="col">Acción</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

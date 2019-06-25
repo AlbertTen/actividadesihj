@@ -1,8 +1,68 @@
 import React , {Component} from 'react';
+import {municipios,hidalgo} from '../components/data/data';
 
 //View for Login
 
 class Login extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      zips:[],
+      colonias:[]
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+}
+
+componentWillReceiveProps(nextProps){
+    //const ActualProps = this.props;
+    const NewProps = nextProps;
+
+    if(NewProps.responseNewUser.success === "OK"){
+        window.location.href = "/";
+    }
+}
+
+handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    console.log(name + ": ",value);
+
+    if(name === "municipio"){
+        var zips = [];
+        var newZips = [];
+        hidalgo.map((item,index) => {
+            if(item.nombre === value){
+                zips.push(item.cp);
+            }
+        })
+        newZips = zips.filter(function(item, index, array) {
+            return array.indexOf(item) === index;
+        })
+
+        this.setState({
+            zips: [...newZips]
+        });
+        
+    } else if(name === "cp"){
+        var newCols = [];
+        hidalgo.map((item,index) => {
+            if(item.cp === value){
+                newCols.push(item.asentamiento);
+            }
+        })
+
+        this.setState({
+            colonias: [...newCols]
+        });
+    }
+
+    this.setState({
+      [name]: value
+    });
+}
 
   handleSubmit() {
     console.log(this.state);

@@ -10,6 +10,7 @@ import AreaRegistro from './views/AreaRegistro';
 import Tactividad from './views/Tactividad';
 import ActividadRegistro from './views/ActividadRegistro';
 import Tusuarios from './views/Tusuarios';
+import RegistroUsers from './views/RegistroUsers';
 
 class Router extends Component {
     render(){
@@ -30,6 +31,7 @@ class Router extends Component {
                 <Route path="/actividadRegistro" component={ActividadRegistro}/>
 
                 <Route path="/tusuarios" component={Tusuarios}/>
+                <Route path="/registroUsers" component={RegistroUsers}/>
                 
             </Switch>
         );
