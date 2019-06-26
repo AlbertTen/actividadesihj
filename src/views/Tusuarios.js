@@ -21,13 +21,11 @@ class Tusuarios extends Component{
                                         <th scope="col">Password</th>
                                         <th scope="col">Área</th>
                                         <th scope="col">Nivel</th>
-                                        <th scope="col">Fecha de registro</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

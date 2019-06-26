@@ -28,7 +28,7 @@ class  Principal extends Component{
                         <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Actividades</a>
+                                <a href="#" className="btn btn-primary">Áreas</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@ class  Principal extends Component{
                         <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body">
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Actividades</a>
+                                <a href="#" className="btn btn-primary">Beneficiarios</a>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ class  Principal extends Component{
                         <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Actividades</a>
+                                <a href="#" className="btn btn-primary">Usuarios</a> 
                             </div>
                         </div>
                     </div>
