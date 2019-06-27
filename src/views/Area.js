@@ -11,14 +11,19 @@ class Area extends Component{
                 <div className="col-12 col-md-10 col-lg-10">
         
                     <div>
-                        <h3 align="center"> <strong>Área</strong> </h3> <br></br>
+                        <div class style={{marginTop:'30px'}}>
+                            <h3 align="center"> <strong>Áreas</strong> </h3> </div> <br></br>
+            
+                        <div class style={{textAlign:"center"}}>
+                            <button type="button" class="btn btn-success">Agregar</button>
+                        </div> <br></br>
             
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre de área</th>
                                         <th scope="col">Responsable</th>
-                                        <th scope="col">Acción</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -33,11 +38,6 @@ class Area extends Component{
                     
                                 </tbody>
                             </table>
-
-                            <div class style={{textAlign:"right"}}>
-                                <button type="button" class="btn btn-success">Agregar</button>
-                            </div>
-
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ class  Principal extends Component{
             <div className="row justify-content-center">
                 <div className="col-12 col-md-4">
                     <div className="card"style={{marginBottom: 15}}>
-                        <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
+                        <img src="./images/actividades.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body">
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Actividades</a>
@@ -25,7 +25,7 @@ class  Principal extends Component{
 
                 <div className="col-12 col-md-4">
                     <div className="card">
-                        <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
+                        <img src="./images/areas.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Áreas</a>
@@ -38,7 +38,7 @@ class  Principal extends Component{
             <div className="row justify-content-center">
                 <div className="col-12 col-md-4">
                     <div className="card"style={{marginBottom: 15}}>
-                        <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
+                        <img src="./images/BENEFICIARIO.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body">
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Beneficiarios</a>
@@ -49,7 +49,7 @@ class  Principal extends Component{
 
                 <div className="col-12 col-md-4">
                     <div className="card">
-                        <img src="./images/car2.jpg" className="card-img-top" alt="..."/>
+                        <img src="./images/usuarios.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Usuarios</a> 

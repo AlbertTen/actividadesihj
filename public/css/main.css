@@ -276,3 +276,7 @@ body {
 .my-float{
 	margin-top:22px;
 }
+
+.card-img-top{
+  height: 200px !important;
+}

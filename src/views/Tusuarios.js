@@ -9,7 +9,14 @@ class Tusuarios extends Component{
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-10">
-                        <h3 align="center"> <strong>Usuarios</strong> </h3> <br></br>
+                        
+                        <div class style={{marginTop:'30px'}}>
+                            <h3 align="center"> <strong>Usuarios</strong> </h3> 
+                        </div> <br></br>
+            
+                            <div class style={{textAlign:"center"}}>
+                                <button type="button" class="btn btn-success">Agregar</button>
+                            </div> <br></br>
             
                             <table class="table">
                                 <thead>
@@ -40,10 +47,6 @@ class Tusuarios extends Component{
                                     </tr>
                                 </tbody>
                             </table>
-
-                            <div class style={{textAlign:"right"}}>
-                                <button type="button" class="btn btn-success">Agregar</button>
-                            </div>
                     </div>
                 </div>
             </div>

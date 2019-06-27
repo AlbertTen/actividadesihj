@@ -113,14 +113,15 @@ handleInputChange(event) {
                         </div>
                     </div>
 
-                    <div className="col-12 mt-3">
+                   
+                    <div className="col-6 mt-3">
                         <button type="submit" className="btn btn-success login100-form-btn">
                             Inicia Sesión
                         </button>
-                    </div>
+                    </div> 
                   </form>
-                </div>
-              </div>
+                </div> 
+              </div> 
             </div>
           </section>
         );

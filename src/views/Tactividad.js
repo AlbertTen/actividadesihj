@@ -11,7 +11,13 @@ class Tactividad extends Component{
                 <div className="col-12 col-md-10 col-lg-10">
 
                     <div>
-                        <h3 align="center"> <strong>Actividades</strong> </h3> <br></br>
+                        <div class style={{marginTop:'30px'}}>
+                            <h3 align="center"> <strong>Actividades</strong> </h3> 
+                        </div> <br></br>
+            
+                            <div class style={{textAlign:"center"}}>
+                                <button type="button" class="btn btn-success">Agregar</button>
+                            </div> <br></br>
             
                         <table class="table">
                             <thead>
@@ -21,7 +27,7 @@ class Tactividad extends Component{
                                     <th scope="col">Hora</th>
                                     <th scope="col">Lugar</th>
                                     <th scope="col">Folio</th>
-                                    <th scope="col">Acción</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,11 +44,6 @@ class Tactividad extends Component{
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class style={{textAlign:"right"}}>
-                            <button type="button" class="btn btn-success">Agregar</button>
-                        </div>
-
                     </div>
                 </div>
             </div>

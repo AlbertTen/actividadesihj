@@ -154,14 +154,12 @@ class BeneficiariosRegistro extends Component{
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="sexo">Sexo: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="sexo" name="sexo" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona tu sexo</option>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona tu sexo</div>
-                                    </div>
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
@@ -218,7 +216,6 @@ class BeneficiariosRegistro extends Component{
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="municipio">Municipio: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="municipio" name="municipio" onChange={this.handleInputChange} required>
                                             <option value="">Selecciona un municipio</option>
                                             {municipios.map((item,index) => {
@@ -226,12 +223,10 @@ class BeneficiariosRegistro extends Component{
                                             })}
                                         </select>
                                         <div className="invalid-feedback">Selecciona un municipio</div>
-                                    </div>
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="cp">Codigo Postal: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="cp" name="cp" onChange={this.handleInputChange} required>
                                             <option value="">Selecciona un municipio</option>
                                             {this.state.zips.map((item,index) => {
@@ -239,12 +234,10 @@ class BeneficiariosRegistro extends Component{
                                             })}
                                         </select>
                                         <div className="invalid-feedback">Selecciona un codigo postal</div>
-                                    </div>
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="colonia">Colonia: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="colonia" name="colonia" onChange={this.handleInputChange} required>
                                             <option value="">Selecciona una colonia</option>
                                             {this.state.colonias.map((item,index) => {
@@ -252,7 +245,6 @@ class BeneficiariosRegistro extends Component{
                                             })}
                                         </select>
                                         <div className="invalid-feedback">Selecciona un colonia</div>
-                                    </div>
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">

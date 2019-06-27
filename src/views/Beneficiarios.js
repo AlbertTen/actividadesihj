@@ -9,8 +9,14 @@ class Beneficiarios extends Component{
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-12 col-md-10 col-lg-10">
-                    <h3 align="center"> <strong>Beneficiarios</strong> </h3> <br></br>
+
+                    <div class style={{marginTop:'30px'}}>
+                    <h3 align="center"> <strong>Beneficiarios</strong> </h3> </div> <br></br>
             
+                    <div class style={{textAlign:"center"}}>
+                        <button type="button" class="btn btn-success">Agregar</button>
+                    </div> <br></br>
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -34,13 +40,7 @@ class Beneficiarios extends Component{
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
-
-                    <div class style={{textAlign:"right"}}>
-                                <button type="button" class="btn btn-success">Agregar</button>
-                    </div>
-
-                    
+                    </table>     
                 </div>
             </div>
         </div>
