@@ -67,8 +67,6 @@ class RegistroUsers extends Component {
         
         this.props.sendUser(
             this.state.nombre,
-            this.state.app,
-            this.state.apm,
             this.state.email,
             this.state.password,
             this.state.area,
@@ -97,41 +95,15 @@ class RegistroUsers extends Component {
                             <form className="needs-validation login100-form" noValidate>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="nombre">Nombre(s): </label>
+                                    <label htmlFor="nombre">Nombre Completo: </label>
                                     <input 
                                         type="text" className="form-control" 
                                         id="nombre" name="nombre" required
-                                        placeholder="Tu nombre aqui ..."
+                                        placeholder="Tu nombre completo aqui ..."
                                         onChange={this.handleInputChange}
                                     />
                                     <div className="invalid-feedback">
-                                        Por favor ingresa tu nombre
-                                    </div>
-                                </div>
-
-                                <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="app">Apellido Paterno: </label>
-                                    <input 
-                                        type="text" className="form-control" 
-                                        id="app" name="app" required
-                                        placeholder="Tu apellido aqui ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu apellido
-                                    </div>
-                                </div>
-
-                                <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="apm">Apellido Materno: </label>
-                                    <input 
-                                        type="text" className="form-control" 
-                                        id="apm" name="apm" required
-                                        placeholder="Tu apellido aqui ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu apellido
+                                        Por favor ingresa tu nombre completo
                                     </div>
                                 </div>
 
@@ -165,9 +137,16 @@ class RegistroUsers extends Component {
                                     <label htmlFor="area">Area: </label>
                                         <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona una area</option>
-                                        <option value="Salud Juvenil">Salud Juvenil</option>
-                                        <option value="Poder Joven">Poder Joven</option>
-                                        <option value="Emprendedores">Emprendedores</option>
+                                        <option value="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
+                                        <option value="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
+                                        <option value="Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada">Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada</option>
+                                        <option value="Espacios de Expresión Artística para la Juventud Aperturados">Espacios de Expresión Artística para la Juventud Aperturados</option>
+                                        <option value="Participación Juvenil en Organizaciones Beneficiadas">Participación Juvenil en Organizaciones Beneficiadas</option>
+                                        <option value="Servicios de Consulta en Centros Poder Joven Otorgados ">Servicios de Consulta en Centros Poder Joven Otorgados </option>
+                                        <option value="Programas Televisivos de Expresión Elaborados ">Programas Televisivos de Expresión Elaborados </option>
+                                        <option value="Programas Poder Joven Producidos ">Programas Poder Joven Producidos </option>
+                                        <option value="Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados ">Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados </option>
+                                        <option value="Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados">Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona un area</div>
                                 </div>
@@ -177,22 +156,9 @@ class RegistroUsers extends Component {
                                         <select className="custom-select" id="level" name="level" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona un nivel</option>
                                         <option value="Administrador">Administrador</option>
-                                        <option value="Coordinador">Coordinador</option>
+                                        <option value="Coordinador">Usuario</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona un nivel</div>
-                                </div>
-
-                                <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="date">Fecha de Registro: </label>
-                                    <input 
-                                        type="date" className="form-control" 
-                                        id="date" name="date" required
-                                        placeholder="Tu fecha de registro aqui ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu fecha de registro
-                                    </div>
                                 </div>
 
                                 <div className="col-12 mt-3">

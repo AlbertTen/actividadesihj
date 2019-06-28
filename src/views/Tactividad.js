@@ -22,16 +22,20 @@ class Tactividad extends Component{
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">No. Actividad</th>
                                     <th scope="col">Día</th>
                                     <th scope="col">Hora</th>
                                     <th scope="col">Lugar</th>
                                     <th scope="col">Folio</th>
+                                    <th scope="col">Área</th>
+                                    <th scope="col">Número de Asistentes</th>
+                                    <th scope="col">Cambios hechos por:</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

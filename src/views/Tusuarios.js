@@ -21,9 +21,7 @@ class Tusuarios extends Component{
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido Paterno</th>
-                                        <th scope="col">Apellido Materno</th>
+                                        <th scope="col">Nombre Completo</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Password</th>
                                         <th scope="col">Área</th>
@@ -33,8 +31,6 @@ class Tusuarios extends Component{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

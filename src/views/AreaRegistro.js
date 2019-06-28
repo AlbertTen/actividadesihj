@@ -66,8 +66,9 @@ class AreaRegistro extends Component {
         console.log(this.state);
         
         this.props.sendUser(
-            this.state.nomarea,
-            this.state.responsable);
+            this.state.name,
+            this.state.descripcion,
+            this.state.telefono);
             
     }
 
@@ -102,17 +103,30 @@ class AreaRegistro extends Component {
                             </div>
 
                             <div className="col-12 col-lg-6 mb-3">
-                                <label htmlFor="responsable">Responsable: </label>
+                                <label htmlFor="descripcion">Descripción: </label>
                                 <input 
                                     type="text" className="form-control" 
-                                    id="responsable" name="responsable" required
-                                    placeholder="El responsable aqui ..."
+                                    id="descripcion" name="descripcion" required
+                                    placeholder="La descripción aqui ..."
                                     onChange={this.handleInputChange}
                                 />
                                 <div className="invalid-feedback">
-                                    Por favor ingresa el nombre del responsable del área
+                                    Por favor ingresa una descripción del área
                                 </div>
                             </div>
+
+                            <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="telefono">Telefono: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="telefono" name="telefono" required
+                                        placeholder="Tu telefono aqui ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa tu telefono
+                                    </div>
+                                </div>
 
                             <div className="col-12 mt-3">
                                 <button type="submit" className="btn btn-success login100-form-btn">

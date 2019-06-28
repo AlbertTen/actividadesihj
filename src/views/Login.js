@@ -113,12 +113,15 @@ handleInputChange(event) {
                         </div>
                     </div>
 
-                   
-                    <div className="col-6 mt-3">
-                        <button type="submit" className="btn btn-success login100-form-btn">
+                    <div className="container" style={{marginTop:30}}>
+                      <div className="row justify-content-center" >
+                        <div className="col-6 mt-6">
+                          <button type="submit" className="btn btn-success login100-form-btn">
                             Inicia Sesión
-                        </button>
-                    </div> 
+                          </button>
+                        </div> 
+                      </div> 
+                    </div>
                   </form>
                 </div> 
               </div> 

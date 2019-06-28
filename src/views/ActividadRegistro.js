@@ -66,11 +66,13 @@ class ActividadRegistro extends Component {
         console.log(this.state);
         
         this.props.sendUser(
-            this.state.numact,
             this.state.dia,
             this.state.hora,
             this.state.lugar,
-            this.state.folio);    
+            this.state.folio,
+            this.state.area,
+            this.state.numAsis,
+            this.state.nCambios);    
     }
 
     render(){
@@ -89,19 +91,6 @@ class ActividadRegistro extends Component {
                             </div>
 
                             <form className="needs-validation login100-form" noValidate>
-
-                                <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="numact">Número de Actividad: </label>
-                                    <input 
-                                        type="number" className="form-control" 
-                                        id="numact" name="numact" required
-                                        placeholder="El número de actividad aqui ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa el número de actividad
-                                    </div>
-                                </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="dia">Día: </label>
@@ -152,6 +141,51 @@ class ActividadRegistro extends Component {
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa el folio
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="area">Area: </label>
+                                        <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
+                                        <option value="">Selecciona una area</option>
+                                        <option value="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
+                                        <option value="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
+                                        <option value="Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada">Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada</option>
+                                        <option value="Espacios de Expresión Artística para la Juventud Aperturados">Espacios de Expresión Artística para la Juventud Aperturados</option>
+                                        <option value="Participación Juvenil en Organizaciones Beneficiadas">Participación Juvenil en Organizaciones Beneficiadas</option>
+                                        <option value="Servicios de Consulta en Centros Poder Joven Otorgados ">Servicios de Consulta en Centros Poder Joven Otorgados </option>
+                                        <option value="Programas Televisivos de Expresión Elaborados ">Programas Televisivos de Expresión Elaborados </option>
+                                        <option value="Programas Poder Joven Producidos ">Programas Poder Joven Producidos </option>
+                                        <option value="Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados ">Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados </option>
+                                        <option value="Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados">Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados</option>
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona un area</div>
+                                </div>
+                                
+                                
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="numAsis">Número de Asistentes: </label>
+                                    <input 
+                                        type="number" className="form-control" 
+                                        id="numAsis" name="numAsis" required
+                                        placeholder="El número de asistentes aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el número de asistentes
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="nCambios">Cambios hechos por: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="nCambios" name="nCambios" required
+                                        placeholder="Cambios hechos por ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa quién hizo algún cambio 
                                     </div>
                                 </div>
 

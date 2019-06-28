@@ -22,12 +22,14 @@ class Area extends Component{
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre de área</th>
-                                        <th scope="col">Responsable</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Teléfono</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>

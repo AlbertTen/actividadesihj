@@ -15,7 +15,7 @@ class  Principal extends Component{
                 <div className="col-12 col-md-4">
                     <div className="card"style={{marginBottom: 15}}>
                         <img src="./images/actividades.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
+                        <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Actividades</a>
                             </div>
@@ -24,7 +24,7 @@ class  Principal extends Component{
                 </div>
 
                 <div className="col-12 col-md-4">
-                    <div className="card">
+                    <div className="card" style={{marginBottom: 15}}>
                         <img src="./images/areas.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
@@ -39,7 +39,7 @@ class  Principal extends Component{
                 <div className="col-12 col-md-4">
                     <div className="card"style={{marginBottom: 15}}>
                         <img src="./images/BENEFICIARIO.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
+                        <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
                                 <a href="#" className="btn btn-primary">Beneficiarios</a>
                             </div>
@@ -48,7 +48,7 @@ class  Principal extends Component{
                 </div>
 
                 <div className="col-12 col-md-4">
-                    <div className="card">
+                    <div className="card" style={{marginBottom: 15}}>
                         <img src="./images/usuarios.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
