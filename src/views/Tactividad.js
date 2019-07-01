@@ -16,7 +16,7 @@ class Tactividad extends Component{
                         </div> <br></br>
             
                             <div class style={{textAlign:"center"}}>
-                                <button type="button" class="btn btn-success">Agregar</button>
+                                <button href="./ActividadRegistro" type="button" class="btn btn-success">Agregar</button>
                             </div> <br></br>
             
                         <table class="table">

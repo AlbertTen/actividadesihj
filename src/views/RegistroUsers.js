@@ -71,7 +71,9 @@ class RegistroUsers extends Component {
             this.state.password,
             this.state.area,
             this.state.level,
-            this.state.fechaReg);
+            this.state.activo,
+            this.state.fechaReg
+            );
             
     }
 
@@ -159,6 +161,18 @@ class RegistroUsers extends Component {
                                         <option value="Coordinador">Usuario</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona un nivel</div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="active">Activo: </label>
+                                    <div className="form-group">
+                                        <select className="custom-select" id="active" name="active" onChange={this.handleInputChange} required>
+                                        <option value="">Selecciona un estatus</option>
+                                        <option value={true}>SI</option>
+                                        <option value={false}>NO</option>
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona un estatus</div>
+                                    </div>
                                 </div>
 
                                 <div className="col-12 mt-3">

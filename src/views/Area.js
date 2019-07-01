@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { GET_AREAS_ACTION } from  '../redux/actions/AreaAction';
 
 //View for Área
 
 class Area extends Component{
+
+    componentDidMount(){
+        this.props.getAreas();
+    }
+
     render(){
         return(
         
@@ -48,4 +55,17 @@ class Area extends Component{
     }
 }
 
-export default Area;
+const mapStateToProps = ({stateAreas}) => {
+    return {
+        stateAreas: stateAreas
+    };
+}
+
+const mapDispatchToProps = ( dispatch) => {
+    return {
+        getAreas: () => dispatch(GET_AREAS_ACTION())
+    };
+};
+
+ const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(Area);
+ export default ConnectAreas;

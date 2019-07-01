@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { GET_USERS_ACTION } from  '../redux/actions/UserAction';
 
 //View for Users
 
 class Tusuarios extends Component{
+
+    componentDidMount(){
+        this.props.getUsers();
+    }
+
     render(){
+        console.log(this.props.stateUsers);
         return(
         
             <div className="container">
@@ -26,11 +34,13 @@ class Tusuarios extends Component{
                                         <th scope="col">Password</th>
                                         <th scope="col">Área</th>
                                         <th scope="col">Nivel</th>
+                                        <th scope="col">Activo</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -48,6 +58,20 @@ class Tusuarios extends Component{
             </div>
         );
     }
+} 
+
+const mapStateToProps = ({stateUsers}) => {
+    return {
+        stateUsers: stateUsers
+    };
 }
 
-export default Tusuarios;
+const mapDispatchToProps = ( dispatch) => {
+    return {
+        getUsers: () => dispatch(GET_USERS_ACTION())
+    };
+};
+
+ const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(Tusuarios);
+ export default ConnectUsers;
+

@@ -17,7 +17,7 @@ class  Principal extends Component{
                         <img src="./images/actividades.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Actividades</a>
+                                <a href="./Tactividad" className="btn btn-primary">Actividades</a>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@ class  Principal extends Component{
                         <img src="./images/areas.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Áreas</a>
+                                <a href="./Area" className="btn btn-primary">Áreas</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@ class  Principal extends Component{
                         <img src="./images/BENEFICIARIO.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Beneficiarios</a>
+                                <a href="./Beneficiarios" className="btn btn-primary">Beneficiarios</a>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ class  Principal extends Component{
                         <img src="./images/usuarios.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="#" className="btn btn-primary">Usuarios</a> 
+                                <a href="./Tusuarios" className="btn btn-primary">Usuarios</a> 
                             </div>
                         </div>
                     </div>
