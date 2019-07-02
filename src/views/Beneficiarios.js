@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { GET_BENEFICIARIOS_ACTION } from  '../redux/actions/BeneficiariosAction';
 
 //View para Beneficiarios
 
 class Beneficiarios extends Component{
+    componentDidMount(){
+        this.props.getBeneficiarios();
+    }
     render(){
+        console.log(this.props.stateBeneficiarios);
         return(
         
         <div className="container">
@@ -48,4 +54,17 @@ class Beneficiarios extends Component{
     }
 }
 
-export default Beneficiarios;
+const mapStateToProps = ({stateBeneficiarios}) => {
+    return {
+        stateBeneficiarios: stateBeneficiarios
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getBeneficiarios: () => dispatch(GET_BENEFICIARIOS_ACTION())
+    };
+};
+
+ const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(Beneficiarios);
+ export default ConnectBeneficiarios;

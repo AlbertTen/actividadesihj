@@ -10,14 +10,14 @@ const GET_AREAS_ACTION = () => {
 }
 
 //Add AREAS
-const NEW_AREA_ACTION = (name, descripcion, telefono, fechaReg) => {
+const NEW_AREA_ACTION = (name, descripcion, telefono) => {
 return {
     type: "NEW_AREA",
     payload: axios({
         method: 'post',
-        url: BASE_URL + 'area/add',
+        url: BASE_URL + '/area/add',
         data: {
-            name, descripcion, telefono, fechaReg
+            name, descripcion, telefono
         },
         config: {
             headers: {

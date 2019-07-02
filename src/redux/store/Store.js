@@ -11,12 +11,26 @@ import {
     NEW_AREA_REDUCER
 } from '../reducers/AreaReducer';
 
+import {
+    GET_ACTIVIDADES_REDUCER,
+    NEW_ACTIVIDAD_REDUCER
+} from '../reducers/ActividadReducer';
+
+import {
+    GET_BENEFICIARIOS_REDUCER,
+    NEW_BENEFICIARIO_REDUCER
+} from '../reducers/BeneficiarioReducer';
+
 const CATALOGO = combineReducers({
     stateUsers: GET_USERS_REDUCER,
     responseNewUser: NEW_USER_REDUCER,
-
     stateAreas: GET_AREAS_REDUCER,
-    responseNewArea: NEW_AREA_REDUCER
+    responseNewArea: NEW_AREA_REDUCER,
+    stateActividades: GET_ACTIVIDADES_REDUCER,
+    responseNewActividad: NEW_ACTIVIDAD_REDUCER,  
+    stateBeneficiarios: GET_BENEFICIARIOS_REDUCER,
+    responseNewBeneficiario: NEW_BENEFICIARIO_REDUCER
+
 });
 
 const Store = createStore(CATALOGO, applyMiddleware(promiseMiddleware));

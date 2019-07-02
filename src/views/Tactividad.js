@@ -1,14 +1,40 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { GET_ACTIVIDADES_ACTION } from  '../redux/actions/ActividadAction';
 
 //View 
 
 class Tactividad extends Component{
+    componentDidMount(){
+        this.props.getActividades();
+    }
+    _renderItems = () => {
+        return this.props.stateActividades.map((row,index) => {
+            return(
+                    <tr key={index}>
+                        <td>{row.dia}</td>
+                        <td>{row.hora}</td>
+                        <td>{row.lugar}</td>
+                        <td>{row.folio}</td>
+                        <td>{row.area}</td>
+                        <td>{row.numAsis}</td>
+                        <td>{row.nCambios}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger">Eliminar</button>
+                            <button type="button" class="btn btn-warning">Editar</button>
+                        </td>
+                    </tr>
+                );
+            })
+        }
+
     render(){
+        console.log(this.props.stateActividades);
         return(
         
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-12 col-md-10 col-lg-10">
+                <div className="col-12 col-md-11 col-lg-11">
 
                     <div>
                         <div class style={{marginTop:'30px'}}>
@@ -33,19 +59,7 @@ class Tactividad extends Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger">Eliminar</button>
-                                        <button type="button" class="btn btn-warning">Editar</button>
-                                    </td>
-                                </tr>
+                                {this._renderItems()}
                             </tbody>
                         </table>
                     </div>
@@ -55,5 +69,17 @@ class Tactividad extends Component{
         );
     }
 }
+const mapStateToProps = ({stateActividades}) => {
+    return {
+        stateActividades: stateActividades
+    };
+}
 
-export default Tactividad;
+const mapDispatchToProps = ( dispatch) => {
+    return {
+        getActividades: () => dispatch(GET_ACTIVIDADES_ACTION())
+    };
+};
+
+ const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(Tactividad);
+ export default ConnectActividades;

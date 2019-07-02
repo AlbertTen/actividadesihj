@@ -10,6 +10,22 @@ class Tusuarios extends Component{
         this.props.getUsers();
     }
 
+    _renderItems = () => {
+        return this.props.stateUsers.map((row,index) => {
+            return(
+                <tr key={index}>
+                    <td>{row.name}</td>
+                    <td>{row.email}</td>
+                    <td>{row.area}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-warning">Editar</button>
+                    </td>
+                </tr>
+            );
+        })
+    }
+
     render(){
         console.log(this.props.stateUsers);
         return(
@@ -31,26 +47,12 @@ class Tusuarios extends Component{
                                     <tr>
                                         <th scope="col">Nombre Completo</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
                                         <th scope="col">Área</th>
-                                        <th scope="col">Nivel</th>
-                                        <th scope="col">Activo</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger">Eliminar</button>
-                                            <button type="button" class="btn btn-warning">Editar</button>
-                                        </td>
-                                    </tr>
+                                    {this._renderItems()}
                                 </tbody>
                             </table>
                     </div>

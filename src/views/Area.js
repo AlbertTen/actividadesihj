@@ -10,9 +10,25 @@ class Area extends Component{
         this.props.getAreas();
     }
 
+    _renderItems = () => {
+        return this.props.stateAreas.map((row,index) => {
+            return(
+                <tr key={index}>
+                    <td>{row.name}</td>
+                    <td>{row.descripcion}</td>
+                    <td>{row.telefono}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-warning">Editar</button>
+                    </td>
+                </tr>
+            );
+        })
+    }
+
     render(){
+        console.log(this.props.stateAreas);
         return(
-        
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-12 col-md-10 col-lg-10">
@@ -35,16 +51,7 @@ class Area extends Component{
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                             <button type="button" class="btn btn-danger">Eliminar</button>
-                                            <button type="button" class="btn btn-warning">Editar</button>
-                                        </td>
-                                    </tr>
-                    
+                                    {this._renderItems()}
                                 </tbody>
                             </table>
                     </div>
@@ -61,7 +68,7 @@ const mapStateToProps = ({stateAreas}) => {
     };
 }
 
-const mapDispatchToProps = ( dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         getAreas: () => dispatch(GET_AREAS_ACTION())
     };
