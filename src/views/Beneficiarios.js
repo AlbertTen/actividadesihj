@@ -1,12 +1,37 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { GET_BENEFICIARIOS_ACTION } from  '../redux/actions/BeneficiariosAction';
+import { GET_BENEFICIARIOS_ACTION, DELETE_BENEFICIARIO_ACTION } from  '../redux/actions/BeneficiariosAction';
 
 //View para Beneficiarios
 
 class Beneficiarios extends Component{
+
     componentDidMount(){
         this.props.getBeneficiarios();
+    }
+
+    componentWillReceiveProps(nextProps){
+        const NewProps = nextProps;
+        if(NewProps.responseDeleteBeneficiario.success === "OK"){
+            this.props.getBeneficiarios();
+        }
+    }
+
+    _renderItems = () => {
+        return this.props.stateBeneficiarios.map((row,index) => {
+            return(
+                <tr key={index}>
+                    <td>{row.telefono}</td>
+                    <td>{row.email}</td>
+                    <td>{row.curp}</td>
+                    <td>{row.municipio}</td>
+                    <td>
+                        <button type="button" className="btn btn-danger" onClick={this.props.deleteBeneficiario.bind(this,row._id)} >Eliminar</button>
+                        <button type="button" className="btn btn-warning">Editar</button>
+                    </td>
+                </tr>
+            );
+        })
     }
     render(){
         console.log(this.props.stateBeneficiarios);
@@ -30,21 +55,11 @@ class Beneficiarios extends Component{
                                 <th scope="col">Correo</th>
                                 <th scope="col">Curp</th>
                                 <th scope="col">Municipio</th>
-                        
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
-                                    <button type="button" class="btn btn-warning">Editar</button>
-                                </td>
-                            </tr>
+                            {this._renderItems()}
                         </tbody>
                     </table>     
                 </div>
@@ -54,15 +69,17 @@ class Beneficiarios extends Component{
     }
 }
 
-const mapStateToProps = ({stateBeneficiarios}) => {
+const mapStateToProps = ({stateBeneficiarios, responseDeleteBeneficiario}) => {
     return {
-        stateBeneficiarios: stateBeneficiarios
+        stateBeneficiarios: stateBeneficiarios,
+        responseDeleteBeneficiario: responseDeleteBeneficiario
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getBeneficiarios: () => dispatch(GET_BENEFICIARIOS_ACTION())
+        getBeneficiarios: () => dispatch(GET_BENEFICIARIOS_ACTION()),
+        deleteBeneficiario: (id) => dispatch(DELETE_BENEFICIARIO_ACTION(id))
     };
 };
 

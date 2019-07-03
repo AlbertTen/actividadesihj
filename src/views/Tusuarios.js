@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { GET_USERS_ACTION } from  '../redux/actions/UserAction';
+import { GET_USERS_ACTION, DELETE_USER_ACTION } from  '../redux/actions/UserAction';
 
 //View for Users
 
@@ -10,6 +10,14 @@ class Tusuarios extends Component{
         this.props.getUsers();
     }
 
+        componentWillReceiveProps(nextProps){
+            //const ActualProps = this.props;
+            const NewProps = nextProps;
+            if(NewProps.responseDeleteUser.success === "OK"){
+                this.props.getUsers();
+            } 
+        }
+
     _renderItems = () => {
         return this.props.stateUsers.map((row,index) => {
             return(
@@ -18,8 +26,8 @@ class Tusuarios extends Component{
                     <td>{row.email}</td>
                     <td>{row.area}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
-                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" className="btn btn-danger" onClick={this.props.deleteUser.bind(this,row._id)}>Eliminar</button>
+                        <button type="button" className="btn btn-warning">Editar</button>
                     </td>
                 </tr>
             );
@@ -62,15 +70,17 @@ class Tusuarios extends Component{
     }
 } 
 
-const mapStateToProps = ({stateUsers}) => {
+const mapStateToProps = ({stateUsers, responseDeleteUser}) => {
     return {
-        stateUsers: stateUsers
+        stateUsers: stateUsers,
+        responseDeleteUser: responseDeleteUser
     };
 }
 
 const mapDispatchToProps = ( dispatch) => {
     return {
-        getUsers: () => dispatch(GET_USERS_ACTION())
+        getUsers: () => dispatch(GET_USERS_ACTION()),
+        deleteUser: (id) => dispatch(DELETE_USER_ACTION(id))
     };
 };
 

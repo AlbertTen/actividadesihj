@@ -28,7 +28,15 @@ return {
 };
 }
 
+const DELETE_AREA_ACTION = (id) => {
+    return{
+        type: "DELETE_AREA",
+        payload: axios.get(BASE_URL + '/area/delete/' + id)
+    };
+}
+
 export{
     GET_AREAS_ACTION,
-    NEW_AREA_ACTION
+    NEW_AREA_ACTION,
+    DELETE_AREA_ACTION
 };

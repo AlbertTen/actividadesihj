@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { GET_ACTIVIDADES_ACTION } from  '../redux/actions/ActividadAction';
+import { GET_ACTIVIDADES_ACTION, DELETE_ACTIVIDAD_ACTION } from  '../redux/actions/ActividadAction';
 
 //View 
 
 class Tactividad extends Component{
+
     componentDidMount(){
         this.props.getActividades();
     }
+
+    componentWillReceiveProps(nextProps){
+        const NewProps = nextProps;
+        if(NewProps.responseDeleteActividad.success === "OK"){
+            this.props.getActividades();
+        } 
+    }
+
     _renderItems = () => {
         return this.props.stateActividades.map((row,index) => {
             return(
@@ -20,8 +29,8 @@ class Tactividad extends Component{
                         <td>{row.numAsis}</td>
                         <td>{row.nCambios}</td>
                         <td>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
-                            <button type="button" class="btn btn-warning">Editar</button>
+                            <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
+                            <button type="button" className="btn btn-warning">Editar</button>
                         </td>
                     </tr>
                 );
@@ -34,7 +43,7 @@ class Tactividad extends Component{
         
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-12 col-md-11 col-lg-11">
+                <div className="col-12 col-md-12 col-lg-12">
 
                     <div>
                         <div class style={{marginTop:'30px'}}>
@@ -69,15 +78,17 @@ class Tactividad extends Component{
         );
     }
 }
-const mapStateToProps = ({stateActividades}) => {
+const mapStateToProps = ({stateActividades, responseDeleteActividad}) => {
     return {
-        stateActividades: stateActividades
+        stateActividades: stateActividades,
+        responseDeleteActividad: responseDeleteActividad
     };
 }
 
 const mapDispatchToProps = ( dispatch) => {
     return {
-        getActividades: () => dispatch(GET_ACTIVIDADES_ACTION())
+        getActividades: () => dispatch(GET_ACTIVIDADES_ACTION()),
+        deleteActividad: (id) => dispatch(DELETE_ACTIVIDAD_ACTION(id))
     };
 };
 

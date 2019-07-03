@@ -28,7 +28,15 @@ return {
 };
 }
 
+const DELETE_BENEFICIARIO_ACTION = (id) => {
+    return{
+        type: "DELETE_BENEFICIARIO", 
+        payload: axios.get(BASE_URL + '/beneficiario/delete/' + id)
+    };
+}
+
 export{
     GET_BENEFICIARIOS_ACTION,
-    NEW_BENEFICIARIO_ACTION
+    NEW_BENEFICIARIO_ACTION,
+    DELETE_BENEFICIARIO_ACTION
 };

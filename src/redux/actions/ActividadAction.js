@@ -28,7 +28,15 @@ return {
 };
 }
 
+const DELETE_ACTIVIDAD_ACTION = (id) => {
+    return{
+        type: "DELETE_ACTIVIDAD",
+        payload: axios.get(BASE_URL +'/actividad/delete/'+ id)
+    };
+}
+
 export{
     GET_ACTIVIDADES_ACTION,
-    NEW_ACTIVIDAD_ACTION
+    NEW_ACTIVIDAD_ACTION,
+    DELETE_ACTIVIDAD_ACTION
 };

@@ -195,6 +195,7 @@ class BeneficiariosRegistro extends Component{
                                         id="curp" name="curp" required
                                         placeholder="Tu CURP aqui ..."
                                         onChange={this.handleInputChange}
+                                        maxLength="18"
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu CURP

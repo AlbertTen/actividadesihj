@@ -28,7 +28,15 @@ return {
 };
 }
 
+const DELETE_USER_ACTION = (id) => {
+    return{
+        type: "DELETE_USER",
+        payload: axios.get(BASE_URL +'/user/delete/'+ id)
+    };
+}
+
 export{
     GET_USERS_ACTION,
-    NEW_USER_ACTION
+    NEW_USER_ACTION,
+    DELETE_USER_ACTION
 };

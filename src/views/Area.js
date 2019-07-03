@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { GET_AREAS_ACTION } from  '../redux/actions/AreaAction';
+import { GET_AREAS_ACTION, DELETE_AREA_ACTION } from  '../redux/actions/AreaAction';
 
 //View for Área
 
@@ -8,6 +8,13 @@ class Area extends Component{
 
     componentDidMount(){
         this.props.getAreas();
+    }
+
+    componentWillReceiveProps(nextProps){
+        const NewProps = nextProps;
+        if(NewProps.responseDeleteArea.success === "OK"){
+            this.props.getAreas();
+        }
     }
 
     _renderItems = () => {
@@ -18,8 +25,8 @@ class Area extends Component{
                     <td>{row.descripcion}</td>
                     <td>{row.telefono}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Eliminar</button>
-                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" className="btn btn-danger" onClick={this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
+                        <button type="button" className="btn btn-warning">Editar</button>
                     </td>
                 </tr>
             );
@@ -62,17 +69,20 @@ class Area extends Component{
     }
 }
 
-const mapStateToProps = ({stateAreas}) => {
+const mapStateToProps = ({stateAreas, responseDeleteArea}) => {
     return {
-        stateAreas: stateAreas
+        stateAreas: stateAreas,
+        responseDeleteArea: responseDeleteArea
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAreas: () => dispatch(GET_AREAS_ACTION())
+        getAreas: () => dispatch(GET_AREAS_ACTION()),
+        deleteArea: (id) => dispatch(DELETE_AREA_ACTION(id))
     };
 };
 
  const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(Area);
  export default ConnectAreas;
+

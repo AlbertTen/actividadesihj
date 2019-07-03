@@ -16,7 +16,19 @@ const NEW_BENEFICIARIO_REDUCER = (state = {}, action) => {
     }
 };
 
+const DELETE_BENEFICIARIO_REDUCER = (state = {}, action) => {
+    switch(action.type){
+        case "DELETE_BENEFICIARIO_PENDING": return { status: "Pending" };
+        case "DELETE_BENEFICIARIO_FULFILLED": return action.payload.data;
+        case "DELETE_BENEFICIARIO_REJECTED": return { status: "Error" };
+        default: return state;
+    }
+};
+
+
+
 export {
     NEW_BENEFICIARIO_REDUCER,
-    GET_BENEFICIARIOS_REDUCER
+    GET_BENEFICIARIOS_REDUCER,
+    DELETE_BENEFICIARIO_REDUCER
 };
