@@ -68,7 +68,8 @@ class AreaRegistro extends Component {
         this.props.sendUser(
             this.state.name,
             this.state.descripcion,
-            this.state.telefono);
+            this.state.telefono,  
+            this.state.abreviacion);
             
     }
 
@@ -125,6 +126,18 @@ class AreaRegistro extends Component {
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu telefono
+                                    </div>
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="abreviacion">Abreviacion: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="abreviacion" name="abreviacion" required
+                                        placeholder="Tu abreviación aqui ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa tu abreviación
                                     </div>
                                 </div>
 

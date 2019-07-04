@@ -10,14 +10,14 @@ const GET_USERS_ACTION = () => {
 }
 
 //Add Users
-const NEW_USER_ACTION = (name,password,area,level, active, fechaReg) => {
+const NEW_USER_ACTION = (name,email,password,area,level, active) => {
 return {
     type: "NEW_USER",
     payload: axios({
         method: 'post',
-        url: BASE_URL + 'user/signup',
+        url: BASE_URL + '/users/signup',
         data: {
-            name,password,area,level,active, fechaReg
+            name,email,password,area,level,active
         },
         config: {
             headers: {

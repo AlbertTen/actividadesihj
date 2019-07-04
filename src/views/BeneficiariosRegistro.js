@@ -1,13 +1,31 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
+import { NEW_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
+import { connect } from 'react-redux';
+
 
 class BeneficiariosRegistro extends Component{
+
+    _renderAlert =() => {
+        if(this.state.showAlert){
+           return(
+               <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                   <strong>Atención </strong> Ingresa todos los datos solicitados
+   
+               </div>
+            );
+        } else {
+            return null;
+        }
+        
+    }
 
     constructor(props) {
         super(props);
         this.state = {
           zips:[],
-          colonias:[]
+          colonias:[],
+          showAlert: false
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -18,7 +36,7 @@ class BeneficiariosRegistro extends Component{
         const NewProps = nextProps;
 
         if(NewProps.responseNewUser.success === "OK"){
-            window.location.href = "/";
+            window.location.href = "/Beneficiarios";
         }
     }
     
@@ -26,7 +44,6 @@ class BeneficiariosRegistro extends Component{
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(name + ": ",value);
 
         if(name === "municipio"){
             var zips = [];
@@ -63,24 +80,42 @@ class BeneficiariosRegistro extends Component{
     }
 
     handleSubmit() {
-        console.log(this.state);
-        
-        this.props.sendUser(
-            this.state.nombre,
-            this.state.app,
-            this.state.apm,
-            this.state.edad,
-            this.state.sexo,
-            this.state.telefono,
-            this.state.email,
-            this.state.curp,
-            this.state.fechaNac,
-            this.state.municipio,
-            this.state.cp,
-            this.state.colonia,
-            this.state.calle,
-            this.state.numExt);
-            
+        if(this.state.nombre === undefined ||
+            this.state.app === undefined ||
+            this.state.apm === undefined ||
+            this.state.edad === undefined ||
+            this.state.sexo === undefined ||
+            this.state.telefono === undefined ||
+            this.state.email === undefined ||
+            this.state.curp === undefined ||
+            this.state.fechaNac === undefined ||
+            this.state.municipio === undefined ||
+            this.state.cp === undefined ||
+            this.state.colonia === undefined ||
+            this.state.calle === undefined ||
+            this.state.numExt === undefined){
+
+                this.setState({
+                    showAlert: true
+                });
+
+        }else {
+            this.props.sendUser(
+                this.state.nombre,
+                this.state.app,
+                this.state.apm,
+                this.state.edad,
+                this.state.sexo,
+                this.state.telefono,
+                this.state.email,
+                this.state.curp,
+                this.state.fechaNac,
+                this.state.municipio,
+                this.state.cp,
+                this.state.colonia,
+                this.state.calle,
+                this.state.numExt);
+        }
     }
 
     render(){
@@ -98,7 +133,8 @@ class BeneficiariosRegistro extends Component{
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
 
-                            <form className="needs-validation login100-form" noValidate>
+                            <div className="needs-validation login100-form" noValidate>
+                                {this._renderAlert()}
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="nombre">Nombre(s): </label>
@@ -275,11 +311,11 @@ class BeneficiariosRegistro extends Component{
                                 </div>
 
                                 <div className="col-12 mt-3">
-                                    <button type="submit" className="btn btn-success login100-form-btn">
+                                    <button className="btn btn-success login100-form-btn">
                                         Registrar
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -288,4 +324,17 @@ class BeneficiariosRegistro extends Component{
     }
 }
 
-export default BeneficiariosRegistro;
+const mapStateToProps = ({responseNewBeneficiario}) => {
+    return {
+        responseNewBeneficiario: responseNewBeneficiario
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt))
+    }
+}
+
+
+ const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(BeneficiariosRegistro);
+ export default ConnectBeneficiarios;

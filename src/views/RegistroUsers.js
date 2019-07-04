@@ -1,13 +1,28 @@
 import React, {Component} from 'react';
 import {municipios,hidalgo} from '../components/data/data';
+import { NEW_USER_ACTION } from '../redux/actions/UserAction';
+import { connect } from 'react-redux';
 
 class RegistroUsers extends Component {
 
+     _renderAlert =() => {
+         if(this.state.showAlert){
+            return(
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Atención </strong> Ingresa todos los datos solicitados
+    
+                </div>
+             );
+         } else {
+             return null;
+         }
+         
+     }
+     
     constructor(props) {
         super(props);
         this.state = {
-          zips:[],
-          colonias:[]
+         showAlert: false
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -18,7 +33,7 @@ class RegistroUsers extends Component {
         const NewProps = nextProps;
 
         if(NewProps.responseNewUser.success === "OK"){
-            window.location.href = "/";
+            window.location.href = "/Tusuarios";
         }
     }
     
@@ -26,61 +41,37 @@ class RegistroUsers extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(name + ": ",value);
 
-        if(name === "municipio"){
-            var zips = [];
-            var newZips = [];
-            hidalgo.map((item,index) => {
-                if(item.nombre === value){
-                    zips.push(item.cp);
-                }
-            })
-            newZips = zips.filter(function(item, index, array) {
-                return array.indexOf(item) === index;
-            })
-
-            this.setState({
-                zips: [...newZips]
-            });
-            
-        } else if(name === "cp"){
-            var newCols = [];
-            hidalgo.map((item,index) => {
-                if(item.cp === value){
-                    newCols.push(item.asentamiento);
-                }
-            })
-
-            this.setState({
-                colonias: [...newCols]
-            });
-        }
-    
         this.setState({
           [name]: value
         });
     }
 
     handleSubmit() {
-        console.log(this.state);
-        
-        this.props.sendUser(
-            this.state.nombre,
-            this.state.email,
-            this.state.password,
-            this.state.area,
-            this.state.level,
-            this.state.activo,
-            this.state.fechaReg
-            );
-            
-    }
+        if(this.state.name === undefined ||
+            this.state.email === undefined ||
+            this.state.password === undefined ||
+            this.state.area === undefined ||
+            this.state.level === undefined ||
+            this.state.active === undefined){
 
+                this.setState({
+                    showAlert: true
+                });
+
+        }else {
+            this.props.sendUser(
+                this.state.name,
+                this.state.email,
+                this.state.password,
+                this.state.area,
+                this.state.level,
+                this.state.active);
+        }
+    }
 
     render(){
         return(
-
 
             <section className="container">
                 <div className="limiter">
@@ -94,13 +85,14 @@ class RegistroUsers extends Component {
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
 
-                            <form className="needs-validation login100-form" noValidate>
+                            <div className="login100-form">
+                                {this._renderAlert()}
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="nombre">Nombre Completo: </label>
+                                    <label htmlFor="name">Nombre Completo: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="nombre" name="nombre" required
+                                        id="name" name="name" required
                                         placeholder="Tu nombre completo aqui ..."
                                         onChange={this.handleInputChange}
                                     />
@@ -176,11 +168,11 @@ class RegistroUsers extends Component {
                                 </div>
 
                                 <div className="col-12 mt-3">
-                                    <button type="submit" className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
+                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,5 +183,18 @@ class RegistroUsers extends Component {
     }
 }
 
-export default RegistroUsers;
+const mapStateToProps = ({responseNewUser}) => {
+    return {
+        responseNewUser: responseNewUser
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        sendUser: (name,email,password, area, level,active) => dispatch(NEW_USER_ACTION(name,email,password, area, level,active))
+    }
+}
+
+
+ const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(RegistroUsers);
+ export default ConnectUsers;
 

@@ -1,13 +1,27 @@
 import React, {Component} from 'react';
 import {municipios,hidalgo} from '../components/data/data';
+import { connect } from 'react-redux';
+import { NEW_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
 
 class ActividadRegistro extends Component {
+
+    _renderAlert =() => {
+        if(this.state.showAlert){
+           return(
+               <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                   <strong>Atención </strong> Ingresa todos los datos solicitados
+               </div>
+            );
+        } else {
+            return null;
+        }
+        
+    }
 
     constructor(props) {
         super(props);
         this.state = {
-          zips:[],
-          colonias:[]
+          showAlert: false
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -18,7 +32,7 @@ class ActividadRegistro extends Component {
         const NewProps = nextProps;
 
         if(NewProps.responseNewUser.success === "OK"){
-            window.location.href = "/";
+            window.location.href = "/Tactividad";
         }
     }
     
@@ -26,36 +40,6 @@ class ActividadRegistro extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(name + ": ",value);
-
-        if(name === "municipio"){
-            var zips = [];
-            var newZips = [];
-            hidalgo.map((item,index) => {
-                if(item.nombre === value){
-                    zips.push(item.cp);
-                }
-            })
-            newZips = zips.filter(function(item, index, array) {
-                return array.indexOf(item) === index;
-            })
-
-            this.setState({
-                zips: [...newZips]
-            });
-            
-        } else if(name === "cp"){
-            var newCols = [];
-            hidalgo.map((item,index) => {
-                if(item.cp === value){
-                    newCols.push(item.asentamiento);
-                }
-            })
-
-            this.setState({
-                colonias: [...newCols]
-            });
-        }
     
         this.setState({
           [name]: value
@@ -63,16 +47,28 @@ class ActividadRegistro extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state);
-        
-        this.props.sendUser(
-            this.state.dia,
-            this.state.hora,
-            this.state.lugar,
-            this.state.folio,
-            this.state.area,
-            this.state.numAsis,
-            this.state.nCambios);    
+        if(this.state.dia === undefined ||
+            this.state.hora === undefined ||
+            this.state.lugar === undefined ||
+            this.state.folio === undefined ||
+            this.state.area === undefined ||
+            this.state.numAsis === undefined ||
+            this.state.nCambios === undefined){
+
+                this.setState({
+                    showAlert: true
+                });
+
+        }else {
+            this.props.sendUser(
+                this.state.dia,
+                this.state.hora,
+                this.state.lugar,
+                this.state.folio,
+                this.state.area,
+                this.state.numAsis,
+                this.state.nCambios); 
+        }
     }
 
     render(){
@@ -90,7 +86,8 @@ class ActividadRegistro extends Component {
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
 
-                            <form className="needs-validation login100-form" noValidate>
+                            <div className="needs-validation login100-form" noValidate>
+                                {this._renderAlert()}
 
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="dia">Día: </label>
@@ -190,11 +187,11 @@ class ActividadRegistro extends Component {
                                 </div>
 
                                 <div className="col-12 mt-3">
-                                    <button type="submit" className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
+                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -204,4 +201,17 @@ class ActividadRegistro extends Component {
     }
 }
 
-export default ActividadRegistro;
+const mapStateToProps = ({responseNewActividad}) => {
+    return {
+        responseNewActividad: responseNewActividad
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        sendUser: (dia, hora, lugar, folio, area, numAsis, nCambios) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, nCambios))
+    }
+}
+
+
+ const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadRegistro);
+ export default ConnectActividades;

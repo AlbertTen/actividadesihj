@@ -15,7 +15,7 @@ return {
     type: "NEW_ACTIVIDADES",
     payload: axios({
         method: 'post',
-        url: BASE_URL + 'actividad/add',
+        url: BASE_URL + '/actividad/add',
         data: {
             dia,hora,lugar,folio,area,numAsis,nCambios
         },
