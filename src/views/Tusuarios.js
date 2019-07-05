@@ -39,18 +39,18 @@ class Tusuarios extends Component{
         return(
         
             <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-10">
+                <div className="row">
+                    <div className="col-12">
                         
-                        <div class style={{marginTop:'30px'}}>
+                        <div style={{marginTop:'30px'}}>
                             <h3 align="center"> <strong>Usuarios</strong> </h3> 
-                        </div> <br></br>
+                        </div>
             
-                            <div class style={{textAlign:"center"}}>
-                                <button type="button" class="btn btn-success">Agregar</button>
+                            <div className="text-center" style={{marginBottom:30}}>
+                                <button type="button" className="btn btn-success">Agregar</button>
                             </div> <br></br>
             
-                            <table class="table">
+                            <table className="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre Completo</th>

@@ -31,7 +31,7 @@ class ActividadRegistro extends Component {
         //const ActualProps = this.props;
         const NewProps = nextProps;
 
-        if(NewProps.responseNewUser.success === "OK"){
+        if(NewProps.responseNewActividad.success === "OK"){
             window.location.href = "/Tactividad";
         }
     }
@@ -60,7 +60,7 @@ class ActividadRegistro extends Component {
                 });
 
         }else {
-            this.props.sendUser(
+            this.props.sendActividad(
                 this.state.dia,
                 this.state.hora,
                 this.state.lugar,
@@ -208,7 +208,7 @@ const mapStateToProps = ({responseNewActividad}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendUser: (dia, hora, lugar, folio, area, numAsis, nCambios) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, nCambios))
+        sendActividad: (dia, hora, lugar, folio, area, numAsis, nCambios) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, nCambios))
     }
 }
 

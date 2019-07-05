@@ -27,7 +27,6 @@ class Tactividad extends Component{
                         <td>{row.folio}</td>
                         <td>{row.area}</td>
                         <td>{row.numAsis}</td>
-                        <td>{row.nCambios}</td>
                         <td>
                             <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
                             <button type="button" className="btn btn-warning">Editar</button>
@@ -40,21 +39,16 @@ class Tactividad extends Component{
     render(){
         console.log(this.props.stateActividades);
         return(
-        
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-12 col-md-12 col-lg-12">
-
-                    <div>
-                        <div class style={{marginTop:'30px'}}>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <div style={{marginTop:'30px'}}>
                             <h3 align="center"> <strong>Actividades</strong> </h3> 
-                        </div> <br></br>
-            
-                            <div class style={{textAlign:"center"}}>
-                                <button href="./ActividadRegistro" type="button" class="btn btn-success">Agregar</button>
-                            </div> <br></br>
-            
-                        <table class="table">
+                        </div>
+                        <div className="text-center" style={{marginBottom:30}}>
+                            <button href="./ActividadRegistro" type="button" className="btn btn-success">Agregar</button>
+                        </div>
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Día</th>
@@ -63,7 +57,6 @@ class Tactividad extends Component{
                                     <th scope="col">Folio</th>
                                     <th scope="col">Área</th>
                                     <th scope="col">Número de Asistentes</th>
-                                    <th scope="col">Cambios hechos por:</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -74,7 +67,6 @@ class Tactividad extends Component{
                     </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

@@ -12,7 +12,7 @@ const GET_ACTIVIDADES_ACTION = () => {
 //Add Actividades
 const NEW_ACTIVIDAD_ACTION = (dia,hora,lugar,folio,area,numAsis,nCambios) => {
 return {
-    type: "NEW_ACTIVIDADES",
+    type: "NEW_ACTIVIDAD",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/actividad/add',

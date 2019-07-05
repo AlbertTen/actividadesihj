@@ -12,7 +12,7 @@ const GET_BENEFICIARIOS_ACTION = () => {
 //Add Beneficiarios
 const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => {
 return {
-    type: "NEW_BENEFICIARIOS",
+    type: "NEW_BENEFICIARIO",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/beneficiario/add',

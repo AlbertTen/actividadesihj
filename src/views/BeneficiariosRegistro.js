@@ -35,7 +35,7 @@ class BeneficiariosRegistro extends Component{
         //const ActualProps = this.props;
         const NewProps = nextProps;
 
-        if(NewProps.responseNewUser.success === "OK"){
+        if(NewProps.responseNewBeneficiario.success === "OK"){
             window.location.href = "/Beneficiarios";
         }
     }
@@ -100,7 +100,7 @@ class BeneficiariosRegistro extends Component{
                 });
 
         }else {
-            this.props.sendUser(
+            this.props.sendBeneficiario(
                 this.state.nombre,
                 this.state.app,
                 this.state.apm,
@@ -182,6 +182,8 @@ class BeneficiariosRegistro extends Component{
                                         id="edad" name="edad" required
                                         placeholder="Tu edad aqui ..."
                                         onChange={this.handleInputChange}
+                                        pattern="[18-29]{2}" min="18" max="29"
+                                        
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu edad
@@ -199,20 +201,21 @@ class BeneficiariosRegistro extends Component{
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="telefono">Telefono: </label>
+                                    <label htmlFor="telefono">Teléfono: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="tel" className="form-control" 
                                         id="telefono" name="telefono" required
                                         placeholder="Tu telefono aqui ..."
                                         onChange={this.handleInputChange}
+                                        maxLength="10" minLength="10" pattern="[0-9]{10}"
                                     />
                                     <div className="invalid-feedback">
-                                        Por favor ingresa tu telefono
+                                        Por favor ingresa tu teléfono
                                     </div>
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="telefono">Email: </label>
+                                    <label htmlFor="email">Email: </label>
                                     <input 
                                         type="email" className="form-control" 
                                         id="email" name="email" required
@@ -231,7 +234,7 @@ class BeneficiariosRegistro extends Component{
                                         id="curp" name="curp" required
                                         placeholder="Tu CURP aqui ..."
                                         onChange={this.handleInputChange}
-                                        maxLength="18"
+                                        maxLength="18" minLength="18"
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu CURP
@@ -304,6 +307,8 @@ class BeneficiariosRegistro extends Component{
                                         id="numExt" name="numExt" required
                                         placeholder="Tu numero aqui ..."
                                         onChange={this.handleInputChange}
+                                        min="0" pattern="[0-9]{1,4}"
+                                        
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu número
@@ -311,7 +316,7 @@ class BeneficiariosRegistro extends Component{
                                 </div>
 
                                 <div className="col-12 mt-3">
-                                    <button className="btn btn-success login100-form-btn">
+                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
                                 </div>

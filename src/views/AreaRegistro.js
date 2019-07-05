@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
-import {municipios, hidalgo} from '../components/data/data';
+import { NEW_AREA_ACTION } from '../redux/actions/AreaAction';
+import { connect } from 'react-redux';
 
 class AreaRegistro extends Component {
+
+    _renderAlert =() => {
+        if(this.state.showAlert){
+           return(
+               <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                   <strong>Atención </strong> Ingresa todos los datos solicitados
+               </div>
+            );
+        } else {
+            return null;
+        }
+    }
 
     constructor(props) {
         super(props);
         this.state = {
-          zips:[],
-          colonias:[]
+            showAlert: false
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -17,8 +29,8 @@ class AreaRegistro extends Component {
         //const ActualProps = this.props;
         const NewProps = nextProps;
 
-        if(NewProps.responseNewUser.success === "OK"){
-            window.location.href = "/";
+        if(NewProps.responseNewArea.success === "OK"){
+            window.location.href = "/Area";
         }
     }
     
@@ -26,36 +38,6 @@ class AreaRegistro extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(name + ": ",value);
-
-        if(name === "municipio"){
-            var zips = [];
-            var newZips = [];
-            hidalgo.map((item,index) => {
-                if(item.nombre === value){
-                    zips.push(item.cp);
-                }
-            })
-            newZips = zips.filter(function(item, index, array) {
-                return array.indexOf(item) === index;
-            })
-
-            this.setState({
-                zips: [...newZips]
-            });
-            
-        } else if(name === "cp"){
-            var newCols = [];
-            hidalgo.map((item,index) => {
-                if(item.cp === value){
-                    newCols.push(item.asentamiento);
-                }
-            })
-
-            this.setState({
-                colonias: [...newCols]
-            });
-        }
     
         this.setState({
           [name]: value
@@ -63,14 +45,22 @@ class AreaRegistro extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state);
-        
-        this.props.sendUser(
+        if(this.state.name === undefined ||
+            this.state.descripcion === undefined ||
+            this.state.telefono === undefined ||
+            this.state.abreviacion === undefined){
+
+                this.setState({
+                    showAlert: true
+                });
+
+        }else {
+            this.props.sendArea(
             this.state.name,
             this.state.descripcion,
             this.state.telefono,  
             this.state.abreviacion);
-            
+        }
     }
 
     render(){
@@ -88,13 +78,14 @@ class AreaRegistro extends Component {
                             <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                         </div>
 
-                        <form className="needs-validation login100-form" noValidate>
+                        <div className="needs-validation login100-form" noValidate>
+                            {this._renderAlert()}
 
                             <div className="col-12 col-lg-6 mb-3">
-                                <label htmlFor="nomarea">Nombre del Área: </label>
+                                <label htmlFor="name">Nombre del Área: </label>
                                 <input 
                                     type="text" className="form-control" 
-                                    id="nomarea" name="nomarea" required
+                                    id="name" name="name" required
                                     placeholder="El nombre del área ..."
                                     onChange={this.handleInputChange}
                                 />
@@ -142,11 +133,11 @@ class AreaRegistro extends Component {
                                 </div>
 
                             <div className="col-12 mt-3">
-                                <button type="submit" className="btn btn-success login100-form-btn">
+                                <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                     Registrar
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,4 +148,18 @@ class AreaRegistro extends Component {
 
 }
 
-export default AreaRegistro;
+const mapStateToProps = ({responseNewArea}) => {
+    return {
+        responseNewArea: responseNewArea
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        sendArea: (name,descripcion,telefono,abreviacion) => dispatch(NEW_AREA_ACTION(name,descripcion,telefono,abreviacion))
+    }
+}
+
+
+ const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(AreaRegistro);
+ export default ConnectAreas;
+
