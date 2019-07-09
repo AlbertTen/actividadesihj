@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { GET_BENEFICIARIOS_ACTION, DELETE_BENEFICIARIO_ACTION } from  '../redux/actions/BeneficiariosAction';
-
 //View para Beneficiarios
-
 class Beneficiarios extends Component{
-
     componentDidMount(){
         this.props.getBeneficiarios();
     }
-
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseDeleteBeneficiario.success === "OK"){
             this.props.getBeneficiarios();
         }
     }
-
     _renderItems = () => {
         return this.props.stateBeneficiarios.map((row,index) => {
             return(
@@ -36,18 +31,14 @@ class Beneficiarios extends Component{
     render(){
         console.log(this.props.stateBeneficiarios);
         return(
-        
         <div className="container">
             <div className="row">
                 <div className="col-12">
-
                     <div style={{marginTop:'30px'}}>
                     <h3 align="center"> <strong>Beneficiarios</strong> </h3> </div> 
-            
                     <div className="text-center" style={{marginBottom:30}}>
-                        <button type="button" className="btn btn-success">Agregar</button>
-                    </div> <br></br>
-
+                        <a class="btn btn-success" href="./BeneficiariosRegistro" role="button">Agregar</a>
+                    </div> 
                     <table className="table">
                         <thead>
                             <tr>
@@ -61,27 +52,25 @@ class Beneficiarios extends Component{
                         <tbody>
                             {this._renderItems()}
                         </tbody>
-                    </table>     
+                    </table>  
+                    <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>   
                 </div>
             </div>
         </div>
         );
     }
 }
-
 const mapStateToProps = ({stateBeneficiarios, responseDeleteBeneficiario}) => {
     return {
         stateBeneficiarios: stateBeneficiarios,
         responseDeleteBeneficiario: responseDeleteBeneficiario
     };
 }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         getBeneficiarios: () => dispatch(GET_BENEFICIARIOS_ACTION()),
         deleteBeneficiario: (id) => dispatch(DELETE_BENEFICIARIO_ACTION(id))
     };
 };
-
  const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(Beneficiarios);
  export default ConnectBeneficiarios;

@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import {municipios,hidalgo} from '../components/data/data';
 import { connect } from 'react-redux';
 import { NEW_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
-
 class ActividadRegistro extends Component {
-
     _renderAlert =() => {
         if(this.state.showAlert){
            return(
@@ -14,10 +11,8 @@ class ActividadRegistro extends Component {
             );
         } else {
             return null;
-        }
-        
+        }    
     }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -26,26 +21,21 @@ class ActividadRegistro extends Component {
     
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
     componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
-
         if(NewProps.responseNewActividad.success === "OK"){
             window.location.href = "/Tactividad";
         }
     }
-    
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
         this.setState({
           [name]: value
         });
     }
-
     handleSubmit() {
         if(this.state.dia === undefined ||
             this.state.hora === undefined ||
@@ -54,11 +44,9 @@ class ActividadRegistro extends Component {
             this.state.area === undefined ||
             this.state.numAsis === undefined ||
             this.state.nCambios === undefined){
-
                 this.setState({
                     showAlert: true
                 });
-
         }else {
             this.props.sendActividad(
                 this.state.dia,
@@ -70,10 +58,8 @@ class ActividadRegistro extends Component {
                 this.state.nCambios); 
         }
     }
-
     render(){
         return(
-
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
@@ -81,14 +67,11 @@ class ActividadRegistro extends Component {
                             <div className="login100-form-title">
                                 <span className="login100-form-title-1">Registra una Actividad</span>
                             </div>
-
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
-
                             <div className="needs-validation login100-form" noValidate>
                                 {this._renderAlert()}
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="dia">Día: </label>
                                     <input 
@@ -101,7 +84,6 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el día
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="hora">Hora: </label>
                                     <input 
@@ -114,7 +96,6 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa la hora
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="lugar">Lugar: </label>
                                     <input 
@@ -127,7 +108,6 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el lugar
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="folio">Folio: </label>
                                     <input 
@@ -140,7 +120,6 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el folio
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
                                         <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
@@ -158,8 +137,6 @@ class ActividadRegistro extends Component {
                                         </select>
                                         <div className="invalid-feedback">Selecciona un area</div>
                                 </div>
-                                
-                                
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="numAsis">Número de Asistentes: </label>
                                     <input 
@@ -172,20 +149,6 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el número de asistentes
                                     </div>
                                 </div>
-
-                                <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="nCambios">Cambios hechos por: </label>
-                                    <input 
-                                        type="text" className="form-control" 
-                                        id="nCambios" name="nCambios" required
-                                        placeholder="Cambios hechos por ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa quién hizo algún cambio 
-                                    </div>
-                                </div>
-
                                 <div className="col-12 mt-3">
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
@@ -195,12 +158,11 @@ class ActividadRegistro extends Component {
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
-
         );
     }
 }
-
 const mapStateToProps = ({responseNewActividad}) => {
     return {
         responseNewActividad: responseNewActividad
@@ -211,7 +173,5 @@ const mapDispatchToProps = (dispatch) => {
         sendActividad: (dia, hora, lugar, folio, area, numAsis, nCambios) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, nCambios))
     }
 }
-
-
  const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadRegistro);
  export default ConnectActividades;

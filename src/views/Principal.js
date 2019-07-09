@@ -1,5 +1,4 @@
 import React , {Component} from 'react';
-
 class  Principal extends Component{
     render(){
          return(
@@ -9,8 +8,7 @@ class  Principal extends Component{
                     <h1 className="text-center"><strong>BIENVENIDOS</strong></h1>
                 </div>
              </div>
-                <hr class="red small-margin"/><br/><br/><br/>
-
+                <hr class="red small-margin"/><br/>
             <div className="row justify-content-center">
                 <div className="col-12 col-md-4">
                     <div className="card"style={{marginBottom: 15}}>
@@ -22,7 +20,6 @@ class  Principal extends Component{
                         </div>
                     </div>
                 </div>
-
                 <div className="col-12 col-md-4">
                     <div className="card" style={{marginBottom: 15}}>
                         <img src="./images/areas.jpg" className="card-img-top" alt="..."/>

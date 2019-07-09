@@ -2,23 +2,18 @@ import React, {Component} from 'react';
 import {municipios,hidalgo} from '../components/data/data';
 import { NEW_USER_ACTION } from '../redux/actions/UserAction';
 import { connect } from 'react-redux';
-
 class RegistroUsers extends Component {
-
      _renderAlert =() => {
          if(this.state.showAlert){
             return(
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Atención </strong> Ingresa todos los datos solicitados
-    
                 </div>
              );
          } else {
              return null;
-         }
-         
+         } 
      }
-     
     constructor(props) {
         super(props);
         this.state = {
@@ -27,26 +22,21 @@ class RegistroUsers extends Component {
     
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
     componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
-
         if(NewProps.responseNewUser.success === "OK"){
             window.location.href = "/Tusuarios";
         }
     }
-    
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-
         this.setState({
           [name]: value
         });
     }
-
     handleSubmit() {
         if(this.state.name === undefined ||
             this.state.email === undefined ||
@@ -54,11 +44,9 @@ class RegistroUsers extends Component {
             this.state.area === undefined ||
             this.state.level === undefined ||
             this.state.active === undefined){
-
                 this.setState({
                     showAlert: true
                 });
-
         }else {
             this.props.sendUser(
                 this.state.name,
@@ -69,10 +57,8 @@ class RegistroUsers extends Component {
                 this.state.active);
         }
     }
-
     render(){
         return(
-
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
@@ -80,14 +66,11 @@ class RegistroUsers extends Component {
                             <div className="login100-form-title">
                                 <span className="login100-form-title-1">Registrate</span>
                             </div>
-
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
-
                             <div className="login100-form">
                                 {this._renderAlert()}
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="name">Nombre Completo: </label>
                                     <input 
@@ -100,7 +83,6 @@ class RegistroUsers extends Component {
                                         Por favor ingresa tu nombre completo
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="email">Email: </label>
                                     <input 
@@ -113,7 +95,6 @@ class RegistroUsers extends Component {
                                         Por favor ingresa tu email
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="password">Contraseña: </label>
                                     <input 
@@ -126,7 +107,6 @@ class RegistroUsers extends Component {
                                         Por favor ingresa tu contraseña
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
                                         <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
@@ -144,7 +124,6 @@ class RegistroUsers extends Component {
                                         </select>
                                         <div className="invalid-feedback">Selecciona un area</div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="level">Nivel: </label>
                                         <select className="custom-select" id="level" name="level" onChange={this.handleInputChange} required>
@@ -154,7 +133,6 @@ class RegistroUsers extends Component {
                                         </select>
                                         <div className="invalid-feedback">Selecciona un nivel</div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
                                     <div className="form-group">
@@ -166,7 +144,6 @@ class RegistroUsers extends Component {
                                         <div className="invalid-feedback">Selecciona un estatus</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 mt-3">
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
@@ -176,13 +153,11 @@ class RegistroUsers extends Component {
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
-            
-
         );
     }
 }
-
 const mapStateToProps = ({responseNewUser}) => {
     return {
         responseNewUser: responseNewUser
@@ -193,8 +168,5 @@ const mapDispatchToProps = (dispatch) => {
         sendUser: (name,email,password, area, level,active) => dispatch(NEW_USER_ACTION(name,email,password, area, level,active))
     }
 }
-
-
  const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(RegistroUsers);
  export default ConnectUsers;
-

@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { GET_ACTIVIDADES_ACTION, DELETE_ACTIVIDAD_ACTION } from  '../redux/actions/ActividadAction';
-
 //View 
-
 class Tactividad extends Component{
-
     componentDidMount(){
         this.props.getActividades();
     }
-
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseDeleteActividad.success === "OK"){
             this.props.getActividades();
         } 
     }
-
     _renderItems = () => {
         return this.props.stateActividades.map((row,index) => {
             return(
@@ -35,7 +30,6 @@ class Tactividad extends Component{
                 );
             })
         }
-
     render(){
         console.log(this.props.stateActividades);
         return(
@@ -46,7 +40,7 @@ class Tactividad extends Component{
                             <h3 align="center"> <strong>Actividades</strong> </h3> 
                         </div>
                         <div className="text-center" style={{marginBottom:30}}>
-                            <button href="./ActividadRegistro" type="button" className="btn btn-success">Agregar</button>
+                            <a class="btn btn-success" href="./ActividadRegistro" role="button">Agregar</a>
                         </div>
                         <table className="table">
                             <thead>
@@ -64,6 +58,7 @@ class Tactividad extends Component{
                                 {this._renderItems()}
                             </tbody>
                         </table>
+                        <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
                     </div>
                 </div>
             </div>
@@ -76,13 +71,11 @@ const mapStateToProps = ({stateActividades, responseDeleteActividad}) => {
         responseDeleteActividad: responseDeleteActividad
     };
 }
-
 const mapDispatchToProps = ( dispatch) => {
     return {
         getActividades: () => dispatch(GET_ACTIVIDADES_ACTION()),
         deleteActividad: (id) => dispatch(DELETE_ACTIVIDAD_ACTION(id))
     };
 };
-
  const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(Tactividad);
  export default ConnectActividades;

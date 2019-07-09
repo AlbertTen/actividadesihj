@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import { NEW_AREA_ACTION } from '../redux/actions/AreaAction';
 import { connect } from 'react-redux';
-
 class AreaRegistro extends Component {
-
     _renderAlert =() => {
         if(this.state.showAlert){
            return(
@@ -15,45 +13,36 @@ class AreaRegistro extends Component {
             return null;
         }
     }
-
     constructor(props) {
         super(props);
         this.state = {
             showAlert: false
         };
-    
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
     componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
-
         if(NewProps.responseNewArea.success === "OK"){
             window.location.href = "/Area";
         }
     }
-    
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
         this.setState({
           [name]: value
         });
     }
-
     handleSubmit() {
         if(this.state.name === undefined ||
             this.state.descripcion === undefined ||
             this.state.telefono === undefined ||
             this.state.abreviacion === undefined){
-
                 this.setState({
                     showAlert: true
                 });
-
         }else {
             this.props.sendArea(
             this.state.name,
@@ -62,10 +51,8 @@ class AreaRegistro extends Component {
             this.state.abreviacion);
         }
     }
-
     render(){
         return(
-
             <section className="container">
             <div className="limiter">
                 <div className="container-login100">
@@ -73,14 +60,11 @@ class AreaRegistro extends Component {
                         <div className="login100-form-title">
                             <span className="login100-form-title-1">Registra Área</span>
                         </div>
-
                         <div className="text-center w-100" style={{paddingTop:"15px"}}>
                             <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                         </div>
-
                         <div className="needs-validation login100-form" noValidate>
                             {this._renderAlert()}
-
                             <div className="col-12 col-lg-6 mb-3">
                                 <label htmlFor="name">Nombre del Área: </label>
                                 <input 
@@ -93,7 +77,6 @@ class AreaRegistro extends Component {
                                     Por favor ingresa el nombre de la área
                                 </div>
                             </div>
-
                             <div className="col-12 col-lg-6 mb-3">
                                 <label htmlFor="descripcion">Descripción: </label>
                                 <input 
@@ -106,7 +89,6 @@ class AreaRegistro extends Component {
                                     Por favor ingresa una descripción del área
                                 </div>
                             </div>
-
                             <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="telefono">Telefono: </label>
                                     <input 
@@ -141,13 +123,11 @@ class AreaRegistro extends Component {
                     </div>
                 </div>
             </div>
+            <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
         </section>
-
         );
     }
-
 }
-
 const mapStateToProps = ({responseNewArea}) => {
     return {
         responseNewArea: responseNewArea
@@ -158,8 +138,6 @@ const mapDispatchToProps = (dispatch) => {
         sendArea: (name,descripcion,telefono,abreviacion) => dispatch(NEW_AREA_ACTION(name,descripcion,telefono,abreviacion))
     }
 }
-
-
  const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(AreaRegistro);
  export default ConnectAreas;
 

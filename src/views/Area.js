@@ -46,7 +46,7 @@ class Area extends Component{
                             <h3 align="center"> <strong>Áreas</strong> </h3> </div> 
             
                         <div className="text-center" style={{marginBottom:30}}>
-                            <button type="button" className="btn btn-success">Agregar</button>
+                            <a class="btn btn-success" href="./AreaRegistro" role="button">Agregar</a>
                         </div> <br></br>
             
                             <table className="table">
@@ -63,6 +63,7 @@ class Area extends Component{
                                     {this._renderItems()}
                                 </tbody>
                             </table>
+                            <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
                     </div>
                 </div>
             </div>

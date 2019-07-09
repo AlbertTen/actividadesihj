@@ -1,35 +1,27 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
-
 //View for Register
-
 class Registro extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
           zips:[],
           colonias:[]
         };
-    
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
     componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
-
         if(NewProps.responseNewUser.success === "OK"){
             window.location.href = "/";
         }
     }
-    
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         console.log(name + ": ",value);
-
         if(name === "municipio"){
             var zips = [];
             var newZips = [];
@@ -41,11 +33,9 @@ class Registro extends Component {
             newZips = zips.filter(function(item, index, array) {
                 return array.indexOf(item) === index;
             })
-
             this.setState({
                 zips: [...newZips]
             });
-            
         } else if(name === "cp"){
             var newCols = [];
             hidalgo.map((item,index) => {
@@ -53,20 +43,16 @@ class Registro extends Component {
                     newCols.push(item.asentamiento);
                 }
             })
-
             this.setState({
                 colonias: [...newCols]
             });
         }
-    
         this.setState({
           [name]: value
         });
     }
-
     handleSubmit() {
         console.log(this.state);
-        
         this.props.sendUser(
             this.state.nombre,
             this.state.app,
@@ -84,14 +70,9 @@ class Registro extends Component {
             this.state.area,
             this.state.level,
             this.state.active);
-            
     }
-
-
-
     render(){
         return(
-
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
@@ -99,13 +80,10 @@ class Registro extends Component {
                             <div className="login100-form-title">
                                 <span className="login100-form-title-1">Registrate</span>
                             </div>
-
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
                             </div>
-
                             <form className="needs-validation login100-form" noValidate>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="nombre">Nombre(s): </label>
                                     <input 
@@ -118,7 +96,6 @@ class Registro extends Component {
                                         Por favor ingresa tu nombre
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="app">Apellido Paterno: </label>
                                     <input 
@@ -131,7 +108,6 @@ class Registro extends Component {
                                         Por favor ingresa tu apellido
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="apm">Apellido Materno: </label>
                                     <input 
@@ -144,7 +120,6 @@ class Registro extends Component {
                                         Por favor ingresa tu apellido
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="edad">Edad: </label>
                                     <input 
@@ -157,7 +132,6 @@ class Registro extends Component {
                                         Por favor ingresa tu edad
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="sexo">Sexo: </label>
                                     <div className="form-group">
@@ -169,7 +143,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona tu sexo</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="telefono">Telefono: </label>
                                     <input 
@@ -182,7 +155,6 @@ class Registro extends Component {
                                         Por favor ingresa tu telefono
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="municipio">Municipio: </label>
                                     <div className="form-group">
@@ -195,7 +167,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona un municipio</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="cp">Codigo Postal: </label>
                                     <div className="form-group">
@@ -208,7 +179,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona un codigo postal</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="colonia">Colonia: </label>
                                     <div className="form-group">
@@ -221,7 +191,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona un colonia</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="calle">Calle: </label>
                                     <input 
@@ -234,7 +203,6 @@ class Registro extends Component {
                                         Por favor ingresa tu calle
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="numExt">Número Exterior: </label>
                                     <input 
@@ -247,7 +215,6 @@ class Registro extends Component {
                                         Por favor ingresa tu número
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="email">Email: </label>
                                     <input 
@@ -260,7 +227,6 @@ class Registro extends Component {
                                         Por favor ingresa tu email
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="password">Contraseña: </label>
                                     <input 
@@ -273,7 +239,6 @@ class Registro extends Component {
                                         Por favor ingresa tu contraseña
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
                                         <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
@@ -291,7 +256,6 @@ class Registro extends Component {
                                         </select>
                                         <div className="invalid-feedback">Selecciona un area</div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="level">Nivel: </label>
                                     <div className="form-group">
@@ -303,7 +267,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona un nivel</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
                                     <div className="form-group">
@@ -315,7 +278,6 @@ class Registro extends Component {
                                         <div className="invalid-feedback">Selecciona un estatus</div>
                                     </div>
                                 </div>
-
                                 <div className="col-12 mt-3">
                                     <button type="submit" className="btn btn-success login100-form-btn">
                                         Registrar
@@ -326,10 +288,7 @@ class Registro extends Component {
                     </div>
                 </div>
             </section>
-
         );
     }
 }
-
 export default Registro;
-
