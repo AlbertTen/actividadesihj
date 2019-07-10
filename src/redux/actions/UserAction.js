@@ -9,6 +9,19 @@ const GET_USERS_ACTION = () => {
     };
 }
 
+const GET_USER_ACTION = (id) => {
+    return {
+        type: "GET_USER",
+        payload: axios.get(BASE_URL + '/getUser/'+ id)
+    };
+}
+
+const UPDATE_USER_ACTION = (id) => {
+    return {
+        type: "UPDATE_USER",
+        payload: axios.get(BASE_URL + '/updateUser/'+ id)
+    };
+}
 //Add Users
 const NEW_USER_ACTION = (name,email,password,area,level, active) => {
 return {
@@ -37,6 +50,8 @@ const DELETE_USER_ACTION = (id) => {
 
 export{
     GET_USERS_ACTION,
+    GET_USER_ACTION,
+    UPDATE_USER_ACTION,
     NEW_USER_ACTION,
     DELETE_USER_ACTION
 };

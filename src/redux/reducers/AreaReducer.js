@@ -7,6 +7,15 @@ const GET_AREAS_REDUCER = (state = [], action) => {
     }
 };
 
+const GET_AREA_REDUCER = (state = [], action) => {
+    switch(action.type){
+        case "GET_AREA_PENDING": return state;
+        case "GET_AREA_FULFILLED": return action.payload.data;
+        case "GET_AREA_REJECTED": return state;
+        default: return state;
+    }
+};
+
 const NEW_AREA_REDUCER = (state = {}, action) => {
     switch(action.type){
         case "NEW_AREA_PENDING": return { status: "Pending" };
@@ -28,5 +37,6 @@ const DELETE_AREA_REDUCER = (state = {}, action) => {
 export {
     NEW_AREA_REDUCER,
     GET_AREAS_REDUCER,
+    GET_AREA_REDUCER,
     DELETE_AREA_REDUCER
 };

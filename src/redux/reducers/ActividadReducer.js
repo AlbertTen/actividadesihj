@@ -6,6 +6,14 @@ const GET_ACTIVIDADES_REDUCER = (state = [], action) => {
         default: return state;
     }
 };
+const GET_ACTIVIDAD_REDUCER = (state = [], action) => {
+    switch(action.type){
+        case "GET_ACTIVIDAD_PENDING": return state;
+        case "GET_ACTIVIDAD_FULFILLED": return action.payload.data;
+        case "GET_ACTIVIDAD_REJECTED": return state;
+        default: return state;
+    }
+};
 
 const NEW_ACTIVIDAD_REDUCER = (state = {}, action) => {
     switch(action.type){
@@ -27,6 +35,7 @@ const DELETE_ACTIVIDAD_REDUCER = (state = {}, action) => {
 
 export {
     NEW_ACTIVIDAD_REDUCER,
+    GET_ACTIVIDAD_REDUCER,
     GET_ACTIVIDADES_REDUCER,
     DELETE_ACTIVIDAD_REDUCER
 };

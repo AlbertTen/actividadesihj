@@ -27,7 +27,12 @@ class Area extends Component{
                     <td>{row.abreviacion}</td>
                     <td>
                         <button type="button" className="btn btn-danger" onClick={this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
-                        <button type="button" className="btn btn-warning">Editar</button>
+                        <button type="button" className="btn btn-warning"onClick={() =>{
+                            let areaId=[];
+                            areaId.push(row._id);
+                            localStorage.setItem("areaId",JSON.stringify(areaId));
+                            window.location.href="./ModArea";
+                            }}>Editar</button>
                     </td>
                 </tr>
             );

@@ -8,7 +8,12 @@ const GET_ACTIVIDADES_ACTION = () => {
         payload: axios.get(BASE_URL + '/getActividades')
     };
 }
-
+const GET_ACTIVIDAD_ACTION = (id) => {
+    return {
+        type: "GET_ACTIVIDAD",
+        payload: axios.get(BASE_URL + '/getActividad' + id)
+    };
+}
 //Add Actividades
 const NEW_ACTIVIDAD_ACTION = (dia,hora,lugar,folio,area,numAsis,nCambios) => {
 return {
@@ -37,6 +42,7 @@ const DELETE_ACTIVIDAD_ACTION = (id) => {
 
 export{
     GET_ACTIVIDADES_ACTION,
+    GET_ACTIVIDAD_ACTION,
     NEW_ACTIVIDAD_ACTION,
     DELETE_ACTIVIDAD_ACTION
 };

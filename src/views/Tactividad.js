@@ -24,7 +24,12 @@ class Tactividad extends Component{
                         <td>{row.numAsis}</td>
                         <td>
                             <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
-                            <button type="button" className="btn btn-warning">Editar</button>
+                            <button type="button" className="btn btn-warning" onClick={() =>{
+                            let actividadId=[];
+                            actividadId.push(row._id);
+                            localStorage.setItem("actividadId",JSON.stringify(actividadId));
+                            window.location.href="./ModActividad";
+                            }}> Editar</button>
                         </td>
                     </tr>
                 );

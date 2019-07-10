@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {municipios,hidalgo} from '../components/data/data';
-import { NEW_USER_ACTION } from '../redux/actions/UserAction';
+import { GET_USER_ACTION } from '../redux/actions/UserAction';
 import { connect } from 'react-redux';
-class RegistroUsers extends Component {
+class ModUsers extends Component {
      _renderAlert =() => {
          if(this.state.showAlert){
             return(
@@ -19,16 +18,18 @@ class RegistroUsers extends Component {
         this.state = {
          showAlert: false
         };
-    
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
-    componentWillReceiveProps(nextProps){
+    componentDidMount(){
+        let id = JSON.parse(localStorage.getItem("userId"));
+        this.props.getUser(id);
+    }
+    /* componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
         if(NewProps.responseNewUser.success === "OK"){
             window.location.href = "/Tusuarios";
         }
-    }
+    } */
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -58,13 +59,21 @@ class RegistroUsers extends Component {
         }
     }
     render(){
+        let{name,email,password,area,level,active}=this.props.stateUser;
+        let valActive="SI";
+        if(active !== undefined && active){
+            valActive="SI";
+        }else{
+            valActive="NO";
+        }
+        console.log(this.props.stateUser);
         return(
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
                         <div className="row wrap-login100">
                             <div className="login100-form-title">
-                                <span className="login100-form-title-1">Registrate</span>
+                                <span className="login100-form-title-1">Modifica</span>
                             </div>
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
@@ -75,42 +84,36 @@ class RegistroUsers extends Component {
                                     <label htmlFor="name">Nombre Completo: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="name" name="name" required
+                                        id="name" ref="name" required
                                         placeholder="Tu nombre completo aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={name || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu nombre completo
-                                    </div>
+                                    
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="email">Email: </label>
                                     <input 
                                         type="email" className="form-control" 
-                                        id="email" name="email" required
+                                        id="email" ref="email" required
                                         placeholder="Tu email aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={email || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu email
-                                    </div>
+                                    
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="password">Contraseña: </label>
                                     <input 
                                         type="password" className="form-control" 
-                                        id="password" name="password" required
+                                        id="password" ref="password" required
                                         placeholder="Tu contraseña aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={password || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu contraseña
-                                    </div>
+                                    
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
                                         <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
-                                        <option value="">Selecciona una area</option>
+                                        <option defaultValue={area || ""}> {area || ""}</option>
                                         <option value="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
                                         <option value="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
                                         <option value="Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada">Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada</option>
@@ -122,27 +125,24 @@ class RegistroUsers extends Component {
                                         <option value="Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados ">Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados </option>
                                         <option value="Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados">Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados</option>
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un area</div>
+                                        
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="level">Nivel: </label>
                                         <select className="custom-select" id="level" name="level" onChange={this.handleInputChange} required>
-                                        <option value="">Selecciona un nivel</option>
+                                        <option defaultValue={level || ""}>{level || ""}</option>
                                         <option value="Administrador">Administrador</option>
                                         <option value="Usuario">Usuario</option>
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un nivel</div>
+                                        
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="active" name="active" onChange={this.handleInputChange} required>
-                                        <option value="">Selecciona un estatus</option>
+                                        <option defaultValue={active || ""}>{active || ""}</option>
                                         <option value={true}>SI</option>
                                         <option value={false}>NO</option>
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un estatus</div>
-                                    </div>
                                 </div>
                                 <div className="col-12 mt-3">
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
@@ -153,20 +153,21 @@ class RegistroUsers extends Component {
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
+                <a className="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
         );
     }
 }
-const mapStateToProps = ({responseNewUser}) => {
+const mapStateToProps = ({stateUser}) => {
     return {
-        responseNewUser: responseNewUser
+        stateUser: stateUser
     };
 }
+
 const mapDispatchToProps = (dispatch) => {
-    return{
-        sendUser: (name,email,password, area, level,active) => dispatch(NEW_USER_ACTION(name,email,password, area, level,active))
-    }
+    return{ 
+        getUser: (id) => dispatch(GET_USER_ACTION(id))
+        }
 }
- const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(RegistroUsers);
+ const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(ModUsers);
  export default ConnectUsers;

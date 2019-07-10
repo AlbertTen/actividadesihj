@@ -22,7 +22,12 @@ class Tusuarios extends Component{
                     <td>{row.area}</td>
                     <td>
                         <button type="button" className="btn btn-danger" onClick={this.props.deleteUser.bind(this,row._id)}>Eliminar</button>
-                        <button type="button" className="btn btn-warning">Editar</button>
+                        <button type="button" className="btn btn-warning"onClick={() =>{
+                            let userId=[];
+                            userId.push(row._id);
+                            localStorage.setItem("userId",JSON.stringify(userId));
+                            window.location.href="./ModUsers";
+                            }}>Editar</button>
                     </td>
                 </tr>
             );

@@ -9,6 +9,13 @@ const GET_AREAS_ACTION = () => {
     };
 }
 
+const GET_AREA_ACTION = (id) => {
+    return {
+        type: "GET_AREA",
+        payload: axios.get(BASE_URL + '/getArea/'+ id)
+    };
+}
+
 //Add AREAS
 const NEW_AREA_ACTION = (name, descripcion, telefono, abreviacion) => {
 return {
@@ -37,6 +44,7 @@ const DELETE_AREA_ACTION = (id) => {
 
 export{
     GET_AREAS_ACTION,
+    GET_AREA_ACTION,
     NEW_AREA_ACTION,
     DELETE_AREA_ACTION
 };

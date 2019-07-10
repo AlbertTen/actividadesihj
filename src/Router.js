@@ -11,6 +11,9 @@ import Tactividad from './views/Tactividad';
 import ActividadRegistro from './views/ActividadRegistro';
 import Tusuarios from './views/Tusuarios';
 import RegistroUsers from './views/RegistroUsers';
+import ModUsers from './views/ModUsers';
+import ModArea from './views/ModArea';
+import ModActividad from './views/ModActividad';
 
 class Router extends Component {
     render(){
@@ -32,6 +35,12 @@ class Router extends Component {
 
                 <Route path="/tusuarios" component={Tusuarios}/>
                 <Route path="/registroUsers" component={RegistroUsers}/>
+
+                <Route path="/modUsers" component={ModUsers}/>
+
+                <Route path="/modArea" component={ModArea}/>
+
+                <Route path="/modActividad" component={ModActividad}/>
                 
             </Switch>
         );
