@@ -34,7 +34,23 @@ return {
     })
 };
 }
-
+const UPDATE_AREA_ACTION = (id, name, descripcion, telefono, abreviacion) => {
+    return {
+        type: "UPDATE_AREA",
+        payload: axios({
+            method: 'post',
+            url: BASE_URL + '/areas/edit/' + id,
+            data: {
+                name, descripcion, telefono, abreviacion
+            },
+            config: {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+        })
+    };
+    }
 const DELETE_AREA_ACTION = (id) => {
     return{
         type: "DELETE_AREA",
@@ -45,6 +61,7 @@ const DELETE_AREA_ACTION = (id) => {
 export{
     GET_AREAS_ACTION,
     GET_AREA_ACTION,
+    UPDATE_AREA_ACTION,
     NEW_AREA_ACTION,
     DELETE_AREA_ACTION
 };

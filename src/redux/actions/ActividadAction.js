@@ -11,7 +11,7 @@ const GET_ACTIVIDADES_ACTION = () => {
 const GET_ACTIVIDAD_ACTION = (id) => {
     return {
         type: "GET_ACTIVIDAD",
-        payload: axios.get(BASE_URL + '/getActividad' + id)
+        payload: axios.get(BASE_URL + '/getActividad/' + id)
     };
 }
 //Add Actividades
@@ -33,6 +33,25 @@ return {
 };
 }
 
+//Update Actividades
+const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,nCambios) => {
+    return {
+        type: "UPDATE_ACTIVIDAD",
+        payload: axios({
+            method: 'post',
+            url: BASE_URL + '/actividad/edit/' + id,
+            data: {
+                dia,hora,lugar,folio,area,numAsis,nCambios
+            },
+            config: {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+        })
+    };
+    }
+
 const DELETE_ACTIVIDAD_ACTION = (id) => {
     return{
         type: "DELETE_ACTIVIDAD",
@@ -43,6 +62,7 @@ const DELETE_ACTIVIDAD_ACTION = (id) => {
 export{
     GET_ACTIVIDADES_ACTION,
     GET_ACTIVIDAD_ACTION,
+    UPDATE_ACTIVIDAD_ACTION,
     NEW_ACTIVIDAD_ACTION,
     DELETE_ACTIVIDAD_ACTION
 };

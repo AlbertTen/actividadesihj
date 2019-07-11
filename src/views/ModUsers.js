@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { GET_USER_ACTION } from '../redux/actions/UserAction';
+import { GET_USER_ACTION, UPDATE_USER_ACTION} from '../redux/actions/UserAction';
 import { connect } from 'react-redux';
 class ModUsers extends Component {
      _renderAlert =() => {
@@ -39,23 +39,32 @@ class ModUsers extends Component {
         });
     }
     handleSubmit() {
-        if(this.state.name === undefined ||
-            this.state.email === undefined ||
-            this.state.password === undefined ||
-            this.state.area === undefined ||
-            this.state.level === undefined ||
-            this.state.active === undefined){
+        if(this.refs.name.value === "" ||
+            this.refs.email.value === "" ||
+            this.refs.password.value === "" ||
+            this.refs.area.value === "" ||
+            this.refs.level.value === "" ||
+            this.refs.active.value === ""){
                 this.setState({
                     showAlert: true
                 });
         }else {
-            this.props.sendUser(
-                this.state.name,
-                this.state.email,
-                this.state.password,
-                this.state.area,
-                this.state.level,
-                this.state.active);
+            let id= JSON.parse(localStorage.getItem("userId"));
+            let active = null;
+            if(this.refs.active.value === "SI"){
+                active = true;
+            } else {
+                active=false;
+            }
+
+            this.props.updateUser(
+                id,
+                this.refs.name.value,
+                this.refs.email.value,
+                this.refs.password.value,
+                this.refs.area.value,
+                this.refs.level.value,
+                active);
         }
     }
     render(){
@@ -139,7 +148,7 @@ class ModUsers extends Component {
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
                                         <select className="custom-select" id="active" name="active" onChange={this.handleInputChange} required>
-                                        <option defaultValue={active || ""}>{active || ""}</option>
+                                        <option defaultValue={active || ""}>{valActive || ""}</option>
                                         <option value={true}>SI</option>
                                         <option value={false}>NO</option>
                                         </select>
@@ -148,25 +157,29 @@ class ModUsers extends Component {
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
+                                    <div style={{marginTop: "20px", textAlign: "center"}}>
+                                        <a className="btn btn-primary" href="./Beneficiarios" role="button">Cancelar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a className="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
         );
     }
 }
-const mapStateToProps = ({stateUser}) => {
+const mapStateToProps = ({stateUser, responseUpdateUser}) => {
     return {
-        stateUser: stateUser
+        stateUser: stateUser,
+        responseUpdateUser: responseUpdateUser
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{ 
-        getUser: (id) => dispatch(GET_USER_ACTION(id))
+        getUser: (id) => dispatch(GET_USER_ACTION(id)),
+        updateUser: (id, name,email,password,area,level, active)=>dispatch(UPDATE_USER_ACTION(id, name,email,password,area,level, active))
         }
 }
  const ConnectUsers = connect(mapStateToProps, mapDispatchToProps)(ModUsers);

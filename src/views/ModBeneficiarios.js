@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
-import { NEW_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
+import { GET_BENEFICIARIO_ACTION, UPDATE_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
 import { connect } from 'react-redux';
-class BeneficiariosRegistro extends Component{
+
+class ModBeneficiarios extends Component{
     _renderAlert =() => {
         if(this.state.showAlert){
            return(
@@ -24,13 +25,44 @@ class BeneficiariosRegistro extends Component{
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-    componentWillReceiveProps(nextProps){
+    componentDidMount(){
+        let id = JSON.parse(localStorage.getItem("beneficiarioId"));
+        this.props.getBeneficiario(id);
+    }
+
+    _renderZips = (municipio) => {
+        var zips =[];
+        var newZips = [];
+
+        hidalgo.map((item) => {
+            if(item.nombre === municipio){
+                zips.push(item.cp);
+            }
+        })
+        newZips = zips.filter(function(item,index,array){
+            return array.indexOf(item) === index;
+        })
+        return newZips;
+    }
+
+    _renderCols = (cp) => {
+        var newCols =[];
+        hidalgo.map((item)=>{
+            if(item.cp === cp){
+                newCols.push(item.asentamiento);
+            }
+        })
+        return newCols;
+    }
+
+    /* componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
         if(NewProps.responseNewBeneficiario.success === "OK"){
             window.location.href = "/Beneficiarios";
         }
-    }
+    } */
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -60,54 +92,74 @@ class BeneficiariosRegistro extends Component{
                 colonias: [...newCols]
             });
         }
-        this.setState({
-          [name]: value
-        });
     }
     handleSubmit() {
-        if(this.state.nombre === undefined ||
-            this.state.app === undefined ||
-            this.state.apm === undefined ||
-            this.state.edad === undefined ||
-            this.state.sexo === undefined ||
-            this.state.telefono === undefined ||
-            this.state.email === undefined ||
-            this.state.curp === undefined ||
-            this.state.fechaNac === undefined ||
-            this.state.municipio === undefined ||
-            this.state.cp === undefined ||
-            this.state.colonia === undefined ||
-            this.state.calle === undefined ||
-            this.state.numExt === undefined){
+        if(this.refs.nombre.value === "" ||
+            this.refs.app.value === "" ||
+            this.refs.apm.value === "" ||
+            this.refs.edad.value === "" ||
+            this.refs.sexo.value === "" ||
+            this.refs.telefono.value === "" ||
+            this.refs.email.value === "" ||
+            this.refs.curp.value === "" ||
+            this.refs.fechaNac.value === "" ||
+            this.refs.municipio.value === "" ||
+            this.refs.cp.value === "" ||
+            this.refs.colonia.value === "" ||
+            this.refs.calle.value === "" ||
+            this.refs.numExt.value === ""){
                 this.setState({
                     showAlert: true
                 });
         }else {
-                this.props.sendBeneficiario(
-                    this.state.nombre,
-                    this.state.app,
-                    this.state.apm,
-                    this.state.edad,
-                    this.state.sexo,
-                    this.state.telefono,
-                    this.state.email,
-                    this.state.curp,
-                    this.state.fechaNac,
-                    this.state.municipio,
-                    this.state.cp,
-                    this.state.colonia,
-                    this.state.calle,
-                    this.state.numExt);
+            let id = JSON.parse(localStorage.getItem("actividadId"));
+            let active = null; 
+            if(this.refs.active.value === "SI"){
+                active = true;
+            } else {
+                active=false;
+            }
+                this.props.updateBeneficiario(
+                    this.state.nombre.value,
+                    this.state.app.value,
+                    this.state.apm.value,
+                    this.state.edad.value,
+                    this.state.sexo.value,
+                    this.state.telefono.value,
+                    this.state.email.value,
+                    this.state.curp.value,
+                    this.state.fechaNac.value,
+                    this.state.municipio.value,
+                    this.state.cp.value,
+                    this.state.colonia.value,
+                    this.state.calle.value,
+                    this.state.numExt.value);
              }
     }
     render(){
+        let{nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt}=this.props.stateBeneficiario;
+        let zips = [], cols = [];
+
+        if(this.state.zips.length === 0 && cp !== undefined) {
+            zips = this._renderZips(municipio);
+        } else if(this.state.zips.length !==0){
+            zips = [...this.state.zips];
+        }
+
+        if(this.state.colonias.length === 0 && colonia !== undefined) {
+            cols = this._renderCols(cp);
+        } else if(this.state.colonias.length !==0){
+            cols = [...this.state.colonias];
+        }
+
+
         return(      
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
                         <div className="row wrap-login100">
                             <div className="login100-form-title">
-                                <span className="login100-form-title-1">Registrate como Beneficiario</span>
+                                <span className="login100-form-title-1">Modificar Beneficiario</span>
                             </div>
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
@@ -118,59 +170,47 @@ class BeneficiariosRegistro extends Component{
                                     <label htmlFor="nombre">Nombre(s): </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="nombre" name="nombre" required
+                                        id="nombre" ref="nombre" required
                                         placeholder="Tu nombre aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={nombre || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu nombre
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="app">Apellido Paterno: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="app" name="app" required
+                                        id="app" ref="app" required
                                         placeholder="Tu apellido aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={app || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu apellido
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="apm">Apellido Materno: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="apm" name="apm" required
+                                        id="apm" ref="apm" required
                                         placeholder="Tu apellido aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={apm || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu apellido
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="edad">Edad: </label>
                                     <input 
                                         type="number" className="form-control" 
-                                        id="edad" name="edad" required
+                                        id="edad" ref="edad" required
                                         placeholder="Tu edad aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={edad || ""}
                                         required pattern="[0-9]{2}"
                                         min="18" max="29"
                                         maxLength="2" minLength="2"
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu edad
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="sexo">Sexo: </label>
                                         <select className="custom-select" id="sexo" name="sexo" onChange={this.handleInputChange} required>
-                                        <option value="">Selecciona tu sexo</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
+                                        <option defaultValue={sexo || ""}> {sexo || ""}</option>
+                                        <option defaultValue="Masculino">Masculino</option>
+                                        <option defaultValue="Femenino">Femenino</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona tu sexo</div>
                                 </div>
@@ -178,113 +218,92 @@ class BeneficiariosRegistro extends Component{
                                     <label htmlFor="telefono">Telefono: </label>
                                     <input 
                                         type="string" className="form-control" 
-                                        id="telefono" name="telefono" required
+                                        id="telefono" ref="telefono" required
                                         placeholder="Tu telefono aqui ..."
-                                        onChange={this.handleInputChange} 
+                                        defaultValue={telefono || ""}
                                         maxLength="10" minLength="10" pattern="[0-9]{10}"    
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu telefono
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="email">Email: </label>
                                     <input 
                                         type="email" className="form-control" 
-                                        id="email" name="email" required
+                                        id="email" ref="email" required
                                         placeholder="Tu email aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={email || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu email
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="curp">Curp: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="curp" name="curp" required
+                                        id="curp" ref="curp" required
                                         placeholder="Tu CURP aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={curp || ""}
                                         maxLength="18" minLength="18"
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu CURP
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="Fecha de Nacimiento">Fecha de Nacimiento: </label>
                                     <input 
                                         type="date" className="form-control" 
-                                        id="fechaNac" name="fechaNac" required
+                                        id="fechaNac" ref="fechaNac" required
                                         placeholder="Tu fecha de nacimiento aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={fechaNac || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu fecha de nacimiento
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="municipio">Municipio: </label>
                                         <select className="custom-select" id="municipio" name="municipio" onChange={this.handleInputChange} required>
-                                            <option value="">Selecciona un municipio</option>
+                                        <option defaultValue={municipio || ""}> {municipio || ""}</option>
                                             {municipios.map((item,index) => {
                                                 return(<option value={item.name} key={index}>{item.name}</option>);
                                             })}
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un municipio</div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="cp">Codigo Postal: </label>
                                         <select className="custom-select" id="cp" name="cp" onChange={this.handleInputChange} required>
-                                            <option value="">Selecciona un municipio</option>
+                                        <option defaultValue={cp || ""}> {cp || ""}</option>
                                             {this.state.zips.map((item,index) => {
                                                 return(<option value={item} key={index}>{item}</option>);
                                             })}
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un codigo postal</div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="colonia">Colonia: </label>
                                         <select className="custom-select" id="colonia" name="colonia" onChange={this.handleInputChange} required>
-                                            <option value="">Selecciona una colonia</option>
+                                        <option defaultValue={colonia || ""}> {colonia || ""}</option>
                                             {this.state.colonias.map((item,index) => {
                                                 return(<option value={item} key={index}>{item}</option>);
                                             })}
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un colonia</div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="calle">Calle: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="calle" name="calle" required
+                                        id="calle" ref="calle" required
                                         placeholder="Tu calle aqui ..."
-                                        onChange={this.handleInputChange}
+                                        defaultValue={calle || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu calle
-                                    </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="numExt">Número Exterior: </label>
                                     <input 
                                         type="number" className="form-control" 
-                                        id="numExt" name="numExt" required
+                                        id="numExt" ref="numExt" required
                                         placeholder="Tu numero aqui ..."
-                                        onChange={this.handleInputChange} 
+                                        defaultValue={numExt || ""}
                                         min="0" pattern="[0-9]{1,4}"
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa tu número
-                                    </div>
                                 </div>
                                 <div className="col-12 mt-3">
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
                                     <div style={{marginTop: "20px", textAlign: "center"}}>
-                                        <a class="btn btn-primary" href="./Tactividad" role="button">Cancelar</a>
+                                        <a className="btn btn-primary" href="./Beneficiarios" role="button">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
@@ -295,15 +314,18 @@ class BeneficiariosRegistro extends Component{
         );
     }
 }
-const mapStateToProps = ({responseNewBeneficiario}) => {
+const mapStateToProps = ({stateBeneficiario, responseBeneficiario}) => {
     return {
-        responseNewBeneficiario: responseNewBeneficiario
+        stateBeneficiario: stateBeneficiario,
+        responseBeneficiario: responseBeneficiario
     };
 }
+
 const mapDispatchToProps = (dispatch) => {
-    return{
-        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt))
-    }
+    return{ 
+        getBeneficiario: (id) => dispatch(GET_BENEFICIARIO_ACTION(id)),
+        updateBeneficiario: (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(UPDATE_BENEFICIARIO_ACTION(id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt))
+        }
 }
- const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(BeneficiariosRegistro);
+ const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(ModBeneficiarios);
  export default ConnectBeneficiarios;

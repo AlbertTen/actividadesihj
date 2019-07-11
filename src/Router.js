@@ -14,6 +14,7 @@ import RegistroUsers from './views/RegistroUsers';
 import ModUsers from './views/ModUsers';
 import ModArea from './views/ModArea';
 import ModActividad from './views/ModActividad';
+import ModBeneficiarios from './views/ModBeneficiarios';
 
 class Router extends Component {
     render(){
@@ -41,6 +42,8 @@ class Router extends Component {
                 <Route path="/modArea" component={ModArea}/>
 
                 <Route path="/modActividad" component={ModActividad}/>
+
+                <Route path="/modBeneficiarios" component={ModBeneficiarios}/>
                 
             </Switch>
         );

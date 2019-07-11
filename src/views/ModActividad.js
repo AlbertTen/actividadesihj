@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {GET_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
+import {GET_ACTIVIDAD_ACTION, UPDATE_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
 
 class ModActividad extends Component {
     _renderAlert =() => {
@@ -40,24 +40,34 @@ class ModActividad extends Component {
         });
     }
     handleSubmit() {
-        if(this.state.dia === undefined ||
-            this.state.hora === undefined ||
-            this.state.lugar === undefined ||
-            this.state.folio === undefined ||
-            this.state.area === undefined ||
-            this.state.numAsis === undefined ||
-            this.state.nCambios === undefined){
+        if(this.refs.dia.value === "" ||
+            this.refs.hora.value === "" ||
+            this.refs.lugar.value === "" ||
+            this.refs.folio.value === "" ||
+            this.refs.area.value === "" ||
+            this.refs.numAsis.value === "" ||
+            this.refs.nCambios.value === ""){
                 this.setState({
                     showAlert: true
                 });
         }else {
-            this.props.sendActividad(
-                this.state.dia,
-                this.state.hora,
-                this.state.lugar,
-                this.state.folio,
-                this.state.area,
-                this.state.numAsis);
+            let id = JSON.parse(localStorage.getItem("actividadId"));
+            let active = null;
+            if(this.refs.active.value === "SI"){
+                active= true;
+            } else {
+                active= false;
+            }
+
+
+            this.props.updateActividad(
+                id,
+                this.refs.dia.value,
+                this.refs.hora.value,
+                this.refs.lugar.value,
+                this.refs.folio.value,
+                this.refs.area.value,
+                this.refs.numAsis.value);
         }
     }
     render(){
@@ -152,19 +162,21 @@ class ModActividad extends Component {
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
+                <a className="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
         );
     }
 }
-const mapStateToProps = ({stateActividad}) => {
+const mapStateToProps = ({stateActividad, responseUpdateActividad}) => {
     return {
-        stateActividad: stateActividad
+        stateActividad: stateActividad,
+        responseUpdateActividad: responseUpdateActividad
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id))
+        getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id)),
+        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,nCambios)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,nCambios))
     }
 }
  const ConnectActividad = connect(mapStateToProps, mapDispatchToProps)(ModActividad);

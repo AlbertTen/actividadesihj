@@ -22,7 +22,13 @@ class Beneficiarios extends Component{
                     <td>{row.municipio}</td>
                     <td>
                         <button type="button" className="btn btn-danger" onClick={this.props.deleteBeneficiario.bind(this,row._id)} >Eliminar</button>
-                        <button type="button" className="btn btn-warning">Editar</button>
+                        <button type="button" className="btn btn-warning"onClick={() =>{
+                            let beneficiarioId=[];
+                            beneficiarioId.push(row._id);
+                            localStorage.setItem("beneficiarioId",JSON.stringify(beneficiarioId));
+                            window.location.href="./ModBeneficiarios";
+                            }}
+                        >Editar</button>
                     </td>
                 </tr>
             );

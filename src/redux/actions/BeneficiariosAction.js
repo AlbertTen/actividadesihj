@@ -9,6 +9,13 @@ const GET_BENEFICIARIOS_ACTION = () => {
     };
 }
 
+const GET_BENEFICIARIO_ACTION = (id) => {
+    return {
+        type: "GET_BENEFICIARIO",
+        payload: axios.get(BASE_URL + '/getBeneficiario/' + id)
+    };
+}
+
 //Add Beneficiarios
 const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => {
 return {
@@ -28,6 +35,25 @@ return {
 };
 }
 
+//Update Beneficiarios
+const UPDATE_BENEFICIARIO_ACTION = (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => {
+    return {
+        type: "UPDATE_BENEFICIARIO",
+        payload: axios({
+            method: 'post',
+            url: BASE_URL + '/beneficiario/edit/' + id,
+            data: {
+                nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt
+            },
+            config: {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+        })
+    };
+    }
+
 const DELETE_BENEFICIARIO_ACTION = (id) => {
     return{
         type: "DELETE_BENEFICIARIO", 
@@ -37,6 +63,8 @@ const DELETE_BENEFICIARIO_ACTION = (id) => {
 
 export{
     GET_BENEFICIARIOS_ACTION,
+    GET_BENEFICIARIO_ACTION,
+    UPDATE_BENEFICIARIO_ACTION,
     NEW_BENEFICIARIO_ACTION,
     DELETE_BENEFICIARIO_ACTION
 };

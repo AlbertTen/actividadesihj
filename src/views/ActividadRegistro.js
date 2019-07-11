@@ -153,12 +153,14 @@ class ActividadRegistro extends Component {
                                     <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
                                         Registrar
                                     </button>
+                                    <div style={{marginTop: "20px", textAlign: "center"}}>
+                                        <a class="btn btn-primary" href="./Tactividad" role="button">Cancelar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
         );
     }

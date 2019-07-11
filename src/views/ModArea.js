@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { GET_AREA_ACTION } from '../redux/actions/AreaAction';
+import { GET_AREA_ACTION, UPDATE_AREA_ACTION} from '../redux/actions/AreaAction';
 import { connect } from 'react-redux';
 
 class ModArea extends Component {
@@ -40,19 +40,28 @@ class ModArea extends Component {
         });
     }
     handleSubmit() {
-        if(this.state.name === undefined ||
-            this.state.descripcion === undefined ||
-            this.state.telefono === undefined ||
-            this.state.abreviacion === undefined){
+        if(this.refs.name.value === "" ||
+            this.refs.descripcion.value === "" ||
+            this.refs.telefono.value === "" ||
+            this.refs.abreviacion.value === ""){
                 this.setState({
                     showAlert: true
                 });
         }else {
-            this.props.sendArea(
-            this.state.name,
-            this.state.descripcion,
-            this.state.telefono,  
-            this.state.abreviacion);
+
+            let id= JSON.parse(localStorage.getItem("areaId"));
+            let active = null;
+            if(this.refs.active.value === "SI"){
+                active = true;
+            } else {
+                active=false;
+            }
+
+            this.props.updateArea(
+            this.refs.name.value,
+            this.refs.descripcion.value,
+            this.refs.telefono.value,  
+            this.refs.abreviacion.value);
         }
     }
     render(){
@@ -124,15 +133,17 @@ class ModArea extends Component {
         );
     }
 }
-const mapStateToProps = ({stateArea}) => {
+const mapStateToProps = ({stateArea, responseUpdateArea}) => {
     return {
-        stateArea: stateArea
+        stateArea: stateArea,
+        responseUpdateArea: responseUpdateArea
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{ 
-        getArea:(id) => dispatch(GET_AREA_ACTION(id))
+        getArea:(id) => dispatch(GET_AREA_ACTION(id)),
+        updateArea: (id, name, descripcion, telefono, abreviacion)=>dispatch(UPDATE_AREA_ACTION(id, name, descripcion, telefono, abreviacion))
         }
 }
  const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(ModArea);

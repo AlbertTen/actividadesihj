@@ -15,6 +15,15 @@ const GET_ACTIVIDAD_REDUCER = (state = [], action) => {
     }
 };
 
+const UPDATE_ACTIVIDAD_REDUCER = (state = [], action) => {
+    switch(action.type){
+        case "UPDATE_ACTIVIDAD_PENDING": return state;
+        case "UPDATE_ACTIVIDAD_FULFILLED": return action.payload.data;
+        case "UPDATE_ACTIVIDAD_REJECTED": return state;
+        default: return state;
+    }
+};
+
 const NEW_ACTIVIDAD_REDUCER = (state = {}, action) => {
     switch(action.type){
         case "NEW_ACTIVIDAD_PENDING": return { status: "Pending" };
@@ -37,5 +46,6 @@ export {
     NEW_ACTIVIDAD_REDUCER,
     GET_ACTIVIDAD_REDUCER,
     GET_ACTIVIDADES_REDUCER,
+    UPDATE_ACTIVIDAD_REDUCER,
     DELETE_ACTIVIDAD_REDUCER
 };

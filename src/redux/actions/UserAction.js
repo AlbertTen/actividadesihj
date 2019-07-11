@@ -16,12 +16,6 @@ const GET_USER_ACTION = (id) => {
     };
 }
 
-const UPDATE_USER_ACTION = (id) => {
-    return {
-        type: "UPDATE_USER",
-        payload: axios.get(BASE_URL + '/updateUser/'+ id)
-    };
-}
 //Add Users
 const NEW_USER_ACTION = (name,email,password,area,level, active) => {
 return {
@@ -40,6 +34,24 @@ return {
     })
 };
 }
+
+const UPDATE_USER_ACTION = (id, name,email,password,area,level, active) => {
+    return {
+        type: "UPDATE_USER",
+        payload: axios({
+            method: 'put',
+            url: BASE_URL + '/user/edit/' + id,
+            data: {
+                name,email,password,area,level,active
+            },
+            config: {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }
+        })
+    };
+    }
 
 const DELETE_USER_ACTION = (id) => {
     return{
