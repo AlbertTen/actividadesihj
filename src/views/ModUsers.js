@@ -23,37 +23,32 @@ class ModUsers extends Component {
         let id = JSON.parse(localStorage.getItem("userId"));
         this.props.getUser(id);
     }
-    /* componentWillReceiveProps(nextProps){
-        //const ActualProps = this.props;
+     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
-        if(NewProps.responseNewUser.success === "OK"){
+        if(NewProps.responseUpdateUser.success === "OK"){
             window.location.href = "/Tusuarios";
         }
-    } */
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-          [name]: value
-        });
-    }
+    } 
+    
     handleSubmit() {
-        if(this.refs.name.value === "" ||
+         if(this.refs.name.value === "" ||
             this.refs.email.value === "" ||
             this.refs.password.value === "" ||
             this.refs.area.value === "" ||
             this.refs.level.value === "" ||
-            this.refs.active.value === ""){
+            this.refs.active.value === ""
+        ){
                 this.setState({
                     showAlert: true
                 });
-        }else {
+        } else {
+            
             let id= JSON.parse(localStorage.getItem("userId"));
             let active = null;
+
             if(this.refs.active.value === "SI"){
                 active = true;
-            } else {
+            } else { 
                 active=false;
             }
 
@@ -64,8 +59,9 @@ class ModUsers extends Component {
                 this.refs.password.value,
                 this.refs.area.value,
                 this.refs.level.value,
-                active);
-        }
+                active
+            );
+        } 
     }
     render(){
         let{name,email,password,area,level,active}=this.props.stateUser;
@@ -75,7 +71,7 @@ class ModUsers extends Component {
         }else{
             valActive="NO";
         }
-        console.log(this.props.stateUser);
+        
         return(
             <section className="container">
                 <div className="limiter">
@@ -93,7 +89,7 @@ class ModUsers extends Component {
                                     <label htmlFor="name">Nombre Completo: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="name" ref="name" required
+                                        id="name" ref="name" 
                                         placeholder="Tu nombre completo aqui ..."
                                         defaultValue={name || ""}
                                     />
@@ -103,7 +99,7 @@ class ModUsers extends Component {
                                     <label htmlFor="email">Email: </label>
                                     <input 
                                         type="email" className="form-control" 
-                                        id="email" ref="email" required
+                                        id="email" ref="email" 
                                         placeholder="Tu email aqui ..."
                                         defaultValue={email || ""}
                                     />
@@ -113,7 +109,7 @@ class ModUsers extends Component {
                                     <label htmlFor="password">Contraseña: </label>
                                     <input 
                                         type="password" className="form-control" 
-                                        id="password" ref="password" required
+                                        id="password" ref="password" 
                                         placeholder="Tu contraseña aqui ..."
                                         defaultValue={password || ""}
                                     />
@@ -121,7 +117,7 @@ class ModUsers extends Component {
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
-                                        <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="area" ref="area">
                                         <option defaultValue={area || ""}> {area || ""}</option>
                                         <option value="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
                                         <option value="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
@@ -138,28 +134,32 @@ class ModUsers extends Component {
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="level">Nivel: </label>
-                                        <select className="custom-select" id="level" name="level" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="level" ref="level">
                                         <option defaultValue={level || ""}>{level || ""}</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Usuario">Usuario</option>
+                                        <option defaultValue="Administrador">Administrador</option>
+                                        <option defaultValue="Usuario">Usuario</option>
                                         </select>
                                         
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
-                                        <select className="custom-select" id="active" name="active" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="active" ref="active" >
                                         <option defaultValue={active || ""}>{valActive || ""}</option>
-                                        <option value={true}>SI</option>
-                                        <option value={false}>NO</option>
+                                        <option defaultValue={true}>SI</option>
+                                        <option defaultValue={false}>NO</option>
                                         </select>
                                 </div>
                                 <div className="col-12 mt-3">
-                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
-                                        Registrar
-                                    </button>
-                                    <div style={{marginTop: "20px", textAlign: "center"}}>
-                                        <a className="btn btn-primary" href="./Beneficiarios" role="button">Cancelar</a>
-                                    </div>
+                                    <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
+                                        <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Tusuarios";
+                                        }}>
+                                            Cancelar
+                                        </button>
+                                        <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                                            Registrar
+                                        </button>
+                                    </div> 
                                 </div>
                             </div>
                         </div>

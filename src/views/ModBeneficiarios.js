@@ -55,13 +55,12 @@ class ModBeneficiarios extends Component{
         return newCols;
     }
 
-    /* componentWillReceiveProps(nextProps){
-        //const ActualProps = this.props;
+    componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
-        if(NewProps.responseNewBeneficiario.success === "OK"){
+        if(NewProps.responseUpdateBeneficiario.success === "OK"){
             window.location.href = "/Beneficiarios";
         }
-    } */
+    } 
 
     handleInputChange(event) {
         const target = event.target;
@@ -112,28 +111,24 @@ class ModBeneficiarios extends Component{
                     showAlert: true
                 });
         }else {
-            let id = JSON.parse(localStorage.getItem("actividadId"));
-            let active = null; 
-            if(this.refs.active.value === "SI"){
-                active = true;
-            } else {
-                active=false;
-            }
+            let id = JSON.parse(localStorage.getItem("beneficiarioId"));
+            
                 this.props.updateBeneficiario(
-                    this.state.nombre.value,
-                    this.state.app.value,
-                    this.state.apm.value,
-                    this.state.edad.value,
-                    this.state.sexo.value,
-                    this.state.telefono.value,
-                    this.state.email.value,
-                    this.state.curp.value,
-                    this.state.fechaNac.value,
-                    this.state.municipio.value,
-                    this.state.cp.value,
-                    this.state.colonia.value,
-                    this.state.calle.value,
-                    this.state.numExt.value);
+                    this.refs.nombre.value,
+                    this.refs.app.value,
+                    this.refs.apm.value,
+                    this.refs.edad.value,
+                    this.refs.sexo.value,
+                    this.refs.telefono.value,
+                    this.refs.email.value,
+                    this.refs.curp.value,
+                    this.refs.fechaNac.value,
+                    this.refs.municipio.value,
+                    this.refs.cp.value,
+                    this.refs.colonia.value,
+                    this.refs.calle.value,
+                    this.refs.numExt.value
+                    );
              }
     }
     render(){
@@ -170,7 +165,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="nombre">Nombre(s): </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="nombre" ref="nombre" required
+                                        id="nombre" ref="nombre" 
                                         placeholder="Tu nombre aqui ..."
                                         defaultValue={nombre || ""}
                                     />
@@ -179,7 +174,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="app">Apellido Paterno: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="app" ref="app" required
+                                        id="app" ref="app" 
                                         placeholder="Tu apellido aqui ..."
                                         defaultValue={app || ""}
                                     />
@@ -188,7 +183,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="apm">Apellido Materno: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="apm" ref="apm" required
+                                        id="apm" ref="apm" 
                                         placeholder="Tu apellido aqui ..."
                                         defaultValue={apm || ""}
                                     />
@@ -197,7 +192,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="edad">Edad: </label>
                                     <input 
                                         type="number" className="form-control" 
-                                        id="edad" ref="edad" required
+                                        id="edad" ref="edad" 
                                         placeholder="Tu edad aqui ..."
                                         defaultValue={edad || ""}
                                         required pattern="[0-9]{2}"
@@ -207,18 +202,18 @@ class ModBeneficiarios extends Component{
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="sexo">Sexo: </label>
-                                        <select className="custom-select" id="sexo" name="sexo" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="sexo" ref="sexo" >
                                         <option defaultValue={sexo || ""}> {sexo || ""}</option>
                                         <option defaultValue="Masculino">Masculino</option>
                                         <option defaultValue="Femenino">Femenino</option>
                                         </select>
-                                        <div className="invalid-feedback">Selecciona tu sexo</div>
+                                      
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="telefono">Telefono: </label>
                                     <input 
                                         type="string" className="form-control" 
-                                        id="telefono" ref="telefono" required
+                                        id="telefono" ref="telefono" 
                                         placeholder="Tu telefono aqui ..."
                                         defaultValue={telefono || ""}
                                         maxLength="10" minLength="10" pattern="[0-9]{10}"    
@@ -228,7 +223,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="email">Email: </label>
                                     <input 
                                         type="email" className="form-control" 
-                                        id="email" ref="email" required
+                                        id="email" ref="email" 
                                         placeholder="Tu email aqui ..."
                                         defaultValue={email || ""}
                                     />
@@ -237,7 +232,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="curp">Curp: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="curp" ref="curp" required
+                                        id="curp" ref="curp" 
                                         placeholder="Tu CURP aqui ..."
                                         defaultValue={curp || ""}
                                         maxLength="18" minLength="18"
@@ -247,14 +242,14 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="Fecha de Nacimiento">Fecha de Nacimiento: </label>
                                     <input 
                                         type="date" className="form-control" 
-                                        id="fechaNac" ref="fechaNac" required
+                                        id="fechaNac" ref="fechaNac" 
                                         placeholder="Tu fecha de nacimiento aqui ..."
                                         defaultValue={fechaNac || ""}
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="municipio">Municipio: </label>
-                                        <select className="custom-select" id="municipio" name="municipio" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="municipio" ref="municipio" >
                                         <option defaultValue={municipio || ""}> {municipio || ""}</option>
                                             {municipios.map((item,index) => {
                                                 return(<option value={item.name} key={index}>{item.name}</option>);
@@ -263,7 +258,7 @@ class ModBeneficiarios extends Component{
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="cp">Codigo Postal: </label>
-                                        <select className="custom-select" id="cp" name="cp" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="cp" ref="cp">
                                         <option defaultValue={cp || ""}> {cp || ""}</option>
                                             {this.state.zips.map((item,index) => {
                                                 return(<option value={item} key={index}>{item}</option>);
@@ -272,7 +267,7 @@ class ModBeneficiarios extends Component{
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="colonia">Colonia: </label>
-                                        <select className="custom-select" id="colonia" name="colonia" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="colonia" ref="colonia" >
                                         <option defaultValue={colonia || ""}> {colonia || ""}</option>
                                             {this.state.colonias.map((item,index) => {
                                                 return(<option value={item} key={index}>{item}</option>);
@@ -283,7 +278,7 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="calle">Calle: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="calle" ref="calle" required
+                                        id="calle" ref="calle"
                                         placeholder="Tu calle aqui ..."
                                         defaultValue={calle || ""}
                                     />
@@ -292,18 +287,22 @@ class ModBeneficiarios extends Component{
                                     <label htmlFor="numExt">Número Exterior: </label>
                                     <input 
                                         type="number" className="form-control" 
-                                        id="numExt" ref="numExt" required
+                                        id="numExt" ref="numExt" 
                                         placeholder="Tu numero aqui ..."
                                         defaultValue={numExt || ""}
                                         min="0" pattern="[0-9]{1,4}"
                                     />
                                 </div>
                                 <div className="col-12 mt-3">
-                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
-                                        Registrar
-                                    </button>
-                                    <div style={{marginTop: "20px", textAlign: "center"}}>
-                                        <a className="btn btn-primary" href="./Beneficiarios" role="button">Cancelar</a>
+                                <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
+                                        <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Beneficiarios";
+                                        }}>
+                                            Cancelar
+                                        </button>
+                                        <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                                            Registrar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -314,10 +313,10 @@ class ModBeneficiarios extends Component{
         );
     }
 }
-const mapStateToProps = ({stateBeneficiario, responseBeneficiario}) => {
+const mapStateToProps = ({stateBeneficiario, responseUpdateBeneficiario}) => {
     return {
         stateBeneficiario: stateBeneficiario,
-        responseBeneficiario: responseBeneficiario
+        responseUpdateBeneficiario: responseUpdateBeneficiario
     };
 }
 

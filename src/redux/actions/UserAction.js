@@ -53,6 +53,7 @@ const UPDATE_USER_ACTION = (id, name,email,password,area,level, active) => {
     };
     }
 
+
 const DELETE_USER_ACTION = (id) => {
     return{
         type: "DELETE_USER",

@@ -34,7 +34,7 @@ class Tusuarios extends Component{
         })
     }
     render(){
-        console.log(this.props.stateUsers);
+        
         return(
             <div className="container">
                 <div className="row">
@@ -42,9 +42,13 @@ class Tusuarios extends Component{
                         <div style={{marginTop:'30px'}}>
                             <h3 align="center"> <strong>Usuarios</strong> </h3> 
                         </div>
-                            <div className="text-center" style={{marginBottom:30}}>
-                                <a class="btn btn-success" href="./RegistroUsers" role="button">Agregar</a>
-                            </div> 
+                        <div className="text-center" style={{marginBottom:"30px"}}>
+                            <button className="btn btn-success" onClick={() => {
+                                window.location.href="/RegistroUsers";
+                                }}>
+                                Agregar
+                            </button>
+                        </div> 
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -58,7 +62,11 @@ class Tusuarios extends Component{
                                     {this._renderItems()}
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
+                            <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Principal";
+                                            }}>
+                                            Cancelar
+                            </button>
                     </div>
                 </div>
             </div>

@@ -42,9 +42,13 @@ class Beneficiarios extends Component{
                 <div className="col-12">
                     <div style={{marginTop:'30px'}}>
                     <h3 align="center"> <strong>Beneficiarios</strong> </h3> </div> 
-                    <div className="text-center" style={{marginBottom:30}}>
-                        <a class="btn btn-success" href="./BeneficiariosRegistro" role="button">Agregar</a>
-                    </div> 
+                        <div className="text-center" style={{marginBottom:"30px"}}>
+                            <button className="btn btn-success" onClick={() => {
+                                window.location.href="/BeneficiariosRegistro";
+                                }}>
+                                Agregar
+                            </button>
+                        </div>
                     <table className="table">
                         <thead>
                             <tr>
@@ -59,7 +63,11 @@ class Beneficiarios extends Component{
                             {this._renderItems()}
                         </tbody>
                     </table>  
-                    <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>   
+                    <button className="btn btn-primary" onClick={() => {
+                            window.location.href="/Principal";
+                            }}>
+                            Cancelar
+                    </button> 
                 </div>
             </div>
         </div>

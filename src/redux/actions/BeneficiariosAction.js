@@ -40,7 +40,7 @@ const UPDATE_BENEFICIARIO_ACTION = (id, nombre,app,apm,edad,sexo,telefono,email,
     return {
         type: "UPDATE_BENEFICIARIO",
         payload: axios({
-            method: 'post',
+            method: 'put',
             url: BASE_URL + '/beneficiario/edit/' + id,
             data: {
                 nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt

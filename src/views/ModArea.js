@@ -24,21 +24,13 @@ class ModArea extends Component {
         let id = JSON.parse(localStorage.getItem("areaId"));
         this.props.getArea(id);
     }
-    /*componentWillReceiveProps(nextProps){
-        //const ActualProps = this.props;
+    componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
-        if(NewProps.responseNewArea.success === "OK"){
+        if(NewProps.responseUpdateArea.success === "OK"){
             window.location.href = "/Area";
         }
-    } */
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-          [name]: value
-        });
-    }
+    } 
+    
     handleSubmit() {
         if(this.refs.name.value === "" ||
             this.refs.descripcion.value === "" ||
@@ -50,24 +42,19 @@ class ModArea extends Component {
         }else {
 
             let id= JSON.parse(localStorage.getItem("areaId"));
-            let active = null;
-            if(this.refs.active.value === "SI"){
-                active = true;
-            } else {
-                active=false;
-            }
 
             this.props.updateArea(
-            this.refs.name.value,
-            this.refs.descripcion.value,
-            this.refs.telefono.value,  
-            this.refs.abreviacion.value);
+                id,
+                this.refs.name.value,
+                this.refs.descripcion.value,
+                this.refs.telefono.value,  
+                this.refs.abreviacion.value
+            );
         }
     }
     render(){
         let{name,descripcion,telefono,abreviacion}=this.props.stateArea;
         
-        console.log(this.props.stateArea);
         return(
             <section className="container">
             <div className="limiter">
@@ -85,7 +72,7 @@ class ModArea extends Component {
                                 <label htmlFor="name">Nombre del Área: </label>
                                 <input 
                                     type="text" className="form-control" 
-                                    id="name" ref="name" required
+                                    id="name" ref="name"
                                     placeholder="El nombre del área ..."
                                     defaultValue={name || ""}
                                 />
@@ -95,7 +82,7 @@ class ModArea extends Component {
                                 <label htmlFor="descripcion">Descripción: </label>
                                 <input 
                                     type="text" className="form-control" 
-                                    id="descripcion" ref="descripcion" required
+                                    id="descripcion" ref="descripcion"
                                     placeholder="La descripción aqui ..."
                                     defaultValue={descripcion || ""}
                                 />
@@ -104,7 +91,7 @@ class ModArea extends Component {
                                     <label htmlFor="telefono">Telefono: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="telefono" ref="telefono" required
+                                        id="telefono" ref="telefono"
                                         placeholder="Tu telefono aqui ..."
                                         defaultValue={telefono || ""}
                                     />
@@ -113,22 +100,28 @@ class ModArea extends Component {
                                     <label htmlFor="abreviacion">Abreviacion: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="abreviacion" ref="abreviacion" required
+                                        id="abreviacion" ref="abreviacion"
                                         placeholder="Tu abreviación aqui ..."
                                         defaultValue={abreviacion || ""}
                                     />
                                 </div>
 
                             <div className="col-12 mt-3">
-                                <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
-                                    Registrar
-                                </button>
+                                <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
+                                        <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Area";
+                                        }}>
+                                            Cancelar
+                                        </button>
+                                        <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                                            Registrar
+                                        </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <a className="btn btn-primary" href="./Principal" role="button">Atrás</a>
         </section>
         );
     }

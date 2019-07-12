@@ -38,8 +38,8 @@ const UPDATE_AREA_ACTION = (id, name, descripcion, telefono, abreviacion) => {
     return {
         type: "UPDATE_AREA",
         payload: axios({
-            method: 'post',
-            url: BASE_URL + '/areas/edit/' + id,
+            method: 'put',
+            url: BASE_URL + '/area/edit/' + id,
             data: {
                 name, descripcion, telefono, abreviacion
             },

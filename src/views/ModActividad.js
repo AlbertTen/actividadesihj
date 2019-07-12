@@ -24,21 +24,14 @@ class ModActividad extends Component {
         let id = JSON.parse(localStorage.getItem("actividadId"));
         this.props.getActividad(id);
     }
-    /*
-        componentWillReceiveProps(nextProps){
-        //const ActualProps = this.props;
+    
+    componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
-        if(NewProps.responseNewActividad.success === "OK"){
+        if(NewProps.responseUpdateActividad.success === "OK"){
             window.location.href = "/Tactividad";
         }
-    }*/    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-          [name]: value
-        });
-    }
+    }   
+    
     handleSubmit() {
         if(this.refs.dia.value === "" ||
             this.refs.hora.value === "" ||
@@ -46,19 +39,15 @@ class ModActividad extends Component {
             this.refs.folio.value === "" ||
             this.refs.area.value === "" ||
             this.refs.numAsis.value === "" ||
-            this.refs.nCambios.value === ""){
+            this.refs.nCambios.value === "")
+            {
                 this.setState({
                     showAlert: true
                 });
-        }else {
-            let id = JSON.parse(localStorage.getItem("actividadId"));
-            let active = null;
-            if(this.refs.active.value === "SI"){
-                active= true;
-            } else {
-                active= false;
-            }
 
+        } else {
+
+            let id = JSON.parse(localStorage.getItem("actividadId"));
 
             this.props.updateActividad(
                 id,
@@ -67,19 +56,20 @@ class ModActividad extends Component {
                 this.refs.lugar.value,
                 this.refs.folio.value,
                 this.refs.area.value,
-                this.refs.numAsis.value);
+                this.refs.numAsis.value
+                );
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis,}=this.props.stateActividad;
-        console.log(this.props.stateActividad);
+        let{dia,hora,lugar,folio,area,numAsis}=this.props.stateActividad;
+
         return(
             <section className="container">
                 <div className="limiter">
                     <div className="container-login100">
                         <div className="row wrap-login100">
                             <div className="login100-form-title">
-                                <span className="login100-form-title-1">Registra una Actividad</span>
+                                <span className="login100-form-title-1">Modifica una Actividad</span>
                             </div>
                             <div className="text-center w-100" style={{paddingTop:"15px"}}>
                                 <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
@@ -90,7 +80,7 @@ class ModActividad extends Component {
                                     <label htmlFor="dia">Día: </label>
                                     <input 
                                         type="date" className="form-control" 
-                                        id="dia" ref="dia" required
+                                        id="dia" ref="dia" 
                                         placeholder="El día aqui ..."
                                         defaultValue={dia || ""}
                                     />
@@ -100,7 +90,7 @@ class ModActividad extends Component {
                                     <label htmlFor="hora">Hora: </label>
                                     <input 
                                         type="time" className="form-control" 
-                                        id="hora" ref="hora" required
+                                        id="hora" ref="hora" 
                                         placeholder="La hora aqui ..."
                                         defaultValue={hora || ""}
                                     />
@@ -109,7 +99,7 @@ class ModActividad extends Component {
                                     <label htmlFor="lugar">Lugar: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="lugar" ref="lugar" required
+                                        id="lugar" ref="lugar"
                                         placeholder="El lugar aqui ..."
                                         defaultValue={lugar || ""}
                                     />
@@ -119,50 +109,52 @@ class ModActividad extends Component {
                                     <label htmlFor="folio">Folio: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="folio" ref="folio" required
+                                        id="folio" ref="folio"
                                         placeholder="El folio aqui ..."
                                         defaultValue={folio || ""}
                                     />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa el folio
-                                    </div>
+                                   
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="area">Area: </label>
-                                        <select className="custom-select" id="area" name="area" onChange={this.handleInputChange} required>
+                                        <select className="custom-select" id="area" ref="area">
                                         <option defaultValue={area || ""}> {area || ""}</option>
-                                        <option value="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
-                                        <option value="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
-                                        <option value="Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada">Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada</option>
-                                        <option value="Espacios de Expresión Artística para la Juventud Aperturados">Espacios de Expresión Artística para la Juventud Aperturados</option>
-                                        <option value="Participación Juvenil en Organizaciones Beneficiadas">Participación Juvenil en Organizaciones Beneficiadas</option>
-                                        <option value="Servicios de Consulta en Centros Poder Joven Otorgados ">Servicios de Consulta en Centros Poder Joven Otorgados </option>
-                                        <option value="Programas Televisivos de Expresión Elaborados ">Programas Televisivos de Expresión Elaborados </option>
-                                        <option value="Programas Poder Joven Producidos ">Programas Poder Joven Producidos </option>
-                                        <option value="Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados ">Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados </option>
-                                        <option value="Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados">Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados</option>
+                                        <option defaultValue="Salud Juvenil Realizada">Salud Juvenil Realizada</option>
+                                        <option defaultValue="Jóvenes Emprendedores del Estado Beneficiados ">Jóvenes Emprendedores del Estado Beneficiados </option>
+                                        <option defaultValue="Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada">Vinculación de Jóvenes con Instituciones Públicas y Privadas Concertada</option>
+                                        <option defaultValue="Espacios de Expresión Artística para la Juventud Aperturados">Espacios de Expresión Artística para la Juventud Aperturados</option>
+                                        <option defaultValue="Participación Juvenil en Organizaciones Beneficiadas">Participación Juvenil en Organizaciones Beneficiadas</option>
+                                        <option defaultValue="Servicios de Consulta en Centros Poder Joven Otorgados ">Servicios de Consulta en Centros Poder Joven Otorgados </option>
+                                        <option defaultValue="Programas Televisivos de Expresión Elaborados ">Programas Televisivos de Expresión Elaborados </option>
+                                        <option defaultValue="Programas Poder Joven Producidos ">Programas Poder Joven Producidos </option>
+                                        <option defaultValue="Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados ">Espacios Informativos de Apoyos Gubernamentales para Jóvenes Aperturados </option>
+                                        <option defaultValue="Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados">Jóvenes Emprendedores en la Casa del Emprendedor Poder Joven Hidalgo Aperturados</option>
                                         </select>
-                                        <div className="invalid-feedback">Selecciona un area</div>
+                                       
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="numAsis">Número de Asistentes: </label>
                                     <input 
                                         type="number" className="form-control" 
-                                        id="numAsis" ref="numAsis" required
+                                        id="numAsis" ref="numAsis"
                                         placeholder="El número de asistentes aquí ..."
                                         defaultValue={numAsis || ""}
                                     />
                                    </div> 
-                                <div className="col-12 mt-3">
-                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
-                                        Registrar
-                                    </button>
-                                </div>
+                                   <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
+                                        <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Tactividad";
+                                        }}>
+                                            Cancelar
+                                        </button>
+                                        <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                                            Registrar
+                                        </button>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a className="btn btn-primary" href="./Principal" role="button">Atrás</a>
             </section>
         );
     }

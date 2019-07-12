@@ -280,11 +280,15 @@ class BeneficiariosRegistro extends Component{
                                     </div>
                                 </div>
                                 <div className="col-12 mt-3">
-                                    <button className="btn btn-success login100-form-btn" onClick={this.handleSubmit.bind(this)}>
-                                        Registrar
-                                    </button>
-                                    <div style={{marginTop: "20px", textAlign: "center"}}>
-                                        <a class="btn btn-primary" href="./Tactividad" role="button">Cancelar</a>
+                                    <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
+                                        <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/BeneficiariosRegistro";
+                                        }}>
+                                            Cancelar
+                                        </button>
+                                        <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
+                                            Registrar
+                                        </button>
                                     </div>
                                 </div>
                             </div>

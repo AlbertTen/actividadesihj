@@ -50,8 +50,12 @@ class Area extends Component{
                         <div style={{marginTop:'30px'}}>
                             <h3 align="center"> <strong>Áreas</strong> </h3> </div> 
             
-                        <div className="text-center" style={{marginBottom:30}}>
-                            <a class="btn btn-success" href="./AreaRegistro" role="button">Agregar</a>
+                        <div className="text-center" style={{marginBottom:"30px"}}>
+                            <button className="btn btn-success" onClick={() => {
+                                window.location.href="/AreaRegistro";
+                                }}>
+                                Agregar
+                            </button>
                         </div> <br></br>
             
                             <table className="table">
@@ -68,7 +72,11 @@ class Area extends Component{
                                     {this._renderItems()}
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary" href="./Principal" role="button">Atrás</a>
+                            <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Principal";
+                                            }}>
+                                            Cancelar
+                            </button>
                     </div>
                 </div>
             </div>

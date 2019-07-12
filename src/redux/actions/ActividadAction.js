@@ -38,7 +38,7 @@ const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,nCambios)
     return {
         type: "UPDATE_ACTIVIDAD",
         payload: axios({
-            method: 'post',
+            method: 'put',
             url: BASE_URL + '/actividad/edit/' + id,
             data: {
                 dia,hora,lugar,folio,area,numAsis,nCambios

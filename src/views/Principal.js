@@ -15,7 +15,11 @@ class  Principal extends Component{
                         <img src="./images/actividades.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="./Tactividad" className="btn btn-primary">Actividades</a>
+                                <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Tactividad";
+                                            }}>
+                                            Actividades
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -25,7 +29,11 @@ class  Principal extends Component{
                         <img src="./images/areas.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="./Area" className="btn btn-primary">Áreas</a>
+                                <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Area";
+                                            }}>
+                                            Áreas
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -38,7 +46,11 @@ class  Principal extends Component{
                         <img src="./images/BENEFICIARIO.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="./Beneficiarios" className="btn btn-primary">Beneficiarios</a>
+                                <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Beneficiarios";
+                                            }}>
+                                            Beneficiarios
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +61,11 @@ class  Principal extends Component{
                         <img src="./images/usuarios.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
-                                <a href="./Tusuarios" className="btn btn-primary">Usuarios</a> 
+                                <button className="btn btn-primary" onClick={() => {
+                                            window.location.href="/Tusuarios";
+                                            }}>
+                                            Usuarios
+                                </button>
                             </div>
                         </div>
                     </div>
