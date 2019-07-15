@@ -19,7 +19,7 @@ const GET_BENEFICIARIO_REDUCER = (state = [], action) => {
 const UPDATE_BENEFICIARIO_REDUCER = (state = [], action) => {
     switch(action.type){
         case "UPDATE_BENEFICIARIO_PENDING": return state;
-        case "UIPDATE_BENEFICIARIO_FULFILLED": return action.payload.data;
+        case "UPDATE_BENEFICIARIO_FULFILLED": return action.payload.data;
         case "UPDATE_BENEFICIARIO_REJECTED": return state;
         default: return state;
     }

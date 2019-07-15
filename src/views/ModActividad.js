@@ -56,12 +56,14 @@ class ModActividad extends Component {
                 this.refs.lugar.value,
                 this.refs.folio.value,
                 this.refs.area.value,
-                this.refs.numAsis.value
+                this.refs.numAsis.value,
+                this.refs.nCambios.value
+                
                 );
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis}=this.props.stateActividad;
+        let{dia,hora,lugar,folio,area,numAsis,nCambios}=this.props.stateActividad;
 
         return(
             <section className="container">
