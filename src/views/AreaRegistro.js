@@ -39,7 +39,8 @@ class AreaRegistro extends Component {
         if(this.state.name === undefined ||
             this.state.descripcion === undefined ||
             this.state.telefono === undefined ||
-            this.state.abreviacion === undefined){
+            this.state.abreviacion === undefined ||
+            this.state.responsable === undefined){
                 this.setState({
                     showAlert: true
                 });
@@ -48,7 +49,8 @@ class AreaRegistro extends Component {
             this.state.name,
             this.state.descripcion,
             this.state.telefono,  
-            this.state.abreviacion);
+            this.state.abreviacion,
+            this.state.responsable);
         }
     }
     render(){
@@ -114,6 +116,19 @@ class AreaRegistro extends Component {
                                     </div>
                                 </div>
 
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="responsable">Responsable: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="responsable" name="responsable" required
+                                        placeholder="El responsable del área aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el responsable del área
+                                    </div>
+                                </div>
+
                             <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -141,7 +156,7 @@ const mapStateToProps = ({responseNewArea}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendArea: (name,descripcion,telefono,abreviacion) => dispatch(NEW_AREA_ACTION(name,descripcion,telefono,abreviacion))
+        sendArea: (name,descripcion,telefono,abreviacion,responsable) => dispatch(NEW_AREA_ACTION(name,descripcion,telefono,abreviacion,responsable))
     }
 }
  const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(AreaRegistro);

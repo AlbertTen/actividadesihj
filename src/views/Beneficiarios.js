@@ -19,7 +19,7 @@ class Beneficiarios extends Component{
                     <td>{row.telefono}</td>
                     <td>{row.email}</td>
                     <td>{row.curp}</td>
-                    <td>{row.municipio}</td>
+                    <td>{row.municipio} {row.cp} , {row.colonia} , {row.calle} , {row.numExt} </td>
                     <td>
                         <button type="button" className="btn btn-danger" onClick={this.props.deleteBeneficiario.bind(this,row._id)} >Eliminar</button>
                         <button type="button" className="btn btn-warning"onClick={() =>{
@@ -55,7 +55,7 @@ class Beneficiarios extends Component{
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Curp</th>
-                                <th scope="col">Municipio</th>
+                                <th scope="col">Domicilio</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>

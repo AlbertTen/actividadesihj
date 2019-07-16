@@ -35,7 +35,8 @@ class ModArea extends Component {
         if(this.refs.name.value === "" ||
             this.refs.descripcion.value === "" ||
             this.refs.telefono.value === "" ||
-            this.refs.abreviacion.value === ""){
+            this.refs.abreviacion.value === "" ||
+            this.refs.responsable.value === ""){
                 this.setState({
                     showAlert: true
                 });
@@ -48,12 +49,13 @@ class ModArea extends Component {
                 this.refs.name.value,
                 this.refs.descripcion.value,
                 this.refs.telefono.value,  
-                this.refs.abreviacion.value
+                this.refs.abreviacion.value,
+                this.refs.responsable.value
             );
         }
     }
     render(){
-        let{name,descripcion,telefono,abreviacion}=this.props.stateArea;
+        let{name,descripcion,telefono,abreviacion,responsable}=this.props.stateArea;
         
         return(
             <section className="container">
@@ -106,6 +108,17 @@ class ModArea extends Component {
                                     />
                                 </div>
 
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="responsable">Responsable: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="responsable" ref="responsable"
+                                        placeholder="El responsable del área aquí ..."
+                                        defaultValue={responsable || ""}
+                                    />
+                                    
+                                </div>
+
                             <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -136,7 +149,7 @@ const mapStateToProps = ({stateArea, responseUpdateArea}) => {
 const mapDispatchToProps = (dispatch) => {
     return{ 
         getArea:(id) => dispatch(GET_AREA_ACTION(id)),
-        updateArea: (id, name, descripcion, telefono, abreviacion)=>dispatch(UPDATE_AREA_ACTION(id, name, descripcion, telefono, abreviacion))
+        updateArea: (id, name, descripcion, telefono, abreviacion,responsable)=>dispatch(UPDATE_AREA_ACTION(id, name, descripcion, telefono, abreviacion,responsable))
         }
 }
  const ConnectAreas = connect(mapStateToProps, mapDispatchToProps)(ModArea);

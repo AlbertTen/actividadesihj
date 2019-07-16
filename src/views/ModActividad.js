@@ -38,8 +38,8 @@ class ModActividad extends Component {
             this.refs.lugar.value === "" ||
             this.refs.folio.value === "" ||
             this.refs.area.value === "" ||
-            this.refs.numAsis.value === "" ||
-            this.refs.nCambios.value === "")
+            this.refs.numAsis.value === "" 
+            )
             {
                 this.setState({
                     showAlert: true
@@ -56,14 +56,13 @@ class ModActividad extends Component {
                 this.refs.lugar.value,
                 this.refs.folio.value,
                 this.refs.area.value,
-                this.refs.numAsis.value,
-                this.refs.nCambios.value
+                this.refs.numAsis.value
                 
                 );
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis,nCambios}=this.props.stateActividad;
+        let{dia,hora,lugar,folio,area,numAsis}=this.props.stateActividad;
 
         return(
             <section className="container">
@@ -170,7 +169,7 @@ const mapStateToProps = ({stateActividad, responseUpdateActividad}) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id)),
-        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,nCambios)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,nCambios))
+        updateActividad: (id, dia,hora,lugar,folio,area,numAsis)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis))
     }
 }
  const ConnectActividad = connect(mapStateToProps, mapDispatchToProps)(ModActividad);

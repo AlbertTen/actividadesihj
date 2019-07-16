@@ -17,14 +17,14 @@ const GET_AREA_ACTION = (id) => {
 }
 
 //Add AREAS
-const NEW_AREA_ACTION = (name, descripcion, telefono, abreviacion) => {
+const NEW_AREA_ACTION = (name, descripcion, telefono, abreviacion, responsable) => {
 return {
     type: "NEW_AREA",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/areas/add',
         data: {
-            name, descripcion, telefono, abreviacion
+            name, descripcion, telefono, abreviacion, responsable
         },
         config: {
             headers: {
@@ -34,14 +34,14 @@ return {
     })
 };
 }
-const UPDATE_AREA_ACTION = (id, name, descripcion, telefono, abreviacion) => {
+const UPDATE_AREA_ACTION = (id, name, descripcion, telefono, abreviacion, responsable) => {
     return {
         type: "UPDATE_AREA",
         payload: axios({
             method: 'put',
             url: BASE_URL + '/area/edit/' + id,
             data: {
-                name, descripcion, telefono, abreviacion
+                name, descripcion, telefono, abreviacion, responsable
             },
             config: {
                 headers: {

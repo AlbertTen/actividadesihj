@@ -114,6 +114,7 @@ class ModBeneficiarios extends Component{
             let id = JSON.parse(localStorage.getItem("beneficiarioId"));
             
                 this.props.updateBeneficiario(
+                    id,
                     this.refs.nombre.value,
                     this.refs.app.value,
                     this.refs.apm.value,

@@ -169,8 +169,8 @@ class BeneficiariosRegistro extends Component{
                                     <label htmlFor="sexo">Sexo: </label>
                                         <select className="custom-select" id="sexo" name="sexo" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona tu sexo</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Femenino">Femenino</option>
+                                        <option value="Hombre">H</option>
+                                        <option value="Mujer">M</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona tu sexo</div>
                                 </div>

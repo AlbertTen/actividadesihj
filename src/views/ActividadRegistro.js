@@ -43,7 +43,15 @@ class ActividadRegistro extends Component {
             this.state.folio === undefined ||
             this.state.area === undefined ||
             this.state.numAsis === undefined ||
-            this.state.nCambios === undefined){
+            this.state.calle1 === undefined ||
+            this.state.calle2 === undefined ||
+            this.state.callePost === undefined ||
+            this.state.numExt === undefined ||
+            this.state.letraNumExt === undefined ||
+            this.state.numInt === undefined ||
+            this.state.letraNumInt === undefined ||
+            this.state.cp === undefined
+            ){
                 this.setState({
                     showAlert: true
                 });
@@ -55,7 +63,14 @@ class ActividadRegistro extends Component {
                 this.state.folio,
                 this.state.area,
                 this.state.numAsis,
-                this.state.nCambios); 
+                this.state.calle1,
+                this.state.calle2,
+                this.state.callePost,
+                this.state.numExt,
+                this.state.letraNumExt,
+                this.state.numInt,
+                this.state.letraNumInt,
+                this.state.cp); 
         }
     }
     render(){
@@ -149,6 +164,111 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el número de asistentes
                                     </div>
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="calle1">Calle 1: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="calle1" name="calle1" required
+                                        placeholder="La calle 1 aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa la calle 1 
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="calle2">Calle 2: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="calle2" name="calle2" required
+                                        placeholder="La calle 2 aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa la calle 2 
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="callePost">Calle Posterior: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="callePost" name="callePost" required
+                                        placeholder="La calle posterior aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa la calle posterior
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="numExt">Número Exterior: </label>
+                                    <input 
+                                        type="number" className="form-control" 
+                                        id="numExt" name="numExt" required
+                                        placeholder="El número exterior aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el número exterior
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="letranumExt">Letra Número Exterior: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="letranumExt" name="letranumExt" required
+                                        placeholder="La letra del número exterior aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa la letra del número exterior
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="numInt">Número Interior: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="numInt" name="numInt" required
+                                        placeholder="El número interior aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el número interior
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="letranumInt">Letra del número Interior: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="letranumInt" name="letranumInt" required
+                                        placeholder="La letra del número interior aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa la letra del número interior
+                                    </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="cp">Código Postal: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="cp" name="cp" required
+                                        placeholder="El código postal aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el código postal
+                                    </div>
+                                </div>
+
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -176,7 +296,7 @@ const mapStateToProps = ({responseNewActividad}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendActividad: (dia, hora, lugar, folio, area, numAsis, nCambios) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, nCambios))
+        sendActividad: (dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp))
     }
 }
  const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadRegistro);

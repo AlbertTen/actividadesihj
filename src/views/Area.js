@@ -25,6 +25,7 @@ class Area extends Component{
                     <td>{row.descripcion}</td>
                     <td>{row.telefono}</td>
                     <td>{row.abreviacion}</td>
+                    <td>{row.responsable}</td>
                     <td>
                         <button type="button" className="btn btn-danger" onClick={this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
                         <button type="button" className="btn btn-warning"onClick={() =>{
@@ -65,6 +66,7 @@ class Area extends Component{
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Teléfono</th>
                                         <th scope="col">Abreviacion</th>
+                                        <th scope="col">Responsable</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
