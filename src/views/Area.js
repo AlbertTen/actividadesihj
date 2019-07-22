@@ -77,7 +77,7 @@ class Area extends Component{
                             <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Principal";
                                             }}>
-                                            Cancelar
+                                            Salir
                             </button>
                     </div>
                 </div>

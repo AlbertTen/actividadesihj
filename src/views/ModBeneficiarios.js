@@ -6,22 +6,23 @@ import { connect } from 'react-redux';
 class ModBeneficiarios extends Component{
     _renderAlert =() => {
         if(this.state.showAlert){
-           return(
-               <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                   <strong>Atención </strong> Ingresa todos los datos solicitados
-   
-               </div>
-            );
-        } else {
-            return null;
-        }   
-    }
+            return(
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Atención </strong> Ingresa todos los datos solicitados
+                </div>
+             );
+         } else {
+             return null;
+         }
+               
+        }
     constructor(props) {
         super(props);
         this.state = {
           zips:[],
           colonias:[],
           showAlert: false
+        
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -93,6 +94,9 @@ class ModBeneficiarios extends Component{
         }
     }
     handleSubmit() {
+        let err =[];
+        let edad = parseInt(this.state.edad);
+
         if(this.refs.nombre.value === "" ||
             this.refs.app.value === "" ||
             this.refs.apm.value === "" ||
@@ -106,11 +110,13 @@ class ModBeneficiarios extends Component{
             this.refs.cp.value === "" ||
             this.refs.colonia.value === "" ||
             this.refs.calle.value === "" ||
-            this.refs.numExt.value === ""){
+            this.refs.numExt.value === "")  
+            {
                 this.setState({
                     showAlert: true
                 });
-        }else {
+
+        } else {
             let id = JSON.parse(localStorage.getItem("beneficiarioId"));
             
                 this.props.updateBeneficiario(
@@ -299,10 +305,10 @@ class ModBeneficiarios extends Component{
                                         <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Beneficiarios";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>

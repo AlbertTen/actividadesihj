@@ -56,6 +56,18 @@ class Tactividad extends Component{
                                 }}>
                                 Agregar
                             </button>
+
+                            <div className="col-lg-3">
+                             <div className="input-group">
+                                 <input type="text" class="form-control"/>
+                                 <span className="input-group-btn">
+
+                                   <button className="btn btn-default" type="button">Buscar</button>
+                                 </span>
+                             </div>
+                            </div>
+
+                            
                         </div>
                         <table className="table">
                             <thead>
@@ -82,7 +94,7 @@ class Tactividad extends Component{
                         <button className="btn btn-primary" onClick={() => {
                             window.location.href="/Principal";
                             }}>
-                            Cancelar
+                            Salir
                         </button>
                     </div>
                 </div>

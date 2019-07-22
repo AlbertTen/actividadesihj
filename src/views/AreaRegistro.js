@@ -134,10 +134,10 @@ class AreaRegistro extends Component {
                                         <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Area";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                 </div>
                             </div>

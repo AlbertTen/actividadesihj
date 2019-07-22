@@ -5,9 +5,11 @@ class ActividadRegistro extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
            return(
-               <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                
+
+            <div className="alert alert-danger alert-dismissible fade show" role="alert">
                    <strong>Atención </strong> Ingresa todos los datos solicitados
-               </div>
+               </div> 
             );
         } else {
             return null;
@@ -17,6 +19,7 @@ class ActividadRegistro extends Component {
         super(props);
         this.state = {
           showAlert: false
+          
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -37,6 +40,8 @@ class ActividadRegistro extends Component {
         });
     }
     handleSubmit() {
+        
+
         if(this.state.dia === undefined ||
             this.state.hora === undefined ||
             this.state.lugar === undefined ||
@@ -218,10 +223,10 @@ class ActividadRegistro extends Component {
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="letranumExt">Letra Número Exterior: </label>
+                                    <label htmlFor="letraNumExt">Letra Número Exterior: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="letranumExt" name="letranumExt" required
+                                        id="letraNumExt" name="letraNumExt" required
                                         placeholder="La letra del número exterior aquí ..."
                                         onChange={this.handleInputChange}
                                     />
@@ -244,10 +249,10 @@ class ActividadRegistro extends Component {
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="letranumInt">Letra del número Interior: </label>
+                                    <label htmlFor="letraNumInt">Letra del número Interior: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="letranumInt" name="letranumInt" required
+                                        id="letraNumInt" name="letraNumInt" required
                                         placeholder="La letra del número interior aquí ..."
                                         onChange={this.handleInputChange}
                                     />
@@ -268,16 +273,22 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el código postal
                                     </div>
                                 </div>
-
+                <div className="text-center w-100" style={{paddingTop:"15px"}}>
+                <form enctype="multipart/form-data" action="uploader" method="POST">
+                <input name="uploadedfile" type="file" />
+                <input type="submit" value="Subir archivo" />
+                </form>
+                </div>
+                            
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Tactividad";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>

@@ -5,13 +5,24 @@ import { connect } from 'react-redux';
 class BeneficiariosRegistro extends Component{
     _renderAlert =() => {
         if(this.state.showAlert){
-           return(
-               <div className="alert alert-danger alert-dismissible fade show" role="alert">
+           return this.state.errors.map((error,index) =>{
+            return(
+
+                <div className="col-12" key={index}>
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p className="w-100 mb-0">{error}</p>
+                    </div>
+                </div>
+           
+            
+               
+              /* <div className="alert alert-danger alert-dismissible fade show" role="alert">
                    <strong>Atención </strong> Ingresa todos los datos solicitados
    
-               </div>
+               </div> */
             );
-        } else {
+        }) 
+        }else {
             return null;
         }   
     }
@@ -20,7 +31,8 @@ class BeneficiariosRegistro extends Component{
         this.state = {
           zips:[],
           colonias:[],
-          showAlert: false
+          showAlert: false,
+          errors:[]
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -65,6 +77,9 @@ class BeneficiariosRegistro extends Component{
         });
     }
     handleSubmit() {
+        let err =[];
+        let edad = parseInt(this.state.edad);
+
         if(this.state.nombre === undefined ||
             this.state.app === undefined ||
             this.state.apm === undefined ||
@@ -79,10 +94,31 @@ class BeneficiariosRegistro extends Component{
             this.state.colonia === undefined ||
             this.state.calle === undefined ||
             this.state.numExt === undefined){
-                this.setState({
-                    showAlert: true
-                });
-        }else {
+                
+                err.push("ingresa todos los datos solicitados")
+        }
+        if(this.state.edad.length !==2)
+        err.push ("ingresa una edad valida")
+
+        if(edad < 18 || edad > 29)
+        err.push("Ingresa una edad valida")
+
+        if(this.state.telefono.length !==10)
+        err.push ("Ingresa un teléfono valido")
+
+        if(this.state.curp.length !==18)
+        err.push ("Ingresa una curp valida")
+
+        if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
+        err.push("Ingresa un número exterior valido")
+
+        if(err.length !==0){
+            this.setState({
+                errors: err,
+                showAlert: true
+            });
+        }
+        else {
                 this.props.sendBeneficiario(
                     this.state.nombre,
                     this.state.app,
@@ -157,9 +193,7 @@ class BeneficiariosRegistro extends Component{
                                         id="edad" name="edad" required
                                         placeholder="Tu edad aqui ..."
                                         onChange={this.handleInputChange}
-                                        required pattern="[0-9]{2}"
                                         min="18" max="29"
-                                        maxLength="2" minLength="2"
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu edad
@@ -180,8 +214,7 @@ class BeneficiariosRegistro extends Component{
                                         type="string" className="form-control" 
                                         id="telefono" name="telefono" required
                                         placeholder="Tu telefono aqui ..."
-                                        onChange={this.handleInputChange} 
-                                        maxLength="10" minLength="10" pattern="[0-9]{10}"    
+                                        onChange={this.handleInputChange}     
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu telefono
@@ -206,7 +239,7 @@ class BeneficiariosRegistro extends Component{
                                         id="curp" name="curp" required
                                         placeholder="Tu CURP aqui ..."
                                         onChange={this.handleInputChange}
-                                        maxLength="18" minLength="18"
+                                        
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa tu CURP
@@ -282,12 +315,12 @@ class BeneficiariosRegistro extends Component{
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/BeneficiariosRegistro";
+                                            window.location.href="/Beneficiarios";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>

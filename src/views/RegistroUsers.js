@@ -38,6 +38,7 @@ class RegistroUsers extends Component {
         });
     }
     handleSubmit() {
+        
         if(this.state.name === undefined ||
             this.state.email === undefined ||
             this.state.password === undefined ||
@@ -135,24 +136,22 @@ class RegistroUsers extends Component {
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="active">Activo: </label>
-                                    <div className="form-group">
                                         <select className="custom-select" id="active" name="active" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona un estatus</option>
                                         <option value={true}>SI</option>
                                         <option value={false}>NO</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona un estatus</div>
-                                    </div>
                                 </div>
                                 <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Tusuarios";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                     </div>
                                 </div>
