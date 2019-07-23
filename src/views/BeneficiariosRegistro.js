@@ -13,9 +13,7 @@ class BeneficiariosRegistro extends Component{
                         <p className="w-100 mb-0">{error}</p>
                     </div>
                 </div>
-           
-            
-               
+
               /* <div className="alert alert-danger alert-dismissible fade show" role="alert">
                    <strong>Atención </strong> Ingresa todos los datos solicitados
    
@@ -93,7 +91,8 @@ class BeneficiariosRegistro extends Component{
             this.state.cp === undefined ||
             this.state.colonia === undefined ||
             this.state.calle === undefined ||
-            this.state.numExt === undefined){
+            this.state.numExt === undefined ||
+            this.state.actividad === undefined){
                 
                 err.push("ingresa todos los datos solicitados")
         }
@@ -133,7 +132,8 @@ class BeneficiariosRegistro extends Component{
                     this.state.cp,
                     this.state.colonia,
                     this.state.calle,
-                    this.state.numExt);
+                    this.state.numExt,
+                    this.state.actividad);
              }
     }
     render(){
@@ -339,7 +339,7 @@ const mapStateToProps = ({responseNewBeneficiario}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt))
+        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad))
     }
 }
  const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(BeneficiariosRegistro);
