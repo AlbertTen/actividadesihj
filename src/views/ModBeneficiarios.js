@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
 import { GET_BENEFICIARIO_ACTION, UPDATE_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
+import {GET_ACTIVIDADES_ACTION} from '../redux/actions/ActividadAction';
 import { connect } from 'react-redux';
 
 class ModBeneficiarios extends Component{
@@ -16,6 +17,15 @@ class ModBeneficiarios extends Component{
          }
                
         }
+
+        _renderItem = () => {
+            return this.props.stateActividades.map((row) =>{
+                return(
+                    <option>{row.folio} </option>
+                );
+            })
+        }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -26,9 +36,11 @@ class ModBeneficiarios extends Component{
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+    
     componentDidMount(){
         let id = JSON.parse(localStorage.getItem("beneficiarioId"));
         this.props.getBeneficiario(id);
+        this.props.getActividades();
     }
 
     _renderZips = (municipio) => {
@@ -300,6 +312,13 @@ class ModBeneficiarios extends Component{
                                         min="0" pattern="[0-9]{1,4}"
                                     />
                                 </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="actividad">Actividad: </label>
+                                        <select className="custom-select" id="actividad" ref="actividad" >
+                                        
+                                            {this._renderItem()}
+                                        </select>
+                                </div>
                                 <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -320,17 +339,19 @@ class ModBeneficiarios extends Component{
         );
     }
 }
-const mapStateToProps = ({stateBeneficiario, responseUpdateBeneficiario}) => {
+const mapStateToProps = ({stateBeneficiario, responseUpdateBeneficiario, stateActividades}) => {
     return {
         stateBeneficiario: stateBeneficiario,
-        responseUpdateBeneficiario: responseUpdateBeneficiario
+        responseUpdateBeneficiario: responseUpdateBeneficiario,
+        stateActividades: stateActividades
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{ 
         getBeneficiario: (id) => dispatch(GET_BENEFICIARIO_ACTION(id)),
-        updateBeneficiario: (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(UPDATE_BENEFICIARIO_ACTION(id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt))
+        updateBeneficiario: (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(UPDATE_BENEFICIARIO_ACTION(id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt)),
+        getActividades: ()=> dispatch(GET_ACTIVIDADES_ACTION())
         }
 }
  const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(ModBeneficiarios);

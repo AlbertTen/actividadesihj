@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 class AreaRegistro extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
-           return(
-               <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                   <strong>Atención </strong> Ingresa todos los datos solicitados
-               </div>
-            );
+            return this.state.errors.map((error,index) =>{
+             return(
+                 <div className="col-12" key={index}>
+                     <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                         <p className="w-100 mb-0">{error}</p>
+                     </div>
+                 </div>
+             );
+         })
         } else {
             return null;
         }
@@ -16,7 +20,8 @@ class AreaRegistro extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAlert: false
+            showAlert: false,
+            errors:[]
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -36,15 +41,27 @@ class AreaRegistro extends Component {
         });
     }
     handleSubmit() {
+        let err =[];
+        
         if(this.state.name === undefined ||
             this.state.descripcion === undefined ||
             this.state.telefono === undefined ||
             this.state.abreviacion === undefined ||
             this.state.responsable === undefined){
-                this.setState({
-                    showAlert: true
-                });
-        }else {
+                
+                err.push("ingresa todos los datos solicitados")
+        }
+
+        if(this.state.telefono.length !==10)
+        err.push ("Ingresa un teléfono valido")
+
+        if(err.length !==0){
+            this.setState({
+                errors: err,
+                showAlert: true
+            });
+        }
+        else {
             this.props.sendArea(
             this.state.name,
             this.state.descripcion,

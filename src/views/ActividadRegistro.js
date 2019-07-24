@@ -4,13 +4,16 @@ import { NEW_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
 class ActividadRegistro extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
-           return(
-                
-
-            <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                   <strong>Atención </strong> Ingresa todos los datos solicitados
-               </div> 
-            );
+            return this.state.errors.map((error,index) =>{
+                return(
+    
+                    <div className="col-12" key={index}>
+                        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p className="w-100 mb-0">{error}</p>
+                        </div>
+                    </div>
+                );
+            })
         } else {
             return null;
         }    
@@ -18,8 +21,8 @@ class ActividadRegistro extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          showAlert: false
-          
+          showAlert: false,
+          errors:[]
         };
     
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,7 +43,7 @@ class ActividadRegistro extends Component {
         });
     }
     handleSubmit() {
-        
+        let err =[];
 
         if(this.state.dia === undefined ||
             this.state.hora === undefined ||
@@ -57,7 +60,18 @@ class ActividadRegistro extends Component {
             this.state.letraNumInt === undefined ||
             this.state.cp === undefined
             ){
+                    err.push("ingresa todos los datos solicitados")
+            }
+    
+            if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
+            err.push("Ingresa un número exterior valido")
+
+            if(this.state.numInt.length < 1 || this.state.numInt.length > 4)
+            err.push("Ingresa un número interior valido")
+    
+            if(err.length !==0){
                 this.setState({
+                    errors: err,
                     showAlert: true
                 });
         }else {

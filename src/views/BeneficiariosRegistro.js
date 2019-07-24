@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
 import { NEW_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
+import {GET_ACTIVIDADES_ACTION} from '../redux/actions/ActividadAction';
 import { connect } from 'react-redux';
+
 class BeneficiariosRegistro extends Component{
     _renderAlert =() => {
         if(this.state.showAlert){
@@ -24,6 +26,14 @@ class BeneficiariosRegistro extends Component{
             return null;
         }   
     }
+    _renderItem = () => {
+          return this.props.stateActividades.map((row) =>{
+            return(
+                <option>{row.folio} </option>
+            );
+        })
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,6 +44,11 @@ class BeneficiariosRegistro extends Component{
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
+
+    componentDidMount(){
+        this.props.getActividades();
+    }
+
     componentWillReceiveProps(nextProps){
         //const ActualProps = this.props;
         const NewProps = nextProps;
@@ -312,6 +327,16 @@ class BeneficiariosRegistro extends Component{
                                         Por favor ingresa tu número
                                     </div>
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="actividad">Actividad: </label>
+                                        <select className="custom-select" id="actividad" name="actividad" onChange={this.handleInputChange} required>
+                                            <option value="">Selecciona una actividad</option>
+                                            {this._renderItem()}
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona una actividad</div>
+                                </div>
+                                
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -332,14 +357,16 @@ class BeneficiariosRegistro extends Component{
         );
     }
 }
-const mapStateToProps = ({responseNewBeneficiario}) => {
+const mapStateToProps = ({responseNewBeneficiario, stateActividades}) => {
     return {
-        responseNewBeneficiario: responseNewBeneficiario
+        responseNewBeneficiario: responseNewBeneficiario,
+        stateActividades: stateActividades
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad))
+        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad)),
+        getActividades: ()=> dispatch(GET_ACTIVIDADES_ACTION())
     }
 }
  const ConnectBeneficiarios = connect(mapStateToProps, mapDispatchToProps)(BeneficiariosRegistro);

@@ -42,7 +42,6 @@ class Tactividad extends Component{
             })
         }
     render(){
-        console.log(this.props.stateActividades);
         return(
             <div className="container">
                 <div className="row">
@@ -69,6 +68,7 @@ class Tactividad extends Component{
 
                             
                         </div>
+                        <div class = "table-responsive">                        
                         <table className="table">
                             <thead>
                                 <tr>
@@ -90,7 +90,8 @@ class Tactividad extends Component{
                             <tbody>
                                 {this._renderItems()}
                             </tbody>
-                        </table>
+                        </table> 
+                        </div>
                         <button className="btn btn-primary" onClick={() => {
                             window.location.href="/Principal";
                             }}>
