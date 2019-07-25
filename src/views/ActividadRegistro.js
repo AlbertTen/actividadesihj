@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { NEW_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
+
 class ActividadRegistro extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
@@ -58,7 +59,8 @@ class ActividadRegistro extends Component {
             this.state.letraNumExt === undefined ||
             this.state.numInt === undefined ||
             this.state.letraNumInt === undefined ||
-            this.state.cp === undefined
+            this.state.cp === undefined ||
+            this.state.coordenadas === undefined
             ){
                     err.push("ingresa todos los datos solicitados")
             }
@@ -89,7 +91,8 @@ class ActividadRegistro extends Component {
                 this.state.letraNumExt,
                 this.state.numInt,
                 this.state.letraNumInt,
-                this.state.cp); 
+                this.state.cp,
+                this.state.coordenadas);
         }
     }
     render(){
@@ -287,6 +290,18 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el código postal
                                     </div>
                                 </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="coordenadas">Coordenadas: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="coordenadas" name="coordenadas" required
+                                        placeholder="Ingresa las coordenadas geográficas aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                    Ingresa las coordenadas geográficas aquí ...
+                                    </div>
+                                </div>
                 <div className="text-center w-100" style={{paddingTop:"15px"}}>
                 <form enctype="multipart/form-data" action="uploader" method="POST">
                 <input name="uploadedfile" type="file" />
@@ -321,7 +336,7 @@ const mapStateToProps = ({responseNewActividad}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendActividad: (dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp))
+        sendActividad: (dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp, coordenadas) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp, coordenadas))
     }
 }
  const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadRegistro);

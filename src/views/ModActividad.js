@@ -54,7 +54,8 @@ class ModActividad extends Component {
             this.refs.letraNumExt.value === "" ||
             this.refs.numInt.value === "" ||
             this.refs.letraNumInt.value === "" ||
-            this.refs.cp.value === "" 
+            this.refs.cp.value === "" ||
+            this.refs.coordenadas.value === "" 
             )
             {
                 this.setState({
@@ -80,13 +81,14 @@ class ModActividad extends Component {
                 this.refs.letraNumExt.value,
                 this.refs.numInt.value,
                 this.refs.letraNumInt.value,
-                this.refs.cp.value
+                this.refs.cp.value,
+                this.refs.coordenadas.value
                 
                 );
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp}=this.props.stateActividad;
+        let{dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas}=this.props.stateActividad;
 
         return(
             <section className="container">
@@ -251,8 +253,16 @@ class ModActividad extends Component {
                                         id="cp" ref="cp" 
                                         placeholder="El código postal aquí ..."
                                         defaultValue={cp || ""}
-                                    />
-                                    
+                                    />   
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="coordenadas">Coordenadas: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="coordenadas" ref="coordenadas" 
+                                        placeholder="Ingresa las coordenadas geográficas aquí ..."
+                                        defaultValue={coordenadas || ""}
+                                    />   
                                 </div>
                 <div className="text-center w-100" style={{paddingTop:"15px"}}>
                 <form enctype="multipart/form-data" action="uploader" method="POST">
@@ -265,10 +275,10 @@ class ModActividad extends Component {
                                         <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/Tactividad";
                                         }}>
-                                            Cancelar
+                                            Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
-                                            Registrar
+                                            Guardar
                                         </button>
                                     </div>
                             </div>
@@ -288,7 +298,7 @@ const mapStateToProps = ({stateActividad, responseUpdateActividad}) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id)),
-        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp))
+        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas))
     }
 }
  const ConnectActividad = connect(mapStateToProps, mapDispatchToProps)(ModActividad);

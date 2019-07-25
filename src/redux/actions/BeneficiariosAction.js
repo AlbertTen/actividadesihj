@@ -17,14 +17,14 @@ const GET_BENEFICIARIO_ACTION = (id) => {
 }
 
 //Add Beneficiarios
-const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => {
+const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => {
 return {
     type: "NEW_BENEFICIARIO",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/beneficiario/add',
         data: {
-            nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt
+            nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad
         },
         config: {
             headers: {

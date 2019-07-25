@@ -21,7 +21,6 @@ class Registro extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        console.log(name + ": ",value);
         if(name === "municipio"){
             var zips = [];
             var newZips = [];
@@ -52,7 +51,6 @@ class Registro extends Component {
         });
     }
     handleSubmit() {
-        console.log(this.state);
         this.props.sendUser(
             this.state.nombre,
             this.state.app,

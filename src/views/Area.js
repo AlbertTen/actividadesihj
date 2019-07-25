@@ -41,7 +41,6 @@ class Area extends Component{
     }
 
     render(){
-        console.log(this.props.stateAreas);
         return(
         <div className="container">
             <div className="row">

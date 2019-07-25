@@ -15,14 +15,14 @@ const GET_ACTIVIDAD_ACTION = (id) => {
     };
 }
 //Add Actividades
-const NEW_ACTIVIDAD_ACTION = (dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp) => {
+const NEW_ACTIVIDAD_ACTION = (dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas) => {
 return {
     type: "NEW_ACTIVIDAD",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/actividad/add',
         data: {
-            dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp
+            dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas
         },
         config: {
             headers: {
@@ -34,14 +34,14 @@ return {
 }
 
 //Update Actividades
-const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp) => {
+const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas) => {
     return {
         type: "UPDATE_ACTIVIDAD",
         payload: axios({
             method: 'put',
             url: BASE_URL + '/actividad/edit/' + id,
             data: {
-                dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp
+                dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas
             },
             config: {
                 headers: {

@@ -28,6 +28,7 @@ class Tactividad extends Component{
                         <td>{row.numExt} , {row.letraNumExt}</td>
                         <td>{row.numInt} , {row.letraNumInt}</td>
                         <td>{row.cp}</td>
+                        <td>{row.coordenadas}</td>
                         <td>
                             <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
                             <button type="button" className="btn btn-warning" onClick={() =>{
@@ -68,7 +69,7 @@ class Tactividad extends Component{
 
                             
                         </div>
-                        <div class = "table-responsive">                        
+                        <div className = "table-responsive">                        
                         <table className="table">
                             <thead>
                                 <tr>
@@ -84,6 +85,7 @@ class Tactividad extends Component{
                                     <th scope="col">Número y Letra Exterior</th>
                                     <th scope="col">Número y Letra Interior</th>
                                     <th scope="col">Código Postal</th>
+                                    <th scope="col">Coordenadas</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>

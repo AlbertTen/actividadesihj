@@ -22,7 +22,9 @@ class Beneficiarios extends Component{
                     <td>{row.municipio} {row.cp} , {row.colonia} , {row.calle} , {row.numExt} </td>
                     <td>{row.actividad}</td>
                     <td>
-                        <button type="button" className="btn btn-danger" onClick={this.props.deleteBeneficiario.bind(this,row._id)} >Eliminar</button>
+                        <button type="button" className="btn btn-danger" onClick={
+                            this.props.deleteBeneficiario.bind(this,row._id)} >Eliminar</button>
+
                         <button type="button" className="btn btn-warning"onClick={() =>{
                             let beneficiarioId=[];
                             beneficiarioId.push(row._id);

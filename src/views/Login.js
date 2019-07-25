@@ -22,7 +22,6 @@ handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    console.log(name + ": ",value);
     if(name === "municipio"){
         var zips = [];
         var newZips = [];
@@ -53,7 +52,6 @@ handleInputChange(event) {
     });
 }
   handleSubmit() {
-    console.log(this.state);
     this.props.sendUser(
         this.state.email,
         this.state.password);     
