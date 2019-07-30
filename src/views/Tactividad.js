@@ -28,7 +28,7 @@ class Tactividad extends Component{
                         <td>{row.numExt} , {row.letraNumExt}</td>
                         <td>{row.numInt} , {row.letraNumInt}</td>
                         <td>{row.cp}</td>
-                        <td>{row.coordenadas}</td>
+                        <td>{row.latitud} , {row.longitud}</td>
                         <td>
                             <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
                             <button type="button" className="btn btn-warning" onClick={() =>{

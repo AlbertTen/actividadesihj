@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 class ModArea extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
-           return(
-               <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                   <strong>Atención </strong> Ingresa todos los datos solicitados
-               </div>
-            );
+            return(
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Atención </strong> Ingresa todos los datos solicitados
+                </div>
+             );
         } else {
             return null;
         }
@@ -32,6 +32,7 @@ class ModArea extends Component {
     } 
     
     handleSubmit() {
+
         if(this.refs.name.value === "" ||
             this.refs.descripcion.value === "" ||
             this.refs.telefono.value === "" ||
@@ -40,6 +41,7 @@ class ModArea extends Component {
                 this.setState({
                     showAlert: true
                 });
+                   
         }else {
 
             let id= JSON.parse(localStorage.getItem("areaId"));

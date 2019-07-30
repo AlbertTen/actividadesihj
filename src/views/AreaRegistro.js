@@ -49,11 +49,11 @@ class AreaRegistro extends Component {
             this.state.abreviacion === undefined ||
             this.state.responsable === undefined){
                 
-                err.push("ingresa todos los datos solicitados")
+                err.push("Ingresa todos los datos solicitados")
+        } else {
+            if(this.state.telefono.length !==10)
+            err.push ("Ingresa un teléfono valido")
         }
-
-        if(this.state.telefono.length !==10)
-        err.push ("Ingresa un teléfono valido")
 
         if(err.length !==0){
             this.setState({

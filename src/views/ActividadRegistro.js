@@ -36,9 +36,25 @@ class ActividadRegistro extends Component {
         }
     }
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+        let target = event.target;
+        
+        let value = null;
+        let name = target.name;
+
+        switch (target.type) {
+            case "checkbox":
+                value = target.checked;
+                break;
+                case "file":
+                value = target.files[0];
+                break;
+            default:
+                value = target.value;
+                break;
+        }
+
+        console.log("name: ",name, " value: ",value);
+
         this.setState({
           [name]: value
         });
@@ -60,39 +76,46 @@ class ActividadRegistro extends Component {
             this.state.numInt === undefined ||
             this.state.letraNumInt === undefined ||
             this.state.cp === undefined ||
-            this.state.coordenadas === undefined
+            this.state.latitud === undefined ||
+            this.state.longitud === undefined 
             ){
                     err.push("ingresa todos los datos solicitados")
-            }
-    
-            if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
-            err.push("Ingresa un número exterior valido")
+            } else {
+                if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
+                err.push("Ingresa un número exterior valido")
 
-            if(this.state.numInt.length < 1 || this.state.numInt.length > 4)
-            err.push("Ingresa un número interior valido")
-    
+                if(this.state.numInt.length < 1 || this.state.numInt.length > 4)
+                err.push("Ingresa un número interior valido")
+            }
+
             if(err.length !==0){
                 this.setState({
                     errors: err,
                     showAlert: true
                 });
         }else {
-            this.props.sendActividad(
-                this.state.dia,
-                this.state.hora,
-                this.state.lugar,
-                this.state.folio,
-                this.state.area,
-                this.state.numAsis,
-                this.state.calle1,
-                this.state.calle2,
-                this.state.callePost,
-                this.state.numExt,
-                this.state.letraNumExt,
-                this.state.numInt,
-                this.state.letraNumInt,
-                this.state.cp,
-                this.state.coordenadas);
+            let data = new FormData();
+            data.append('title',this.state.title);
+            data.append('dia',this.state.dia);
+            data.append('hora',this.state.hora);
+            data.append('lugar',this.state.lugar);
+            data.append('folio',this.state.folio)
+            data.append('area',this.state.area);
+            data.append('numAsis',this.state.numAsis);
+            data.append('calle1',this.state.calle1);
+            data.append('calle2',this.state.calle2);
+            data.append('callePost',this.state.callePost);
+            data.append('numExt',this.state.numExt);
+            data.append('letraNumExt',this.state.letraNumExt);
+            data.append('numInt',this.state.numInt);
+            data.append('letraNumInt',this.state.letraNumInt);
+            data.append('cp',this.state.cp);
+            data.append('latitud',this.state.latitud);
+            data.append('longitud',this.state.longitud);
+            data.append('img',this.state.img);
+            data.append('img2',this.state.img);
+            data.append('img3',this.state.img);
+            this.props.sendActividad(data);
         }
     }
     render(){
@@ -291,24 +314,40 @@ class ActividadRegistro extends Component {
                                     </div>
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="coordenadas">Coordenadas: </label>
+                                    <label htmlFor="latitud">Latitud: </label>
                                     <input 
                                         type="text" className="form-control" 
-                                        id="coordenadas" name="coordenadas" required
-                                        placeholder="Ingresa las coordenadas geográficas aquí ..."
+                                        id="latitud" name="latitud" required
+                                        placeholder="Ingresa la latitud aquí ..."
                                         onChange={this.handleInputChange}
                                     />
                                     <div className="invalid-feedback">
-                                    Ingresa las coordenadas geográficas aquí ...
+                                    Ingresa la latitud  aquí ...
                                     </div>
                                 </div>
-                <div className="text-center w-100" style={{paddingTop:"15px"}}>
-                <form enctype="multipart/form-data" action="uploader" method="POST">
-                <input name="uploadedfile" type="file" />
-                <input type="submit" value="Subir archivo" />
-                </form>
-                </div>
-                            
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="longitud">Longitud: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="longitud" name="longitud" required
+                                        placeholder="Ingresa la longitud aquí ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                    Ingresa la longitud  aquí ...
+                                    </div>
+                                </div>
+                
+                                <input name="img" type="file" onChange={this.handleInputChange}/>
+                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+
+                                <input name="img2" type="file" onChange={this.handleInputChange}/>
+                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+
+                                <input name="img3" type="file" onChange={this.handleInputChange}/>
+                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+                        
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -336,7 +375,7 @@ const mapStateToProps = ({responseNewActividad}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendActividad: (dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp, coordenadas) => dispatch(NEW_ACTIVIDAD_ACTION(dia, hora, lugar, folio, area, numAsis, calle1, calle2, callePost, numExt, letraNumExt, numInt, letraNumInt, cp, coordenadas))
+        sendActividad: (datos) => dispatch(NEW_ACTIVIDAD_ACTION(datos))
     }
 }
  const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadRegistro);

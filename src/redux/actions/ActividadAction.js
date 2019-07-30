@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const BASE_URL = "http://" + window.location.hostname + ":8110";
 
+{/* <img src={BASE_URL + "/img/" +this.PaymentResponse.stateActividad._id + "-image1.png"}/> */}
+
 const GET_ACTIVIDADES_ACTION = () => {
     return {
         type: "GET_ACTIVIDADES",
@@ -15,10 +17,16 @@ const GET_ACTIVIDAD_ACTION = (id) => {
     };
 }
 //Add Actividades
-const NEW_ACTIVIDAD_ACTION = (dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas) => {
+const NEW_ACTIVIDAD_ACTION = (datos) => {
 return {
     type: "NEW_ACTIVIDAD",
-    payload: axios({
+    payload: axios.post(BASE_URL + '/actividad/add', datos,{
+        headers: {
+            'accept': 'application/json',
+            'Content-Type': `multipart/form-data; boundary=${datos._boundary}`
+        }
+    })
+    /* payload: axios({
         method: 'post',
         url: BASE_URL + '/actividad/add',
         data: {
@@ -29,7 +37,7 @@ return {
                 'Content-Type': 'application/json; charset=utf-8'
             }
         }
-    })
+    }) */
 };
 }
 

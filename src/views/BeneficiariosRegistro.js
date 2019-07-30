@@ -110,21 +110,24 @@ class BeneficiariosRegistro extends Component{
             this.state.actividad === undefined){
                 
                 err.push("ingresa todos los datos solicitados")
+        } else{
+
+            if(this.state.edad.length !==2)
+            err.push ("ingresa una edad valida")
+
+            if(edad < 18 || edad > 29)
+            err.push("Ingresa una edad valida")
+
+            if(this.state.telefono.length !==10)
+            err.push ("Ingresa un teléfono valido")
+
+            if(this.state.curp.length !==18)
+            err.push ("Ingresa una curp valida")
+
+            if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
+            err.push("Ingresa un número exterior valido")
+
         }
-        if(this.state.edad.length !==2)
-        err.push ("ingresa una edad valida")
-
-        if(edad < 18 || edad > 29)
-        err.push("Ingresa una edad valida")
-
-        if(this.state.telefono.length !==10)
-        err.push ("Ingresa un teléfono valido")
-
-        if(this.state.curp.length !==18)
-        err.push ("Ingresa una curp valida")
-
-        if(this.state.numExt.length < 1 || this.state.numExt.length > 4)
-        err.push("Ingresa un número exterior valido")
 
         if(err.length !==0){
             this.setState({

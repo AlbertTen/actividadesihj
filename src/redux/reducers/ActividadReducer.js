@@ -27,7 +27,7 @@ const UPDATE_ACTIVIDAD_REDUCER = (state = [], action) => {
 const NEW_ACTIVIDAD_REDUCER = (state = {}, action) => {
     switch(action.type){
         case "NEW_ACTIVIDAD_PENDING": return { status: "Pending" };
-        case "NEW_ACTIVIDAD_FULFILLED": return action.payload.data;
+        case "NEW_ACTIVIDAD_FULFILLED": console.log(action.payload.data);return action.payload.data;
         case "NEW_ACTIVIDAD_REJECTED": return { status: "Error" };
         default: return state;
     }
