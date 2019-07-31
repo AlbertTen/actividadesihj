@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {municipios, hidalgo} from '../components/data/data';
 import { NEW_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
 
 class ActividadRegistro extends Component {
@@ -22,6 +23,8 @@ class ActividadRegistro extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          zips:[],
+          colonias:[],
           showAlert: false,
           errors:[]
         };
@@ -53,7 +56,32 @@ class ActividadRegistro extends Component {
                 break;
         }
 
-        console.log("name: ",name, " value: ",value);
+        if(name === "municipio"){
+            var zips = [];
+            var newZips = [];
+            hidalgo.map((item,index) => {
+                if(item.nombre === value){
+                    zips.push(item.cp);
+                }
+            })
+            newZips = zips.filter(function(item, index, array) {
+                return array.indexOf(item) === index;
+            })
+            this.setState({
+                zips: [...newZips]
+            });  
+        } else if(name === "cp"){
+            var newCols = [];
+            hidalgo.map((item,index) => {
+                if(item.cp === value){
+                    newCols.push(item.asentamiento);
+                }
+            })
+            this.setState({
+                colonias: [...newCols]
+            });
+        }
+
 
         this.setState({
           [name]: value
@@ -68,6 +96,9 @@ class ActividadRegistro extends Component {
             this.state.folio === undefined ||
             this.state.area === undefined ||
             this.state.numAsis === undefined ||
+            this.state.municipio === undefined ||
+            this.state.cp === undefined ||
+            this.state.colonia === undefined ||
             this.state.calle1 === undefined ||
             this.state.calle2 === undefined ||
             this.state.callePost === undefined ||
@@ -75,7 +106,6 @@ class ActividadRegistro extends Component {
             this.state.letraNumExt === undefined ||
             this.state.numInt === undefined ||
             this.state.letraNumInt === undefined ||
-            this.state.cp === undefined ||
             this.state.latitud === undefined ||
             this.state.longitud === undefined 
             ){
@@ -86,6 +116,9 @@ class ActividadRegistro extends Component {
 
                 if(this.state.numInt.length < 1 || this.state.numInt.length > 4)
                 err.push("Ingresa un número interior valido")
+
+                if(this.state.letraNumInt.length !==1)
+                err.push ("ingresa una edad valida")
             }
 
             if(err.length !==0){
@@ -102,6 +135,9 @@ class ActividadRegistro extends Component {
             data.append('folio',this.state.folio)
             data.append('area',this.state.area);
             data.append('numAsis',this.state.numAsis);
+            data.append('municipio',this.state.municipio);
+            data.append('cp',this.state.cp);
+            data.append('colonia',this.state.colonia);
             data.append('calle1',this.state.calle1);
             data.append('calle2',this.state.calle2);
             data.append('callePost',this.state.callePost);
@@ -109,12 +145,11 @@ class ActividadRegistro extends Component {
             data.append('letraNumExt',this.state.letraNumExt);
             data.append('numInt',this.state.numInt);
             data.append('letraNumInt',this.state.letraNumInt);
-            data.append('cp',this.state.cp);
             data.append('latitud',this.state.latitud);
             data.append('longitud',this.state.longitud);
             data.append('img',this.state.img);
-            data.append('img2',this.state.img);
-            data.append('img3',this.state.img);
+            data.append('img2',this.state.img2);
+            data.append('img3',this.state.img3);
             this.props.sendActividad(data);
         }
     }
@@ -210,6 +245,38 @@ class ActividadRegistro extends Component {
                                     </div>
                                 </div>
 
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="municipio">Municipio: </label>
+                                        <select className="custom-select" id="municipio" name="municipio" onChange={this.handleInputChange} required>
+                                            <option value="">Selecciona un municipio</option>
+                                            {municipios.map((item,index) => {
+                                                return(<option value={item.name} key={index}>{item.name}</option>);
+                                            })}
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona un municipio</div>
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="cp">Codigo Postal: </label>
+                                        <select className="custom-select" id="cp" name="cp" onChange={this.handleInputChange} required>
+                                            <option value="">Selecciona un municipio</option>
+                                            {this.state.zips.map((item,index) => {
+                                                return(<option value={item} key={index}>{item}</option>);
+                                            })}
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona un codigo postal</div>
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="colonia">Colonia: </label>
+                                        <select className="custom-select" id="colonia" name="colonia" onChange={this.handleInputChange} required>
+                                            <option value="">Selecciona una colonia</option>
+                                            {this.state.colonias.map((item,index) => {
+                                                return(<option value={item} key={index}>{item}</option>);
+                                            })}
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona un colonia</div>
+                                </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="calle1">Calle 1: </label>
                                     <input 
@@ -267,7 +334,7 @@ class ActividadRegistro extends Component {
                                     <input 
                                         type="text" className="form-control" 
                                         id="letraNumExt" name="letraNumExt" required
-                                        placeholder="La letra del número exterior aquí ..."
+                                        placeholder="Letra del número exterior aquí ..."
                                         onChange={this.handleInputChange}
                                     />
                                     <div className="invalid-feedback">
@@ -293,8 +360,9 @@ class ActividadRegistro extends Component {
                                     <input 
                                         type="text" className="form-control" 
                                         id="letraNumInt" name="letraNumInt" required
-                                        placeholder="La letra del número interior aquí ..."
+                                        placeholder="Letra del número interior aquí ..."
                                         onChange={this.handleInputChange}
+                                        maxLength="1" minLength="1"
                                     />
                                     <div className="invalid-feedback">
                                         Por favor ingresa la letra del número interior
@@ -302,21 +370,9 @@ class ActividadRegistro extends Component {
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="cp">Código Postal: </label>
-                                    <input 
-                                        type="text" className="form-control" 
-                                        id="cp" name="cp" required
-                                        placeholder="El código postal aquí ..."
-                                        onChange={this.handleInputChange}
-                                    />
-                                    <div className="invalid-feedback">
-                                        Por favor ingresa el código postal
-                                    </div>
-                                </div>
-                                <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="latitud">Latitud: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="number" className="form-control" 
                                         id="latitud" name="latitud" required
                                         placeholder="Ingresa la latitud aquí ..."
                                         onChange={this.handleInputChange}
@@ -329,7 +385,7 @@ class ActividadRegistro extends Component {
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="longitud">Longitud: </label>
                                     <input 
-                                        type="text" className="form-control" 
+                                        type="number" className="form-control" 
                                         id="longitud" name="longitud" required
                                         placeholder="Ingresa la longitud aquí ..."
                                         onChange={this.handleInputChange}
@@ -338,15 +394,17 @@ class ActividadRegistro extends Component {
                                     Ingresa la longitud  aquí ...
                                     </div>
                                 </div>
-                
-                                <input name="img" type="file" onChange={this.handleInputChange}/>
-                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+                    
+                                <div className="col-12 mb-3">
+                                    <input name="img" type="file" onChange={this.handleInputChange}/>
+                                    <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
 
-                                <input name="img2" type="file" onChange={this.handleInputChange}/>
-                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+                                    <input name="img2" type="file" onChange={this.handleInputChange}/>
+                                    <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
 
-                                <input name="img3" type="file" onChange={this.handleInputChange}/>
-                                <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+                                    <input name="img3" type="file" onChange={this.handleInputChange}/>
+                                    <input type="hidden" name="MAX_FILE_SIZE" defaultValue="3000000"/>
+                                </div>
                         
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">

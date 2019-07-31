@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://" + window.location.hostname + ":8110";
+const BASE_URL = "http://" + window.location.hostname + ":8111";
 
 const GET_BENEFICIARIOS_ACTION = () => {
     return {

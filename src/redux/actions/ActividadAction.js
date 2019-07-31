@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://" + window.location.hostname + ":8110";
+const BASE_URL = "http://" + window.location.hostname + ":8111";
 
 {/* <img src={BASE_URL + "/img/" +this.PaymentResponse.stateActividad._id + "-image1.png"}/> */}
 
@@ -42,14 +42,14 @@ return {
 }
 
 //Update Actividades
-const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas) => {
+const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud) => {
     return {
         type: "UPDATE_ACTIVIDAD",
         payload: axios({
             method: 'put',
             url: BASE_URL + '/actividad/edit/' + id,
             data: {
-                dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas
+                dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud
             },
             config: {
                 headers: {

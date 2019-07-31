@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {municipios, hidalgo} from '../components/data/data';
+import {entidades} from '../components/data/estados';
 import { NEW_BENEFICIARIO_ACTION } from '../redux/actions/BeneficiariosAction';
 import {GET_ACTIVIDADES_ACTION} from '../redux/actions/ActividadAction';
 import { connect } from 'react-redux';

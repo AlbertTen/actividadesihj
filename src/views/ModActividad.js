@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {municipios, hidalgo} from '../components/data/data';
 import {GET_ACTIVIDAD_ACTION, UPDATE_ACTIVIDAD_ACTION }  from '../redux/actions/ActividadAction';
 
 class ModActividad extends Component {
     _renderAlert =() => {
         if(this.state.showAlert){
-            return this.state.errors.map((error,index) => {
-                return(
-                   
-                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Atención </strong> Ingresa todos los datos solicitados
-                    </div> 
-                 )
-            })
-        
+            return(
+                <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Atención </strong> Ingresa todos los datos solicitados
+                </div>
+             );
         } else {
             return null;
         }    
@@ -21,6 +18,8 @@ class ModActividad extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          zips:[],
+          colonias:[],
           showAlert: false
           
         };
@@ -29,24 +28,81 @@ class ModActividad extends Component {
         let id = JSON.parse(localStorage.getItem("actividadId"));
         this.props.getActividad(id);
     }
+
+    _renderZips = (municipio) => {
+        var zips =[];
+        var newZips = [];
+
+        hidalgo.map((item) => {
+            if(item.nombre === municipio){
+                zips.push(item.cp);
+            }
+        })
+        newZips = zips.filter(function(item,index,array){
+            return array.indexOf(item) === index;
+        })
+        return newZips;
+    }
+
+    _renderCols = (cp) => {
+        var newCols =[];
+        hidalgo.map((item)=>{
+            if(item.cp === cp){
+                newCols.push(item.asentamiento);
+            }
+        })
+        return newCols;
+    }
     
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseUpdateActividad.success === "OK"){
             window.location.href = "/Tactividad";
         }
-    }   
+    } 
+    
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        if(name === "municipio"){
+            var zips = [];
+            var newZips = [];
+            hidalgo.map((item,index) => {
+                if(item.nombre === value){
+                    zips.push(item.cp);
+                }
+            })
+            newZips = zips.filter(function(item, index, array) {
+                return array.indexOf(item) === index;
+            })
+            this.setState({
+                zips: [...newZips]
+            });  
+        } else if(name === "cp"){
+            var newCols = [];
+            hidalgo.map((item,index) => {
+                if(item.cp === value){
+                    newCols.push(item.asentamiento);
+                }
+            })
+            this.setState({
+                colonias: [...newCols]
+            });
+        }
+    }
     
     handleSubmit() {
        
-        
-
         if(this.refs.dia.value === "" ||
             this.refs.hora.value === "" ||
             this.refs.lugar.value === "" ||
             this.refs.folio.value === "" ||
             this.refs.area.value === "" ||
             this.refs.numAsis.value === "" ||
+            this.refs.municipio.value === "" ||
+            this.refs.cp.value === "" ||
+            this.refs.colonia.value === "" ||
             this.refs.calle1.value === "" ||
             this.refs.calle2.value === "" ||
             this.refs.callePost.value === "" ||
@@ -54,8 +110,8 @@ class ModActividad extends Component {
             this.refs.letraNumExt.value === "" ||
             this.refs.numInt.value === "" ||
             this.refs.letraNumInt.value === "" ||
-            this.refs.cp.value === "" ||
-            this.refs.coordenadas.value === "" 
+            this.refs.latitud.value === "" ||
+            this.refs.longitud.value === "" 
             )
             {
                 this.setState({
@@ -74,6 +130,9 @@ class ModActividad extends Component {
                 this.refs.folio.value,
                 this.refs.area.value,
                 this.refs.numAsis.value,
+                this.refs.municipio.value,
+                this.refs.cp.value,
+                this.refs.colonia.value,
                 this.refs.calle1.value,
                 this.refs.calle2.value,
                 this.refs.callePost.value,
@@ -81,14 +140,27 @@ class ModActividad extends Component {
                 this.refs.letraNumExt.value,
                 this.refs.numInt.value,
                 this.refs.letraNumInt.value,
-                this.refs.cp.value,
-                this.refs.coordenadas.value
+                this.refs.latitud.value,
+                this.refs.longitud.value
                 
                 );
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas}=this.props.stateActividad;
+        let{dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud}=this.props.stateActividad;
+        let zips = [], cols = [];
+
+        if(this.state.zips.length === 0 && cp !== undefined) {
+            zips = this._renderZips(municipio);
+        } else if(this.state.zips.length !==0){
+            zips = [...this.state.zips];
+        }
+
+        if(this.state.colonias.length === 0 && colonia !== undefined) {
+            cols = this._renderCols(cp);
+        } else if(this.state.colonias.length !==0){
+            cols = [...this.state.colonias];
+        }
 
         return(
             <section className="container">
@@ -170,6 +242,34 @@ class ModActividad extends Component {
                                    </div> 
 
                                    <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="municipio">Municipio: </label>
+                                        <select className="custom-select" id="municipio" ref="municipio" >
+                                        <option defaultValue={municipio || ""}> {municipio || ""}</option>
+                                            {municipios.map((item,index) => {
+                                                return(<option value={item.name} key={index}>{item.name}</option>);
+                                            })}
+                                        </select>
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="cp">Codigo Postal: </label>
+                                        <select className="custom-select" id="cp" ref="cp">
+                                        <option defaultValue={cp || ""}> {cp || ""}</option>
+                                            {this.state.zips.map((item,index) => {
+                                                return(<option value={item} key={index}>{item}</option>);
+                                            })}
+                                        </select>
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="colonia">Colonia: </label>
+                                        <select className="custom-select" id="colonia" ref="colonia" >
+                                        <option defaultValue={colonia || ""}> {colonia || ""}</option>
+                                            {this.state.colonias.map((item,index) => {
+                                                return(<option value={item} key={index}>{item}</option>);
+                                            })}
+                                        </select>
+                                </div>
+
+                                   <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="calle1">Calle 1: </label>
                                     <input 
                                         type="text" className="form-control" 
@@ -247,29 +347,26 @@ class ModActividad extends Component {
                                 </div>
 
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="cp">Código Postal: </label>
+                                    <label htmlFor="latitud">Latitud: </label>
                                     <input 
-                                        type="text" className="form-control" 
-                                        id="cp" ref="cp" 
-                                        placeholder="El código postal aquí ..."
-                                        defaultValue={cp || ""}
+                                        type="number" className="form-control" 
+                                        id="latitud" ref="latitud" 
+                                        placeholder="Ingresa la latitud aquí ..."
+                                        defaultValue={latitud || ""}
                                     />   
                                 </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
-                                    <label htmlFor="coordenadas">Coordenadas: </label>
+                                    <label htmlFor="longitud">Longitud: </label>
                                     <input 
-                                        type="text" className="form-control" 
-                                        id="coordenadas" ref="coordenadas" 
-                                        placeholder="Ingresa las coordenadas geográficas aquí ..."
-                                        defaultValue={coordenadas || ""}
+                                        type="number" className="form-control" 
+                                        id="longitud" ref="longitud" 
+                                        placeholder="Ingresa la longitud aquí ..."
+                                        defaultValue={longitud || ""}
                                     />   
                                 </div>
-                <div className="text-center w-100" style={{paddingTop:"15px"}}>
-                <form enctype="multipart/form-data" action="uploader" method="POST">
-                <input name="uploadedfile" type="file" />
-                <input type="submit" value="Subir archivo" />
-                </form>
-                </div>
+
+                
 
                                    <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
@@ -298,7 +395,7 @@ const mapStateToProps = ({stateActividad, responseUpdateActividad}) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id)),
-        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,cp,coordenadas))
+        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud))
     }
 }
  const ConnectActividad = connect(mapStateToProps, mapDispatchToProps)(ModActividad);

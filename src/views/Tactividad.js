@@ -22,12 +22,12 @@ class Tactividad extends Component{
                         <td>{row.folio}</td>
                         <td>{row.area}</td>
                         <td>{row.numAsis}</td>
+                        <td>{row.municipio}, {row.cp} , {row.colonia} </td>
                         <td>{row.calle1}</td>
                         <td>{row.calle2}</td>
                         <td>{row.callePost}</td>
                         <td>{row.numExt} , {row.letraNumExt}</td>
                         <td>{row.numInt} , {row.letraNumInt}</td>
-                        <td>{row.cp}</td>
                         <td>{row.latitud} , {row.longitud}</td>
                         <td>
                             <button type="button" className="btn btn-danger" onClick={this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
@@ -59,7 +59,7 @@ class Tactividad extends Component{
 
                             <div className="col-lg-3">
                              <div className="input-group">
-                                 <input type="text" class="form-control"/>
+                                 <input type="text" className="form-control"/>
                                  <span className="input-group-btn">
 
                                    <button className="btn btn-default" type="button">Buscar</button>
@@ -79,12 +79,12 @@ class Tactividad extends Component{
                                     <th scope="col">Folio</th>
                                     <th scope="col">Área</th>
                                     <th scope="col">Número de Asistentes</th>
+                                    <th scope="col">Domicilio</th>
                                     <th scope="col">Calle 1</th>
                                     <th scope="col">Calle 2</th>
                                     <th scope="col">Calle Posterior</th>
                                     <th scope="col">Número y Letra Exterior</th>
                                     <th scope="col">Número y Letra Interior</th>
-                                    <th scope="col">Código Postal</th>
                                     <th scope="col">Coordenadas</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
