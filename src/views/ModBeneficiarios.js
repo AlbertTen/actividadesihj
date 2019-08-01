@@ -21,7 +21,7 @@ class ModBeneficiarios extends Component{
         _renderItem = () => {
             return this.props.stateActividades.map((row) =>{
                 return(
-                    <option>{row.folio} </option>
+                    <option>{row.nombre} </option>
                 );
             })
         }

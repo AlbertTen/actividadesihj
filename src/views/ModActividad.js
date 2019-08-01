@@ -96,7 +96,9 @@ class ModActividad extends Component {
        
         if(this.refs.dia.value === "" ||
             this.refs.hora.value === "" ||
+            this.refs.nombre.value === "" ||
             this.refs.lugar.value === "" ||
+            this.refs.descripcion.value === "" ||
             this.refs.folio.value === "" ||
             this.refs.area.value === "" ||
             this.refs.numAsis.value === "" ||
@@ -126,7 +128,9 @@ class ModActividad extends Component {
                 id,
                 this.refs.dia.value,
                 this.refs.hora.value,
+                this.refs.nombre.value,
                 this.refs.lugar.value,
+                this.refs.descripcion.value,
                 this.refs.folio.value,
                 this.refs.area.value,
                 this.refs.numAsis.value,
@@ -147,7 +151,7 @@ class ModActividad extends Component {
         }
     }
     render(){
-        let{dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud}=this.props.stateActividad;
+        let{dia,hora,nombre,lugar,descripcion,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud}=this.props.stateActividad;
         let zips = [], cols = [];
 
         if(this.state.zips.length === 0 && cp !== undefined) {
@@ -193,7 +197,19 @@ class ModActividad extends Component {
                                         placeholder="La hora aqui ..."
                                         defaultValue={hora || ""}
                                     />
-                                                                   </div>
+                                </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="nombre">Nombre: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="nombre" ref="nombre"
+                                        placeholder="El nombre de la actividad aqui ..."
+                                        defaultValue={nombre || ""}
+                                    />
+                                  
+                                </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="lugar">Lugar: </label>
                                     <input 
@@ -204,6 +220,18 @@ class ModActividad extends Component {
                                     />
                                   
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="descripcion">Descripción: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="descripcion" ref="descripcion"
+                                        placeholder="Una breve descripción aqui ..."
+                                        defaultValue={descripcion || ""}
+                                    />
+                                  
+                                </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="folio">Folio: </label>
                                     <input 
@@ -395,7 +423,7 @@ const mapStateToProps = ({stateActividad, responseUpdateActividad}) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         getActividad: (id) => dispatch(GET_ACTIVIDAD_ACTION(id)),
-        updateActividad: (id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud))
+        updateActividad: (id, dia,hora,nombre,lugar,descripcion,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud)=>dispatch(UPDATE_ACTIVIDAD_ACTION(id, dia,hora,nombre,lugar,descripcion,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud))
     }
 }
  const ConnectActividad = connect(mapStateToProps, mapDispatchToProps)(ModActividad);

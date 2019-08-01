@@ -27,13 +27,16 @@ class Area extends Component{
                     <td>{row.abreviacion}</td>
                     <td>{row.responsable}</td>
                     <td>
-                        <button type="button" className="btn btn-danger" onClick={this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
-                        <button type="button" className="btn btn-warning"onClick={() =>{
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-warning" onClick={() =>{
                             let areaId=[];
                             areaId.push(row._id);
                             localStorage.setItem("areaId",JSON.stringify(areaId));
                             window.location.href="./ModArea";
-                            }}>Editar</button>
+                            }}> Editar</button>
+                      <button type="button" className="btn btn-danger" onClick={
+                          this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
+                    </div>
                     </td>
                 </tr>
             );

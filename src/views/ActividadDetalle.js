@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { GET_ACTIVIDADES_ACTION, DELETE_ACTIVIDAD_ACTION } from  '../redux/actions/ActividadAction';
 //View 
-class Tactividad extends Component{
+class ActividadDetalle extends Component{
     componentDidMount(){
         this.props.getActividades();
     }
@@ -16,30 +16,31 @@ class Tactividad extends Component{
         return this.props.stateActividades.map((row,index) => {
             return(
                     <tr key={index}>
-                        <td>{row.dia},{row.hora}</td>
-                        <td>{row.nombre}</td>
+                        <td>{row.dia} , <br></br> {row.hora}</td>
                         <td>{row.lugar}</td>
-                        <td>{row.descripcion}</td>
                         <td>{row.folio}</td>
                         <td>{row.area}</td>
                         <td>{row.numAsis}</td>
+                        <td>{row.municipio}, {row.cp} , {row.colonia} </td>
+                        <td>{row.calle1}</td>
+                        <td>{row.calle2}</td>
+                        <td>{row.callePost}</td>
+                        <td>{row.numExt} , {row.letraNumExt}</td>
+                        <td>{row.numInt} , {row.letraNumInt}</td>
+                        <td>{row.latitud} , {row.longitud}</td>
                         <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success" onClick={() => {
-                                    window.location.href="/actividadDetalle";
-                                    }}>Detalles
-                                </button>
-                                <button type="button" className="btn btn-danger" onClick={
-                                    this.props.deleteActividad.bind(this,row._id)}>Eliminar
-                                </button>
-                                <button type="button" className="btn btn-warning" onClick={() =>{
-                                    let actividadId=[];
-                                    actividadId.push(row._id);
-                                    localStorage.setItem("actividadId",JSON.stringify(actividadId));
-                                    window.location.href="./ModActividad";
-                                    }}> Editar
-                                </button>
-                            </div>
+                            
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-warning" onClick={() =>{
+                            let actividadId=[];
+                            actividadId.push(row._id);
+                            localStorage.setItem("actividadId",JSON.stringify(actividadId));
+                            window.location.href="./ModActividad";
+                            }}> Editar</button>
+                      <button type="button" className="btn btn-danger" onClick={
+                          this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
+                    </div>
                         </td>
                     </tr>
                 );
@@ -77,12 +78,17 @@ class Tactividad extends Component{
                             <thead>
                                 <tr>
                                     <th scope="col">Día y Hora</th>
-                                    <th scope="col">Nombre</th>
                                     <th scope="col">Lugar</th>
-                                    <th scope="col">Descripción</th>
                                     <th scope="col">Folio</th>
                                     <th scope="col">Área</th>
                                     <th scope="col">Número de Asistentes</th>
+                                    <th scope="col">Domicilio</th>
+                                    <th scope="col">Calle 1</th>
+                                    <th scope="col">Calle 2</th>
+                                    <th scope="col">Calle Posterior</th>
+                                    <th scope="col">Número y Letra Exterior</th>
+                                    <th scope="col">Número y Letra Interior</th>
+                                    <th scope="col">Coordenadas</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -114,5 +120,5 @@ const mapDispatchToProps = ( dispatch) => {
         deleteActividad: (id) => dispatch(DELETE_ACTIVIDAD_ACTION(id))
     };
 };
- const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(Tactividad);
+ const ConnectActividades = connect(mapStateToProps, mapDispatchToProps)(ActividadDetalle);
  export default ConnectActividades;

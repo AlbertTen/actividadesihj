@@ -15,7 +15,7 @@ import ModUsers from './views/ModUsers';
 import ModArea from './views/ModArea';
 import ModActividad from './views/ModActividad';
 import ModBeneficiarios from './views/ModBeneficiarios';
-
+import ActividadDetalle from './views/ActividadDetalle';
 class Router extends Component {
     render(){
         return(
@@ -33,6 +33,7 @@ class Router extends Component {
 
                 <Route path="/tactividad" component={Tactividad}/>
                 <Route path="/actividadRegistro" component={ActividadRegistro}/>
+                <Route path="/actividadDetalle" component={ActividadDetalle}/>
 
                 <Route path="/tusuarios" component={Tusuarios}/>
                 <Route path="/registroUsers" component={RegistroUsers}/>

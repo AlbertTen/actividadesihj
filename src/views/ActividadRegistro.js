@@ -92,7 +92,9 @@ class ActividadRegistro extends Component {
 
         if(this.state.dia === undefined ||
             this.state.hora === undefined ||
+            this.state.nombre === undefined ||
             this.state.lugar === undefined ||
+            this.state.descripcion === undefined ||
             this.state.folio === undefined ||
             this.state.area === undefined ||
             this.state.numAsis === undefined ||
@@ -131,7 +133,9 @@ class ActividadRegistro extends Component {
             data.append('title',this.state.title);
             data.append('dia',this.state.dia);
             data.append('hora',this.state.hora);
+            data.append('nombre',this.state.nombre);
             data.append('lugar',this.state.lugar);
+            data.append('descripcion',this.state.descripcion);
             data.append('folio',this.state.folio)
             data.append('area',this.state.area);
             data.append('numAsis',this.state.numAsis);
@@ -191,6 +195,20 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa la hora
                                     </div>
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="nombre">Nombre: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="nombre" name="nombre" required
+                                        placeholder="El nombre aqui ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa el nombre de la actividad
+                                    </div>
+                                </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="lugar">Lugar: </label>
                                     <input 
@@ -203,6 +221,20 @@ class ActividadRegistro extends Component {
                                         Por favor ingresa el lugar
                                     </div>
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="descripcion">Descripción: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="descripcion" name="descripcion" required
+                                        placeholder="Una breve descripción aqui ..."
+                                        onChange={this.handleInputChange}
+                                    />
+                                    <div className="invalid-feedback">
+                                        Por favor ingresa una breve descripción
+                                    </div>
+                                </div>
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="folio">Folio: </label>
                                     <input 

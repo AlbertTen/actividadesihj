@@ -42,14 +42,14 @@ return {
 }
 
 //Update Actividades
-const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud) => {
+const UPDATE_ACTIVIDAD_ACTION = (id, dia,hora,nombre,lugar,descripcion,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud) => {
     return {
         type: "UPDATE_ACTIVIDAD",
         payload: axios({
             method: 'put',
             url: BASE_URL + '/actividad/edit/' + id,
             data: {
-                dia,hora,lugar,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud
+                dia,hora,nombre,lugar,descripcion,folio,area,numAsis,municipio,cp,colonia,calle1,calle2,callePost,numExt,letraNumExt,numInt,letraNumInt,latitud,longitud
             },
             config: {
                 headers: {
