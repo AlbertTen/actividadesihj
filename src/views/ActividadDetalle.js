@@ -16,8 +16,10 @@ class ActividadDetalle extends Component{
         return this.props.stateActividades.map((row,index) => {
             return(
                     <tr key={index}>
-                        <td>{row.dia} , <br></br> {row.hora}</td>
+                        <td>{row.dia} , {row.hora}</td>
+                        <td>{row.nombre}</td>
                         <td>{row.lugar}</td>
+                        <td>{row.descripcion}</td>
                         <td>{row.folio}</td>
                         <td>{row.area}</td>
                         <td>{row.numAsis}</td>
@@ -78,7 +80,9 @@ class ActividadDetalle extends Component{
                             <thead>
                                 <tr>
                                     <th scope="col">Día y Hora</th>
+                                    <th scope="col">Nombre</th>
                                     <th scope="col">Lugar</th>
+                                    <th scope="col">Descripción</th>
                                     <th scope="col">Folio</th>
                                     <th scope="col">Área</th>
                                     <th scope="col">Número de Asistentes</th>

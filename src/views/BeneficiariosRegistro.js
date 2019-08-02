@@ -146,6 +146,7 @@ class BeneficiariosRegistro extends Component{
                     this.state.telefono,
                     this.state.email,
                     this.state.curp,
+                    this.state.entidad,
                     this.state.fechaNac,
                     this.state.municipio,
                     this.state.cp,
@@ -264,6 +265,21 @@ class BeneficiariosRegistro extends Component{
                                         Por favor ingresa tu CURP
                                     </div>
                                 </div>
+
+                                <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="entidad">Estado de Nacimiento: </label>
+                                        <select className="custom-select" id="entidad" name="entidad" onChange={this.handleInputChange} required>
+                                            <option value="">Selecciona una entidad</option>
+                                            {entidades.map((item,index) => {
+                                                return(<option value={item.name} key={index}>{item.name}</option>);
+                                            })}
+                                        </select>
+                                        <div className="invalid-feedback">Selecciona una entidad</div>
+                                </div>
+
+
+
+
                                 <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="Fecha de Nacimiento">Fecha de Nacimiento: </label>
                                     <input 
@@ -369,7 +385,7 @@ const mapStateToProps = ({responseNewBeneficiario, stateActividades}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return{
-        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad)),
+        sendBeneficiario: (nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => dispatch(NEW_BENEFICIARIO_ACTION(nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt,actividad)),
         getActividades: ()=> dispatch(GET_ACTIVIDADES_ACTION())
     }
 }

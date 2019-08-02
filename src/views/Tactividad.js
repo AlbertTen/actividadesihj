@@ -16,12 +16,11 @@ class Tactividad extends Component{
         return this.props.stateActividades.map((row,index) => {
             return(
                     <tr key={index}>
-                        <td>{row.dia},{row.hora}</td>
+                        <td>{row.dia}</td>
+                        <td>{row.hora}</td>
                         <td>{row.nombre}</td>
                         <td>{row.lugar}</td>
-                        <td>{row.descripcion}</td>
                         <td>{row.folio}</td>
-                        <td>{row.area}</td>
                         <td>{row.numAsis}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -29,15 +28,15 @@ class Tactividad extends Component{
                                     window.location.href="/actividadDetalle";
                                     }}>Detalles
                                 </button>
-                                <button type="button" className="btn btn-danger" onClick={
-                                    this.props.deleteActividad.bind(this,row._id)}>Eliminar
-                                </button>
                                 <button type="button" className="btn btn-warning" onClick={() =>{
                                     let actividadId=[];
                                     actividadId.push(row._id);
                                     localStorage.setItem("actividadId",JSON.stringify(actividadId));
                                     window.location.href="./ModActividad";
                                     }}> Editar
+                                </button>
+                                <button type="button" className="btn btn-danger" onClick={
+                                    this.props.deleteActividad.bind(this,row._id)}>Eliminar
                                 </button>
                             </div>
                         </td>
@@ -76,12 +75,11 @@ class Tactividad extends Component{
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Día y Hora</th>
+                                    <th scope="col">Día</th>
+                                    <th scope="col">Hora</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Lugar</th>
-                                    <th scope="col">Descripción</th>
                                     <th scope="col">Folio</th>
-                                    <th scope="col">Área</th>
                                     <th scope="col">Número de Asistentes</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
