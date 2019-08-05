@@ -26,7 +26,7 @@ class ModUsers extends Component {
      componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseUpdateUser.success === "OK"){
-            window.location.href = "/Tusuarios";
+            window.location.href = "/usuarios";
         }
     } 
     
@@ -152,7 +152,7 @@ class ModUsers extends Component {
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Tusuarios";
+                                            window.location.href="/usuarios";
                                         }}>
                                             Salir
                                         </button>

@@ -27,7 +27,7 @@ class Beneficiarios extends Component{
                               let beneficiarioId=[];
                               beneficiarioId.push(row._id);
                               localStorage.setItem("beneficiarioId",JSON.stringify(beneficiarioId));
-                              window.location.href="./ModBeneficiarios";
+                              window.location.href="./modificarBeneficiario";
                               }}> Editar</button>
                         <button type="button" className="btn btn-danger" onClick={
                             this.props.deleteBeneficiario.bind(this,row._id)}>Eliminar</button>
@@ -47,7 +47,7 @@ class Beneficiarios extends Component{
                     <h3 align="center"> <strong>Beneficiarios</strong> </h3> </div> 
                         <div className="text-center" style={{marginBottom:"30px"}}>
                             <button className="btn btn-success" onClick={() => {
-                                window.location.href="/BeneficiariosRegistro";
+                                window.location.href="/beneficiarioRegistro";
                                 }}>
                                 Agregar
                             </button>
@@ -68,7 +68,7 @@ class Beneficiarios extends Component{
                         </tbody>
                     </table>  
                     <button className="btn btn-primary" onClick={() => {
-                            window.location.href="/Principal";
+                            window.location.href="/principal";
                             }}>
                             Salir
                     </button> 

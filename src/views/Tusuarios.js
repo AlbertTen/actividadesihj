@@ -26,7 +26,7 @@ class Tusuarios extends Component{
                             let userId=[];
                             userId.push(row._id);
                             localStorage.setItem("userId",JSON.stringify(userId));
-                            window.location.href="./ModUsers";
+                            window.location.href="./modificarUsuario";
                             }}> Editar</button>
                       <button type="button" className="btn btn-danger" onClick={
                           this.props.deleteUser.bind(this,row._id)}>Eliminar</button>
@@ -47,7 +47,7 @@ class Tusuarios extends Component{
                         </div>
                         <div className="text-center" style={{marginBottom:"30px"}}>
                             <button className="btn btn-success" onClick={() => {
-                                window.location.href="/RegistroUsers";
+                                window.location.href="/usuarioRegistro";
                                 }}>
                                 Agregar
                             </button>
@@ -66,7 +66,7 @@ class Tusuarios extends Component{
                                 </tbody>
                             </table>
                             <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Principal";
+                                            window.location.href="/principal";
                                             }}>
                                             Salir
                             </button>

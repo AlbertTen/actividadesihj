@@ -16,6 +16,8 @@ import ModArea from './views/ModArea';
 import ModActividad from './views/ModActividad';
 import ModBeneficiarios from './views/ModBeneficiarios';
 import ActividadDetalle from './views/ActividadDetalle';
+import ModificarImagen from './views/ModificarImagen';
+
 class Router extends Component {
     render(){
         return(
@@ -26,25 +28,23 @@ class Router extends Component {
                 <Route path="/registro" component={Registro}/>
 
                 <Route path="/beneficiarios" component={Beneficiarios}/>
-                <Route path="/beneficiariosRegistro" component={BeneficiariosRegistro}/>
+                <Route path="/beneficiarioRegistro" component={BeneficiariosRegistro}/>
+                <Route path="/modificarBeneficiario" component={ModBeneficiarios}/>
 
-                <Route path="/area" component={Area}/>
+                <Route path="/areas" component={Area}/>
                 <Route path="/areaRegistro" component={AreaRegistro}/>
+                <Route path="/modificarArea" component={ModArea}/>
 
-                <Route path="/tactividad" component={Tactividad}/>
+                <Route path="/actividades" component={Tactividad}/>
                 <Route path="/actividadRegistro" component={ActividadRegistro}/>
                 <Route path="/actividadDetalle" component={ActividadDetalle}/>
+                <Route path="/modificarActividad" component={ModActividad}/>
 
-                <Route path="/tusuarios" component={Tusuarios}/>
-                <Route path="/registroUsers" component={RegistroUsers}/>
+                <Route path="/usuarios" component={Tusuarios}/>
+                <Route path="/usuarioRegistro" component={RegistroUsers}/>
+                <Route path="/modificarUsuario" component={ModUsers}/>
 
-                <Route path="/modUsers" component={ModUsers}/>
-
-                <Route path="/modArea" component={ModArea}/>
-
-                <Route path="/modActividad" component={ModActividad}/>
-
-                <Route path="/modBeneficiarios" component={ModBeneficiarios}/>
+                <Route path="/modificarImagen" component={ModificarImagen}/>
                 
             </Switch>
         );

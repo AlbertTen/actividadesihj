@@ -32,7 +32,7 @@ class Tactividad extends Component{
                                     let actividadId=[];
                                     actividadId.push(row._id);
                                     localStorage.setItem("actividadId",JSON.stringify(actividadId));
-                                    window.location.href="./ModActividad";
+                                    window.location.href="./modificarActividad";
                                     }}> Editar
                                 </button>
                                 <button type="button" className="btn btn-danger" onClick={
@@ -54,7 +54,7 @@ class Tactividad extends Component{
                         </div>
                         <div className="text-center" style={{marginBottom:"30px"}}>
                             <button className="btn btn-success" onClick={() => {
-                                window.location.href="/ActividadRegistro";
+                                window.location.href="/actividadRegistro";
                                 }}>
                                 Agregar
                             </button>
@@ -90,7 +90,7 @@ class Tactividad extends Component{
                         </table> 
                         </div>
                         <button className="btn btn-primary" onClick={() => {
-                            window.location.href="/Principal";
+                            window.location.href="/principal";
                             }}>
                             Salir
                         </button>

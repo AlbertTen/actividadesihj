@@ -32,7 +32,7 @@ class Area extends Component{
                             let areaId=[];
                             areaId.push(row._id);
                             localStorage.setItem("areaId",JSON.stringify(areaId));
-                            window.location.href="./ModArea";
+                            window.location.href="./modificarArea";
                             }}> Editar</button>
                       <button type="button" className="btn btn-danger" onClick={
                           this.props.deleteArea.bind(this,row._id)}>Eliminar</button>
@@ -55,7 +55,7 @@ class Area extends Component{
             
                         <div className="text-center" style={{marginBottom:"30px"}}>
                             <button className="btn btn-success" onClick={() => {
-                                window.location.href="/AreaRegistro";
+                                window.location.href="/areaRegistro";
                                 }}>
                                 Agregar
                             </button>
@@ -77,7 +77,7 @@ class Area extends Component{
                                 </tbody>
                             </table>
                             <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Principal";
+                                            window.location.href="/principal";
                                             }}>
                                             Salir
                             </button>

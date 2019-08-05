@@ -26,7 +26,7 @@ class RegistroUsers extends Component {
         //const ActualProps = this.props;
         const NewProps = nextProps;
         if(NewProps.responseNewUser.success === "OK"){
-            window.location.href = "/Tusuarios";
+            window.location.href = "/usuarios";
         }
     }
     handleInputChange(event) {
@@ -146,7 +146,7 @@ class RegistroUsers extends Component {
                                 <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Tusuarios";
+                                            window.location.href="/usuarios";
                                         }}>
                                             Salir
                                         </button>

@@ -17,14 +17,14 @@ const GET_BENEFICIARIO_ACTION = (id) => {
 }
 
 //Add Beneficiarios
-const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => {
+const NEW_BENEFICIARIO_ACTION = (nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt,actividad) => {
 return {
     type: "NEW_BENEFICIARIO",
     payload: axios({
         method: 'post',
         url: BASE_URL + '/beneficiario/add',
         data: {
-            nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt,actividad
+            nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt,actividad
         },
         config: {
             headers: {
@@ -36,14 +36,14 @@ return {
 }
 
 //Update Beneficiarios
-const UPDATE_BENEFICIARIO_ACTION = (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => {
+const UPDATE_BENEFICIARIO_ACTION = (id, nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt) => {
     return {
         type: "UPDATE_BENEFICIARIO",
         payload: axios({
             method: 'put',
             url: BASE_URL + '/beneficiario/edit/' + id,
             data: {
-                nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt
+                nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt
             },
             config: {
                 headers: {

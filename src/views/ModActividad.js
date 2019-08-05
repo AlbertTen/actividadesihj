@@ -57,7 +57,7 @@ class ModActividad extends Component {
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseUpdateActividad.success === "OK"){
-            window.location.href = "/Tactividad";
+            window.location.href = "/actividades";
         }
     } 
     
@@ -398,7 +398,7 @@ class ModActividad extends Component {
 
                                    <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Tactividad";
+                                            window.location.href="/actividades";
                                         }}>
                                             Salir
                                         </button>

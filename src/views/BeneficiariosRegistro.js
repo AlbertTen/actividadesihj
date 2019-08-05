@@ -28,9 +28,9 @@ class BeneficiariosRegistro extends Component{
         }   
     }
     _renderItem = () => {
-          return this.props.stateActividades.map((row) =>{
+          return this.props.stateActividades.map((row,index) =>{
             return(
-                <option>{row.nombre} </option>
+                <option key={index}>{row.nombre} </option>
             );
         })
     }
@@ -54,13 +54,115 @@ class BeneficiariosRegistro extends Component{
         //const ActualProps = this.props;
         const NewProps = nextProps;
         if(NewProps.responseNewBeneficiario.success === "OK"){
-            window.location.href = "/Beneficiarios";
+            window.location.href = "/beneficiarios";
         }
     }
+
+    _validatecurp = () => {
+        const consonantes = ["B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z"];
+        const vocales = ["A","E","I","O","U"];
+
+        if(this.state.fechaNac  !== undefined &&
+             this.state.sexo !== undefined && 
+            this.state.entidad !== undefined &&
+            this.state.nombre !== undefined && 
+            this.state.app !== undefined &&
+            this.state.apm !== undefined ){
+
+                let nombre = this.state.nombre.toUpperCase();
+                let app = this.state.app.toUpperCase();
+                let apm = this.state.apm.toUpperCase();
+                let fecha= this.state.fechaNac.split("-");
+                let anio = fecha[0].slice(2);
+                let mes = fecha[1];
+                let dia = fecha[2];
+                let consonanteSeleccionada = false, vocalSeleccionada = false;
+                let pp = "", pm = "", nom = "", pp2 = "", pm2 = "", nom2 = "",  contadorConsonantes = 0;
+
+                pp = app.charAt(0);
+
+                for(let i=0;i<app.length;i++){
+                    let c = app.charAt(i);
+                    if(!vocalSeleccionada){
+                        if(vocales.includes(c)){
+                            pp += c;
+                            vocalSeleccionada = true;
+                        }
+                    }
+                }
+
+                pm = apm.charAt(0);
+                nom = nombre.charAt(0);
+
+                /* for(let i=0;i<apm.length;i++){
+                    let c = apm.charAt(i);
+                    if(!consonanteSeleccionada){
+                        if(consonantes.includes(c)){
+                            pm = c;
+                            consonanteSeleccionada = true;
+                        } 
+                    }
+                } */
+
+                consonanteSeleccionada = false;
+
+                for(let i=0;i<app.length;i++){
+                    let c = app.charAt(i);
+                    if(!consonanteSeleccionada){
+                        if(consonantes.includes(c)){
+                            if(contadorConsonantes === 1){
+                                pp2 = c;
+                                consonanteSeleccionada = true;
+                                break;
+                            } else {
+                                contadorConsonantes++;
+                            }
+                        } 
+                    }
+                }
+
+                consonanteSeleccionada = false;
+                contadorConsonantes = 0;
+
+                for(let i=0;i<apm.length;i++){
+                    let c = apm.charAt(i);
+                    if(!consonanteSeleccionada){
+                        if(consonantes.includes(c)){
+                            if(contadorConsonantes === 1){
+                                pm2 = c;
+                                consonanteSeleccionada = true;
+                                break;
+                            } else {
+                                contadorConsonantes++;
+                            }
+                        } 
+                    }
+                }
+
+                consonanteSeleccionada = false;
+                contadorConsonantes = 0;
+
+                for(let i=0;i<nombre.length;i++){
+                    let c = nombre.charAt(i);
+                    if(!consonanteSeleccionada){
+                        if(consonantes.includes(c)){
+                            nom2 = c;
+                            consonanteSeleccionada = true;        
+                        } 
+                    }
+                }
+
+                console.log(pp + pm + nom + anio + mes + dia + this.state.sexo + this.state.entidad + pp2 + pm2 + nom2);
+        }
+
+        
+    }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+
         if(name === "municipio"){
             var zips = [];
             var newZips = [];
@@ -102,6 +204,7 @@ class BeneficiariosRegistro extends Component{
             this.state.telefono === undefined ||
             this.state.email === undefined ||
             this.state.curp === undefined ||
+            this.state.entidad === undefined ||
             this.state.fechaNac === undefined ||
             this.state.municipio === undefined ||
             this.state.cp === undefined ||
@@ -223,8 +326,8 @@ class BeneficiariosRegistro extends Component{
                                     <label htmlFor="sexo">Sexo: </label>
                                         <select className="custom-select" id="sexo" name="sexo" onChange={this.handleInputChange} required>
                                         <option value="">Selecciona tu sexo</option>
-                                        <option value="Hombre">H</option>
-                                        <option value="Mujer">M</option>
+                                        <option value="H">Hombre</option>
+                                        <option value="M">Mujer</option>
                                         </select>
                                         <div className="invalid-feedback">Selecciona tu sexo</div>
                                 </div>
@@ -271,7 +374,7 @@ class BeneficiariosRegistro extends Component{
                                         <select className="custom-select" id="entidad" name="entidad" onChange={this.handleInputChange} required>
                                             <option value="">Selecciona una entidad</option>
                                             {entidades.map((item,index) => {
-                                                return(<option value={item.name} key={index}>{item.name}</option>);
+                                                return(<option value={item.clave} key={index}>{item.nombre}</option>);
                                             })}
                                         </select>
                                         <div className="invalid-feedback">Selecciona una entidad</div>
@@ -360,12 +463,15 @@ class BeneficiariosRegistro extends Component{
                                 <div className="col-12 mt-3">
                                     <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Beneficiarios";
+                                            window.location.href="/beneficiarios";
                                         }}>
                                             Salir
                                         </button>
                                         <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>
                                             Guardar
+                                        </button>
+                                        <button className="btn btn-primary" onClick={this._validatecurp.bind(this)}>
+                                            Validar CURP
                                         </button>
                                     </div>
                                 </div>

@@ -38,7 +38,7 @@ class ActividadDetalle extends Component{
                             let actividadId=[];
                             actividadId.push(row._id);
                             localStorage.setItem("actividadId",JSON.stringify(actividadId));
-                            window.location.href="./ModActividad";
+                            window.location.href="./modificarActividad";
                             }}> Editar</button>
                       <button type="button" className="btn btn-danger" onClick={
                           this.props.deleteActividad.bind(this,row._id)}>Eliminar</button>
@@ -58,7 +58,7 @@ class ActividadDetalle extends Component{
                         </div>
                         <div className="text-center" style={{marginBottom:"30px"}}>
                             <button className="btn btn-success" onClick={() => {
-                                window.location.href="/ActividadRegistro";
+                                window.location.href="/actividadRegistro";
                                 }}>
                                 Agregar
                             </button>
@@ -102,7 +102,7 @@ class ActividadDetalle extends Component{
                         </table> 
                         </div>
                         <button className="btn btn-primary" onClick={() => {
-                            window.location.href="/Principal";
+                            window.location.href="/principal";
                             }}>
                             Salir
                         </button>

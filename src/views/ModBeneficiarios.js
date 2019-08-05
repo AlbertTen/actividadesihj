@@ -71,7 +71,7 @@ class ModBeneficiarios extends Component{
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseUpdateBeneficiario.success === "OK"){
-            window.location.href = "/Beneficiarios";
+            window.location.href = "/beneficiarios";
         }
     } 
 
@@ -117,6 +117,7 @@ class ModBeneficiarios extends Component{
             this.refs.telefono.value === "" ||
             this.refs.email.value === "" ||
             this.refs.curp.value === "" ||
+            this.refs.entidad.value === "" ||
             this.refs.fechaNac.value === "" ||
             this.refs.municipio.value === "" ||
             this.refs.cp.value === "" ||
@@ -141,6 +142,7 @@ class ModBeneficiarios extends Component{
                     this.refs.telefono.value,
                     this.refs.email.value,
                     this.refs.curp.value,
+                    this.refs.entidad.value,
                     this.refs.fechaNac.value,
                     this.refs.municipio.value,
                     this.refs.cp.value,
@@ -151,7 +153,7 @@ class ModBeneficiarios extends Component{
              }
     }
     render(){
-        let{nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt}=this.props.stateBeneficiario;
+        let{nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt}=this.props.stateBeneficiario;
         let zips = [], cols = [];
 
         if(this.state.zips.length === 0 && cp !== undefined) {
@@ -258,6 +260,15 @@ class ModBeneficiarios extends Component{
                                     />
                                 </div>
                                 <div className="col-12 col-lg-6 mb-3">
+                                    <label htmlFor="entidad">Estado de Nacimiento: </label>
+                                    <input 
+                                        type="text" className="form-control" 
+                                        id="entidad" ref="entidad" 
+                                        placeholder="Tu estado de nacimiento aqui ..."
+                                        defaultValue={entidad || ""}
+                                    />
+                                </div>
+                                <div className="col-12 col-lg-6 mb-3">
                                     <label htmlFor="Fecha de Nacimiento">Fecha de Nacimiento: </label>
                                     <input 
                                         type="date" className="form-control" 
@@ -322,7 +333,7 @@ class ModBeneficiarios extends Component{
                                 <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Beneficiarios";
+                                            window.location.href="/beneficiarios";
                                         }}>
                                             Salir
                                         </button>
@@ -350,7 +361,7 @@ const mapStateToProps = ({stateBeneficiario, responseUpdateBeneficiario, stateAc
 const mapDispatchToProps = (dispatch) => {
     return{ 
         getBeneficiario: (id) => dispatch(GET_BENEFICIARIO_ACTION(id)),
-        updateBeneficiario: (id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(UPDATE_BENEFICIARIO_ACTION(id, nombre,app,apm,edad,sexo,telefono,email,curp,fechaNac,municipio,cp,colonia,calle,numExt)),
+        updateBeneficiario: (id, nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt) => dispatch(UPDATE_BENEFICIARIO_ACTION(id, nombre,app,apm,edad,sexo,telefono,email,curp,entidad,fechaNac,municipio,cp,colonia,calle,numExt)),
         getActividades: ()=> dispatch(GET_ACTIVIDADES_ACTION())
         }
 }

@@ -27,7 +27,7 @@ class ModArea extends Component {
     componentWillReceiveProps(nextProps){
         const NewProps = nextProps;
         if(NewProps.responseUpdateArea.success === "OK"){
-            window.location.href = "/Area";
+            window.location.href = "/areas";
         }
     } 
     
@@ -65,7 +65,7 @@ class ModArea extends Component {
                 <div className="container-login100">
                     <div className="row wrap-login100">
                         <div className="login100-form-title">
-                            <span className="login100-form-title-1">Modifica</span>
+                            <span className="login100-form-title-1">Modifica alguna área</span>
                         </div>
                         <div className="text-center w-100" style={{paddingTop:"15px"}}>
                             <img className="rounded hidalgo" src="../images/logo_hidalgo.png" alt="IHJ Logo"/>
@@ -124,7 +124,7 @@ class ModArea extends Component {
                             <div className="col-12 mt-3">
                                 <div className="btn-group w-100 text-center" role="group" aria-label="Basic example">
                                         <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Area";
+                                            window.location.href="/areas";
                                         }}>
                                             Salir
                                         </button>

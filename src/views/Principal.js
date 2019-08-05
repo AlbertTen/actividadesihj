@@ -16,7 +16,7 @@ class  Principal extends Component{
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
                                 <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Tactividad";
+                                            window.location.href="/actividades";
                                             }}>
                                             Actividades
                                 </button>
@@ -30,7 +30,7 @@ class  Principal extends Component{
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
                                 <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Area";
+                                            window.location.href="/areas";
                                             }}>
                                             Áreas
                                 </button>
@@ -47,7 +47,7 @@ class  Principal extends Component{
                         <div className="card-body" style={{marginBottom: 15}}>
                             <div align="center">
                                 <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Beneficiarios";
+                                            window.location.href="/beneficiarios";
                                             }}>
                                             Beneficiarios
                                 </button>
@@ -62,7 +62,7 @@ class  Principal extends Component{
                         <div className="card-body"style={{marginBottom: 15}}>
                             <div align="center">
                                 <button className="btn btn-primary" onClick={() => {
-                                            window.location.href="/Tusuarios";
+                                            window.location.href="/usuarios";
                                             }}>
                                             Usuarios
                                 </button>
