@@ -52,6 +52,7 @@ class Beneficiarios extends Component{
                                 Agregar
                             </button>
                         </div>
+                <div className = "table-responsive"> 
                     <table className="table">
                         <thead>
                             <tr>
@@ -66,7 +67,8 @@ class Beneficiarios extends Component{
                         <tbody>
                             {this._renderItems()}
                         </tbody>
-                    </table>  
+                    </table>
+                </div>  
                     <button className="btn btn-primary" onClick={() => {
                             window.location.href="/principal";
                             }}>

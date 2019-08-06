@@ -61,6 +61,7 @@ class Area extends Component{
                             </button>
                         </div> <br></br>
             
+                        <div className = "table-responsive">
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -76,6 +77,7 @@ class Area extends Component{
                                     {this._renderItems()}
                                 </tbody>
                             </table>
+                        </div>
                             <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/principal";
                                             }}>

@@ -52,6 +52,7 @@ class Tusuarios extends Component{
                                 Agregar
                             </button>
                         </div> 
+                        <div className = "table-responsive">
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -65,6 +66,7 @@ class Tusuarios extends Component{
                                     {this._renderItems()}
                                 </tbody>
                             </table>
+                        </div>
                             <button className="btn btn-primary" onClick={() => {
                                             window.location.href="/principal";
                                             }}>
